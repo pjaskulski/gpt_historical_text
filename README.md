@@ -1,5 +1,5 @@
 # gpt_historical_text
-Testy GPT na tekstach historycznych
+Testy GPT3 na tekstach historycznych
 
 Model: text-davinci-003<br>
 Text: biografia Ludwika Mortęskiego (zm. 1539).
