@@ -74,3 +74,7 @@ Institutions related to Ludwik Mortęski:
 | Ludwik | Mortęski (de Mortangen) | 1539 |
 | ------ | ----------------------- | ---- |
 ```
+
+### Inne przykłady
+
+Pozostałe przykłady w folderze `src`, wyniki w folderze `output`.
