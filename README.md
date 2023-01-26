@@ -56,3 +56,21 @@ Institutions related to Ludwik Mortęski:
 9. Zamek Pokrzywno
 10. Kasztelania Gdańska (4/3/1512)
 11. Kasztelania Elbląska (4/3/1516)
+
+### Example 4
+
+**Prompt**: From this text give the name, surname and date of death of the main character. Show the result in the form of a table.
+
+{TEXT}
+
+```
+| Name | Surname | Date of death |
+```
+
+**Result**:
+
+```
+| ------ | ----------------------- | ---- |
+| Ludwik | Mortęski (de Mortangen) | 1539 |
+| ------ | ----------------------- | ---- |
+```
