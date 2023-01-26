@@ -9,13 +9,13 @@ Text: biografia Ludwika Mortęskiego (zm. 1539), w języku polskim.
 **Prompt**: From this text extract information about parents, wife, children and grandchildren for the person Ludwik Mortęski
 
 **Result**:
-Parents: Ludwik Mortęski (father, woj. chełmińskiego) and Anna (mother).
+Parents: Ludwik (possibly) and Anna 
 
-Wife: Elżbieta z Dąbrówki.
+Wife: Elżbieta z Dąbrówki 
 
-Children: Katarzyna, Dorota, Gertruda, Elżbieta and Małgorzata (daughters); Ludwik and Melchior (sons).
+Children: Katarzyna, Dorota, Gertruda, Elżbieta, Małgorzata, Ludwik and Melchior 
 
-Grandchildren: Magdalena Mortęskiej and Ludwik (grandchildren of Melchior).
+Grandchildren: Magdalena Mortęskiej and Ludwik
 
 ### Example 2
 
