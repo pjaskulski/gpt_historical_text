@@ -2,7 +2,7 @@
 Testy GPT3 na tekstach historycznych
 
 Model: text-davinci-003<br>
-Text: biografia Ludwika Mortęskiego (zm. 1539).
+Text: biografia Ludwika Mortęskiego (zm. 1539), w języku polskim.
 
 ### Example 1
 
