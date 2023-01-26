@@ -1,6 +1,4 @@
-""" openai test - extraction info about parents, children, wife,
-    husband from bio
-"""
+""" openai test - extraction info about institutions from bio """
 
 import os
 from pathlib import Path
@@ -22,13 +20,13 @@ with open(file_data, 'r', encoding='utf-8') as f:
     data = f.read()
 
 response = openai.Completion.create(
-    model="text-davinci-003",
-    prompt=f"From this text extract information about parents, wife, children and grandchildren for the person Ludwik Mortęski:\n\n {data}",
-    temperature=0.5,
-    max_tokens=500,
-    top_p=1.0,
-    frequency_penalty=0.8,
-    presence_penalty=0.0
+  model="text-davinci-003",
+  prompt=f"From this text, extract information about institutions related to the the person Ludwik Mortęski, present them in the form of a list:\n\n {data}",
+  temperature=0.5,
+  max_tokens=500,
+  top_p=1.0,
+  frequency_penalty=0.8,
+  presence_penalty=0.0
 )
 
 print(response['choices'][0]['text'])

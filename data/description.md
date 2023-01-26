@@ -1,0 +1,1 @@
+Folder na dane tekstowe
