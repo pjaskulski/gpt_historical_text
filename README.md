@@ -77,6 +77,8 @@ Institutions related to Ludwik Mortęski:
 
 ### Example 5
 
+Text: biografia Mikołaja z Woli (zm. 1346 lub 1347) - w języku polskim.
+
 **Prompt**: From this text, extract information about the offices,
 held by the person Mikołaj z Woli, present them in the form of a list
 
