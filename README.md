@@ -75,6 +75,19 @@ Institutions related to Ludwik Mortęski:
 | ------ | ----------------------- | ---- |
 ```
 
+### Example 5
+
+**Prompt**: From this text, extract information about the offices,
+held by the person Mikołaj z Woli, present them in the form of a list
+
+**Result**:
+
+List of offices held by Mikołaj z Woli:
+-Kasztelan kruszwicki
+-Starosta kujawski
+-Podkomorzy brzeski
+-Asesor sądu ziemskiego w Inowrocławiu
+
 ### Inne przykłady
 
 Pozostałe przykłady w folderze `src`, wyniki w folderze `output`.
