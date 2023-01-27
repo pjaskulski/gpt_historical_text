@@ -83,10 +83,10 @@ held by the person Mikołaj z Woli, present them in the form of a list
 **Result**:
 
 List of offices held by Mikołaj z Woli:
--Kasztelan kruszwicki
--Starosta kujawski
--Podkomorzy brzeski
--Asesor sądu ziemskiego w Inowrocławiu
+- Kasztelan kruszwicki
+- Starosta kujawski
+- Podkomorzy brzeski
+- Asesor sądu ziemskiego w Inowrocławiu
 
 ### Inne przykłady
 
