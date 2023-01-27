@@ -19,10 +19,16 @@ file_data = Path("..") / "data" / "sedlaczek_edward_jozef.txt"
 with open(file_data, 'r', encoding='utf-8') as f:
     data = f.read()
 
+# prompt - zapytanie do GPT, jeżeli potrzebne to z przykładami odpowiedzi
+prompt = "From this text, extract information about the offices, " \
+         "functions and positions held by the person Edward Józef Sedlaczek, " \
+         "present them in the form of a list:\n\n" + data
+
 response = openai.Completion.create(
-  model="text-davinci-003",
-  prompt=f"From this text, extract information about the offices, functions and positions held by the person Edward Józef Sedlaczek, present them in the form of a list:\n\n {data}",
-  temperature=0.5,
+  model="text-davinci-003", # najlepszy ale i najdroższy model w openai
+  prompt=prompt,
+  temperature=0.2, # domyślnie 0.5, zmniejszenie powoduje mniejszą 'płynność'
+                   # generowanej odpowiedzi, ale jest bardziej konkretna
   max_tokens=500,
   top_p=1.0,
   frequency_penalty=0.8,
