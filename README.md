@@ -92,7 +92,7 @@ List of offices held by Mikołaj z Woli:
 - Podkomorzy brzeski
 - Asesor sądu ziemskiego w Inowrocławiu
 
-**Example 6**
+### Example 6
 
 Text: biografia Edwarda Józefa Sedlaczka
 (Polski Słownik Biograficzny t. XXXVI, 1995-6, s. 137-138)
@@ -121,6 +121,25 @@ the form of xml: `<xml><person><office>office, function or position</office><per
   </person>
 </xml
 ```
+
+### Example 7
+
+Text: biografia Andrzeja Rosickiego (1814-1904),
+(Polski Słownik Biograficzny t. XXXII, 1989-1991, s. 82)
+
+**Prompt**: From this text extract information about parents, wife, siblings, children and grandchildren for the main character
+
+**Result**:
+
+Parents: Walenty and Marianna z Idzikowskich
+
+Wife: Anna z Robowskich
+
+Siblings: Unknown
+
+Children: Józefa Konstancja (born 1859), Antonina Wiktoria (born 1863) and Piotr Michał (born 1862)
+
+Grandchildren: Unknown
 
 ### Inne przykłady
 
