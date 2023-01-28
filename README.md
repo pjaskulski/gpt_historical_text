@@ -3,17 +3,18 @@ Testy GPT3 na tekstach historycznych
 
 Model: text-davinci-003<br>
 Text: biografia Ludwika Mortęskiego (zm. 1539), w języku polskim.
+(Polski Słownik Biograficzny t. XXII, 1977, s. 9-11)
 
 ### Example 1
 
 **Prompt**: From this text extract information about parents, wife, children and grandchildren for the person Ludwik Mortęski
 
 **Result**:
-Parents: Ludwik (possibly) and Anna 
+Parents: Ludwik (possibly) and Anna
 
-Wife: Elżbieta z Dąbrówki 
+Wife: Elżbieta z Dąbrówki
 
-Children: Katarzyna, Dorota, Gertruda, Elżbieta, Małgorzata, Ludwik and Melchior 
+Children: Katarzyna, Dorota, Gertruda, Elżbieta, Małgorzata, Ludwik and Melchior
 
 Grandchildren: Magdalena Mortęskiej and Ludwik
 
@@ -78,6 +79,7 @@ Institutions related to Ludwik Mortęski:
 ### Example 5
 
 Text: biografia Mikołaja z Woli (zm. 1346 lub 1347) - w języku polskim.
+(Polski Słownik Biograficzny t. XXI, 1976, s. 151)
 
 **Prompt**: From this text, extract information about the offices,
 held by the person Mikołaj z Woli, present them in the form of a list
@@ -90,6 +92,36 @@ List of offices held by Mikołaj z Woli:
 - Podkomorzy brzeski
 - Asesor sądu ziemskiego w Inowrocławiu
 
+**Example 6**
+
+Text: biografia Edwarda Józefa Sedlaczka
+(Polski Słownik Biograficzny t. XXXVI, 1995-6, s. 137-138)
+
+**Prompt**: From this text, extract information about the offices,
+functions and positions held by the person Edward Józef Sedlaczek, present them in
+the form of xml: `<xml><person><office>office, function or position</office><person></xml>`
+
+
+**Result**:
+
+```
+<xml>
+  <person>
+    <name>Edward Józef Sedlaczek</name>
+    <office>Literat</office>
+    <office>Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy”</office>
+    <office>Kancelista w konsulacie austriackim w Warszawie</office>
+    <office>Kierował wicekonsulatem w Batumi (Rosja, 1896–7)</office>
+    <office>Agencją konsularną w Nowosielicy (Rosja)</office>
+    <office>Agencją konsularną w Burgas (Bułgaria)</office >
+    < office > Wicekonsulatem w Batumi </ office >
+  	< office > Wicekonsulatem w Burgas </ office >
+  	< office > Wicekonsulatem w Ploieşti (Rumunia) </ office >
+  	< office > Redagował serię Wydawnictwa Tow. im. P. Skargi </ office >
+  </person>
+</xml
+```
+
 ### Inne przykłady
 
-Pozostałe przykłady w folderze `src`, wyniki w folderze `output`.
+Skrypty do tych i pozostałych przykładów w folderze `src`, wyniki w folderze `output`.
