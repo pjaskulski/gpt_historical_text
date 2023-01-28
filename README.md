@@ -1,9 +1,9 @@
-# gpt_historical_text
-GPT3 - Large Language Model as a tool for extracting knowledge from text - tests on historical examples.
+# GPT3 - Large Language Model as a tool for extracting knowledge from text - tests on historical examples.
 
 Testy modeli GPT 3.5 udostępionych przez API openai.com na fragmentach publikacji i opracowań historycznych w celu automatycznej ekstrakcji informacji, wyciągania ustrukturyzowanych danych ze źródeł w formie nieustrukturyzowanej.
 
 [Notatki](#notatki)
+
 [Przykłady](#przykłady)
 
 ## Notatki
