@@ -1,0 +1,15 @@
+<xml>
+  <person>
+    <name>Edward Józef Sedlaczek</name>
+    <office>Literat</office>
+    <office>Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy”</office>
+    <office>Kancelista w konsulacie austriackim w Warszawie</office>
+    <office>Kierował wicekonsulatem w Batumi (Rosja, 1896–7)</office>
+    <office>Agencją konsularną w Nowosielicy (Rosja)</office>
+    <office>Agencją konsularną w Burgas (Bułgaria)</office >
+    < office > Wicekonsulatem w Batumi </ office >
+  	< office > Wicekonsulatem w Burgas </ office >
+  	< office > Wicekonsulatem w Ploieşti (Rumunia) </ office >
+  	< office > Redagował serię Wydawnictwa Tow. im. P. Skargi </ office >
+  </person>
+</xml
