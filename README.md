@@ -1,10 +1,21 @@
 # GPT3 - Large Language Model as a tool for extracting knowledge from text - tests on historical examples.
 
-Testy modeli GPT 3.5 udostępnionych przez API OpenAI przeprowadzane na fragmentach publikacji i opracowań historycznych w celu automatycznej ekstrakcji informacji, wyciągania ustrukturyzowanych danych ze źródeł dostępnych w formie nieustrukturyzowanej.
+Testy modeli GPT 3.5 udostępnionych przez API OpenAI przeprowadzane na fragmentach publikacji i opracowań historycznych w celu automatycznej ekstrakcji informacji, wyciągania ustrukturyzowanych danych ze źródeł dostępnych w formie nieustrukturyzowanej. Testowany materiał to głównie fragmenty
+biografii postaci historycznych.
 
 [Notatki](#notatki)
 
 [Przykłady](#przykłady)
+  - [Relacje rodzinne postaci](#relacje-rodzinne)
+  - [Funkcje i urzędy](#funkcje-i-urzędy-głównej-postaci)
+  - [Lista instytucji](#lista-instytucji)
+  - [Imię, nazwisko, data śmierci](#wynik-w-formie-tabeli)
+  - [Lista urzędów](#lista-urzędów)
+  - [Lista urzędów i funkcji w formie xml](#lista-urzędów-i-funkcji-w-xml)
+  - [Relacje rodzinne](#relacje-rodzinne-nr-2)
+  - [Konwersja tekstu do formatu TEI](#tei-xml-output)
+  - [Inne przykłady](#inne-przykłady)
+
 
 ## Notatki
 
@@ -42,8 +53,7 @@ Funkcje/urzędy wg modelu `text-curie-001`:
 Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jednym zapytaniu, są jednak znacznie tańsze.
 
 Parametr `temperature` ma domyślnie wartość 0.5, zmniejszenie powoduje mniejszą 'płynność'
-generowanej odpowiedzi, ale jest bardziej konkretna, deterministyczna. Podobny wpływ ma obniżenie
-domyślnej wartości parametru `top_p` = 1.0
+generowanej odpowiedzi, ale jest bardziej konkretna, deterministyczna, mniej losowa. Podobny wpływ ma obniżenie domyślnej wartości parametru `top_p` = 1.0
 
 **Uwaga**: wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
 
@@ -57,7 +67,7 @@ Model: text-davinci-003<br>
 Text: biografia Ludwika Mortęskiego (zm. 1539), w języku polskim.
 (Polski Słownik Biograficzny t. XXII, 1977, s. 9-11)
 
-### Example 1
+### Relacje rodzinne
 
 **Prompt**: From this text extract information about parents, wife, children and grandchildren for the person Ludwik Mortęski
 
@@ -70,7 +80,7 @@ Children: Katarzyna, Dorota, Gertruda, Elżbieta, Małgorzata, Ludwik and Melchi
 
 Grandchildren: Magdalena Mortęskiej and Ludwik
 
-### Example 2
+### Funkcje i urzędy głównej postaci
 
 **Prompt**: From this text, extract information about the offices, functions and positions held by the person Ludwik Mortęski, present them in the form of a list
 
@@ -90,7 +100,7 @@ Offices, Functions and Positions Held by Ludwik Mortęski:
 11. Starostwo pokrzywnickie(1505).
 12. Starostwo Pokrzywno with Villages Okonin, Nicwałd, Węgrowo Skarszewo Nowawieś i Wiewiórki as a Feudal Estate from Zygmunt Stary for Military Service(1521).
 
-### Example 3
+### Lista instytucji
 
 **Prompt**:
 From this text, extract information about institutions related to the the person Ludwik Mortęski, present them in the form of a list.
@@ -110,7 +120,7 @@ Institutions related to Ludwik Mortęski:
 10. Kasztelania Gdańska (4/3/1512)
 11. Kasztelania Elbląska (4/3/1516)
 
-### Example 4
+### Wynik w formie tabeli
 
 **Prompt**: From this text give the name, surname and date of death of the main character. Show the result in the form of a table.
 
@@ -128,7 +138,7 @@ Institutions related to Ludwik Mortęski:
 | ------ | ----------------------- | ---- |
 ```
 
-### Example 5
+### Lista urzędów
 
 Text: biografia Mikołaja z Woli (zm. 1346 lub 1347) - w języku polskim.
 (Polski Słownik Biograficzny t. XXI, 1976, s. 151)
@@ -144,7 +154,7 @@ List of offices held by Mikołaj z Woli:
 - Podkomorzy brzeski
 - Asesor sądu ziemskiego w Inowrocławiu
 
-### Example 6
+### Lista urzędów i funkcji w xml
 
 Text: biografia Edwarda Józefa Sedlaczka
 (Polski Słownik Biograficzny t. XXXVI, 1995-6, s. 137-138)
@@ -174,7 +184,7 @@ the form of xml: `<xml><person><office>office, function or position</office><per
 </xml
 ```
 
-### Example 7
+### Relacje rodzinne nr 2
 
 Text: biografia Andrzeja Rosickiego (1814-1904),
 (Polski Słownik Biograficzny t. XXXII, 1989-1991, s. 82)
@@ -192,6 +202,25 @@ Siblings: Unknown
 Children: Józefa Konstancja (born 1859), Antonina Wiktoria (born 1863) and Piotr Michał (born 1862)
 
 Grandchildren: Unknown
+
+### TEI XML output
+
+Text: Fragment Bullarium Poloniae.
+
+**Prompt**: Convert this text to TEI XML format.
+
+**Result**:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <text>
+    <body>
+      <p>Francisco Cruswicz magistro in theologia [in civitate Constantiensi commo-ranti]: Eidem decano eccl. s. Floriani extra muros Crac. (15 m. arg. p.), canonica-tus in eccl. s. Michaelis in castro Crac. (12 m. arg. p.), per obitum apud SA ea va-cante Nicolai Falkemberg vacans, confertur.;s m scholastico et cantori ac custodi Crac XI, XIII.</p>
+    </body>
+  </text>
+</TEI>
+```
 
 ### Inne przykłady
 

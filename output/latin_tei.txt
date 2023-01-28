@@ -1,0 +1,10 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <text>
+    <body>
+      <p>Francisco Cruswicz magistro in theologia [in civitate Constantiensi commo-ranti]: Eidem decano eccl. s. Floriani extra muros Crac. (15 m. arg. p.), canonica-tus in eccl. s. Michaelis in castro Crac. (12 m. arg. p.), per obitum apud SA ea va-cante Nicolai Falkemberg vacans, confertur.;s m scholastico et cantori ac custodi Crac XI, XIII.</p>
+    </body>
+  </text>
+</TEI>
