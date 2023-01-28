@@ -1,5 +1,57 @@
 # gpt_historical_text
-Testy GPT3 na tekstach historycznych
+GPT3 - Large Language Model as a tool for extracting knowledge from text - tests on historical examples.
+
+Testy modeli GPT 3.5 udostępionych przez API openai.com na fragmentach publikacji i opracowań historycznych w celu automatycznej ekstrakcji informacji, wyciągania ustrukturyzowanych danych ze źródeł w formie nieustrukturyzowanej.
+
+[Notatki](#notatki)
+[Przykłady](#przykłady)
+
+## Notatki
+
+Najlepszy model `text-davinci-003` (to jednocześnie najdroższy model w openai) ma ograniczenie do 4000 tokenów, przy czym dotyczy to wejścia i wyjścia razem.
+
+Istnieją ograniczenia podczas korzystania z API dotyczące liczby zapytań na minutę i liczby przetworzonych tokenów na minutę.
+
+Token jest rozumiany trochę inaczej niż zwykle w NLP, tu dłuższe wyrazy są rozbijane na krótkie tokeny 3-4 znaki, oprócz tego tokenem są też znaki interpunkcyjne itp. Podawane jest że średnio token to 4 znaki w języku angielskim, na stronie openai jest narzędzie w którym (https://beta.openai.com/tokenizer) można wkleić tekst i zobaczyć ile zawiera tokenów.
+
+Biografia Edwarda Józefa Sedlaczka zawiera 4433 znaków co przekłada się na 2291 tokenów. W przypadku tekstów polskich sytuację pogarszają polskie znaki, wygląda na to że każdy dwubajtowy unicodowy znak jest traktowany jako osobny token.
+
+Modele słabsze np. `text-curie-001` czy `text-babbage-001` dają w przypadku wyciągania danych z przekazanego tekstu wyraźnie gorsze wyniki np.:
+
+Funkcje/urzędy z biografii Edwarda Sedlaczka wg. `text-davinci-003`:
+
+1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
+2. Kancelista w konsulacie austriackim w Warszawie (1886)
+3. Konsulat austriacki w Kijowie (do 1895)
+4. Wicekonsulat w Batumi, Rosja (1896–7)
+5. Agencja konsularna w Nowosielicy, Rosja
+6. Agencja konsularna w Burgas, Bułgaria
+7. Wicekonsulat w Batumi, Rosja
+8. Wicekonsulat Burgas, Bułgaria
+9. Wicekonsulat Ploieşti, Rumunia
+10. Redaktor serii Wydawnictwa Towarzystwa imienia Piotra Skargi (ok 1910).
+
+Funkcje/urzędy wg modelu `text-curie-001`:
+
+- literat
+- urzędnik
+- kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy”
+- posada kancelisty w konsulacie austriackim w Warszawie
+- kierował kolejno wicekonsulatem w Batumi (Rosja, 1896–7), a od r.n. – agencją konsularną w Nowosielicy (Rosja), agencją konsularną w Burgas (Bułgaria), wicekonsulatem w Batumi, wicekonsulatem w Burgas i wicekonsulatem w Ploieşti (Rumunia)
+
+Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jednym zapytaniu, są jednak znacznie tańsze.
+
+Parametr `temperature` ma domyślnie wartość 0.5, zmniejszenie powoduje mniejszą 'płynność'
+generowanej odpowiedzi, ale jest bardziej konkretna, deterministyczna. Podobny wpływ ma obniżenie
+domyślnej wartości parametru `top_p` = 1.0
+
+**Uwaga**: wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
+
+**Uwaga**: zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
+inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
+
+
+## Przykłady
 
 Model: text-davinci-003<br>
 Text: biografia Ludwika Mortęskiego (zm. 1539), w języku polskim.
