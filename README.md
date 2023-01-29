@@ -4,6 +4,10 @@ Testy modeli GPT 3.5 udostępnionych przez API OpenAI przeprowadzane na fragment
 biografii postaci historycznych.
 
 [Notatki](#notatki)
+  - [Wstępne informacje](#wstępne-informacje)
+  - [Porównanie dostępnych modeli](#porównanie-dostępnych-modeli)
+  - [Uwagi techniczne](#uwagi-techniczne)
+  - [Prawdziwość odpowiedzi](#prawdziwość-odpowiedzi)
 
 [Przykłady](#przykłady)
   - [Relacje rodzinne postaci](#relacje-rodzinne)
@@ -19,7 +23,7 @@ biografii postaci historycznych.
 
 ## Notatki
 
-### Wstępne uwagi techniczne
+### Wstępne informacje
 
 Testy zostały przeprowadzone poprzez API udostępnione przez firmę OpenAI.
 
