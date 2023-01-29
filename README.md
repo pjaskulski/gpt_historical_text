@@ -65,7 +65,8 @@ Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jed
 
 ### Uwagi techniczne
 
-Parametr `temperature` ma domyślnie wartość 0.5, jego zmniejszenie że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa, mniej kreatywna. Podobny wpływ ma obniżenie domyślnej wartości parametru `top_p` = 1.0.
+Parametr `temperature` ma domyślnie wartość 0.5, jego zmniejszenie że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa, mniej kreatywna. Podobny wpływ ma wyniki mają modyfikacje domyślnej wartości parametru `top_p` = 1.0 tylko tym razem w drugą stronę, zmniejszanie wartości
+poniżej 1.0 spowoduje przygotowywanie mniej prawdopodobnych wyników.
 
 Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
 
