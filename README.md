@@ -73,11 +73,11 @@ Zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwi
 inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
 
 Ogromne znaczenie ma konstrukcja zapytania (prompt), wydaje się że pytania w języku angielskim nawet w odniesieniu do polskiego tekstu dają lepsze rezultaty. Zadanie zlecone modelowi powinno być napisane
-językiem prostym, konkretnym. Dobry wpływ na jakość odpowiedzi mają podane modelowi przykłady, czego i w jakiej formie się spodziewamy.
+językiem prostym, konkretnym, ale nie musi być bardzo krótkie. Dobry wpływ na jakość odpowiedzi mają podane modelowi przykłady, czego i w jakiej formie się spodziewamy.
 
 ### Poprawność odpowiedzi
 
-Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz bez gwarancji że wszystkie informacje w nich są prawdziwe. Dotyczy to także sytuacji gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy, ale też przypadku gdy model ma wyciągnąć informację z tekstu mu przekazanego. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje, np. przy przetwarzaniu biografii Edwarda Sedlaczka z parametrem `temperature` = 1.0 model zapytany o funkcje i urzędy tej postaci generuje m.in. informację:
+Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz bez gwarancji że wszystkie informacje w nich są prawdziwe. Dotyczy to także sytuacji gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy, ale też przypadku gdy model ma wyciągnąć informację z przekazanego mu tekstu. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje, np. przy przetwarzaniu biografii Edwarda Sedlaczka z parametrem `temperature` = 1.0 model zapytany o funkcje i urzędy tej postaci generuje m.in. informację:
 
 1. Kierownik literacki prasy lwowskiej ("Dziennik dla Wszystkich”, „Dziennik Polski”, „Gazeta Lwowska”, „Gazeta Narodowa”, „Przyjaciel Domowy”) i warszawskiej („Biesiada Literacka”, „Echo”, „Kłosy”, „Kurier Codzienny”, „Kurier Warszawski”, „Niwa", "Słowo", "Tygodnik Ilustrowany", "Tygodni Mód i Powieści" , "Tygodnik Powszechny" i "Wiek").
 
@@ -86,6 +86,16 @@ Tymczasem w rzeczywistości bohater biografii był kierownikiem literackim tylko
 Po obniżeniu wartości `temperature` do 0.0 zwracana jest już prawdziwa informacja:
 
 1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
+
+Ciekawy wpływ ma poprawność odpowiedzi ma także parametr `frequency_penalty` (standardowo wartość 0.8) zmniejszenie go do zera powoduje na przykładowym biogramie Sedlaczka generowanie fałszywych przybliżeń, zamiast:
+
+3. Kancelista w austriackim konsulacie w Kijowie (1895)
+
+otrzymujemy:
+
+3. Konsul w Kijowie (1882-1895)
+
+gdzie odpowiedni fragment biografii brzmi: _"Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
 
 ### Wiedza z kontekstu
 
