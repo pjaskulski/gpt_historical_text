@@ -19,13 +19,19 @@ biografii postaci historycznych.
 
 ## Notatki
 
-Najlepszy model `text-davinci-003` (to jednocześnie najdroższy model w openai) ma ograniczenie do 4000 tokenów, przy czym dotyczy to wejścia i wyjścia razem.
+### Wstępne uwagi techniczne
 
-Istnieją ograniczenia podczas korzystania z API dotyczące liczby zapytań na minutę i liczby przetworzonych tokenów na minutę.
+Testy zostały przeprowadzone poprzez API udostępnione przez firmę OpenAI.
+
+Istnieją ograniczenia podczas korzystania z API dotyczące liczby zapytań na minutę (3 tys.) i liczby przetworzonych tokenów na minutę (250 tys.).
 
 Token jest rozumiany trochę inaczej niż zwykle w NLP, tu dłuższe wyrazy są rozbijane na krótkie tokeny 3-4 znaki, oprócz tego tokenem są też znaki interpunkcyjne itp. Podawane jest że średnio token to 4 znaki w języku angielskim, na stronie OpenAI jest narzędzie w którym (https://beta.openai.com/tokenizer) można wkleić tekst i zobaczyć ile zawiera tokenów.
 
-Biografia Edwarda Józefa Sedlaczka zawiera 4433 znaków co przekłada się na 2291 tokenów. W przypadku tekstów polskich sytuację pogarszają polskie znaki, wygląda na to że każdy dwubajtowy unicodowy znak jest traktowany jako osobny token.
+Przykładowo biografia Edwarda Józefa Sedlaczka zawiera 4433 znaków co przekłada się na 2291 tokenów. W przypadku tekstów polskich sytuację pogarszają polskie znaki, wygląda na to że każdy dwubajtowy unicodowy znak jest traktowany jako osobny token.
+
+### Porównanie dostępnych modeli
+
+Najlepszy model `text-davinci-003` (to jednocześnie najdroższy model językowy w OpenAI) ma ograniczenie do 4000 tokenów, przy czym dotyczy to wejścia i wyjścia razem.
 
 Modele słabsze np. `text-curie-001` czy `text-babbage-001` dają w przypadku wyciągania danych z przekazanego tekstu wyraźnie gorsze wyniki np.:
 
@@ -52,22 +58,25 @@ Funkcje/urzędy wg modelu `text-curie-001`:
 
 Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jednym zapytaniu, są jednak znacznie tańsze.
 
-Parametr `temperature` ma domyślnie wartość 0.5, zmniejszenie powoduje mniejszą 'płynność'
-generowanej odpowiedzi, ale jest bardziej konkretna, deterministyczna, mniej losowa. Podobny wpływ ma obniżenie domyślnej wartości parametru `top_p` = 1.0
+### Uwagi techniczne
 
-**Uwaga**: wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
+Parametr `temperature` ma domyślnie wartość 0.5, jego zmniejszenie że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa. Podobny wpływ ma obniżenie domyślnej wartości parametru `top_p` = 1.0.
 
-**Uwaga**: zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
+Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
+
+Zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
 inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
+
+### Prawdziwość odpowiedzi
 
 Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz niekoniecznie muszą być prawdziwe. Dotyczy to także sytuacji
 gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy,
-ale też przypadku gdy model ma wyciągnąć informację z przekazanego tekstu. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje, np. w przypadku biografii
+ale też przypadku gdy model ma wyciągnąć informację z tekstu mu przekazanego. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje, np. w przypadku biografii
 Edwarda Sedlaczka dla parametru `temperature` = 1.0 model zapytany o funkcje i urzędy postaci generuje m.in. informację:
 
 1. Kierownik literacki prasy lwowskiej ("Dziennik dla Wszystkich”, „Dziennik Polski”, „Gazeta Lwowska”, „Gazeta Narodowa”, „Przyjaciel Domowy”) i warszawskiej („Biesiada Literacka”, „Echo”, „Kłosy”, „Kurier Codzienny”, „Kurier Warszawski”, „Niwa", "Słowo", "Tygodnik Ilustrowany", "Tygodni Mód i Powieści" , "Tygodnik Powszechny" i "Wiek").
 
-Tymczasem w rzeczywistości bohater biografii był kierownikiem literacki tylko pisma "Przyjaciel Domowy".
+Tymczasem w rzeczywistości bohater biografii był kierownikiem literackim tylko pisma "Przyjaciel Domowy".
 
 Po obniżeniu wartości `temperature` do 0.0 zwracana jest już prawdziwa informacja:
 
