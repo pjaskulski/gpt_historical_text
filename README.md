@@ -71,6 +71,9 @@ Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
 Zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
 inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
 
+Ogromne znaczenie ma konstrukcja zapytania (prompt), wydaje się że pytania w języku angielskim nawet w odniesieniu do polskiego tekstu dają lepsze rezultaty. Zadanie zlecone modelowi powinno być napisane
+językiem prostym, konkretnym. Dobry wpływ na jakość odpowiedzi mają podane modelowi przykłady, czego i w jakiej formie się spodziewamy.
+
 ### Prawdziwość odpowiedzi
 
 Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz niekoniecznie muszą być prawdziwe. Dotyczy to także sytuacji
