@@ -31,7 +31,7 @@ Istnieją ograniczenia podczas korzystania z API dotyczące liczby zapytań na 
 
 Token jest rozumiany trochę inaczej niż zwykle w NLP, tu dłuższe wyrazy są rozbijane na krótkie tokeny 3-4 znaki, oprócz tego tokenem są też znaki interpunkcyjne itp. Podawane jest że średnio token to 4 znaki w języku angielskim, na stronie OpenAI jest narzędzie w którym (https://beta.openai.com/tokenizer) można wkleić tekst i zobaczyć ile zawiera tokenów.
 
-Przykładowo biografia Edwarda Józefa Sedlaczka zawiera 4433 znaków co przekłada się na 2291 tokenów. W przypadku tekstów polskich sytuację pogarszają polskie znaki, wygląda na to że każdy dwubajtowy unicodowy znak jest traktowany jako osobny token.
+Przykładowo biografia Edwarda Józefa Sedlaczka (Polski Słownik Biograficzny t. XXXVI, 1995-6, s. 137-138) zawiera 4433 znaków co przekłada się na 2291 tokenów. W przypadku tekstów polskich sytuację pogarszają polskie znaki, wygląda na to że każdy dwubajtowy unicodowy znak jest traktowany jako osobny token.
 
 ### Porównanie dostępnych modeli
 
@@ -93,7 +93,7 @@ z czego model wyciąga informację:
 
 Co nie jest przecież (nazwa funkcji/urzędu) podane wprost.
 
-Podobny przykład występuje w biografii Ludwika Mortęskiego, model odnazał informację o urzędzie sprawowanym przez bohatera biografii:
+Podobny przykład występuje w biografii Ludwika Mortęskiego, model wyszukał informację o urzędzie sprawowanym przez bohatera biografii:
 
 2. Kasztelan elbląski (1516–1539)
 
