@@ -99,8 +99,8 @@ gdzie odpowiedni fragment biografii brzmi: _"Później pełnił takąż funkcję
 
 ### Wiedza z kontekstu
 
-To w czym model bywa zadziwiająco dobry, to umiejętność wyciągania informacji z kontekstu. Np. w tej samej biografii fragment tekstu brzmi: _"W r. 1886 S. otrzymał posadę kancelisty w konsulacie austriackim w Warszawie – zapewne za poparciem Władysława Łozińskiego, który opiekował się jego karierą także w l.n. Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
-z czego model wyciąga informację:
+To w czym model bywa zadziwiająco dobry, to umiejętność wyciągania informacji z kontekstu. Dłuższy fragment tej samej biografii Sedlaczka związany jego pracą kancelisty brzmi: _"W r. 1886 S. otrzymał posadę kancelisty w konsulacie austriackim w Warszawie – zapewne za poparciem Władysława Łozińskiego, który opiekował się jego karierą także w l.n. Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
+z czego model (uruchomiony z właściwymi parametrami!) wyciąga informację:
 
 3. Kancelista w austriackim konsulacie w Kijowie (1895)
 
