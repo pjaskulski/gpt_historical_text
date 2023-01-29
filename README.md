@@ -60,6 +60,26 @@ generowanej odpowiedzi, ale jest bardziej konkretna, deterministyczna, mniej los
 **Uwaga**: zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
 inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
 
+Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz niekoniecznie muszą być prawdziwe. Dotyczy to także sytuacji
+gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy,
+ale też przypadku gdy model ma wyciągnąć informację z przekazanego tekstu. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje, np. w przypadku biografii
+Edwarda Sedlaczka dla parametru `temperature` = 1.0 model zapytany o funkcje i urzędy postaci generuje m.in. informację:
+
+1. Kierownik literacki prasy lwowskiej ("Dziennik dla Wszystkich”, „Dziennik Polski”, „Gazeta Lwowska”, „Gazeta Narodowa”, „Przyjaciel Domowy”) i warszawskiej („Biesiada Literacka”, „Echo”, „Kłosy”, „Kurier Codzienny”, „Kurier Warszawski”, „Niwa", "Słowo", "Tygodnik Ilustrowany", "Tygodni Mód i Powieści" , "Tygodnik Powszechny" i "Wiek").
+
+Tymczasem w rzeczywistości bohater biografii był kierownikiem literacki tylko pisma "Przyjaciel Domowy".
+
+Po obniżeniu wartości `temperature` do 0.0 zwracana jest już prawdziwa informacja:
+
+1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
+
+To w czym model jest naprawdę dobry, to umiejętność wyciągania informacji z kontekstu. Np. w tej samej biografii fragment tekstu brzmi: _"W r. 1886 S. otrzymał posadę kancelisty w konsulacie austriackim w Warszawie – zapewne za poparciem Władysława Łozińskiego, który opiekował się jego karierą także w l.n. Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
+z czego model wyciąga informację:
+
+3. Kancelista w austriackim konsulacie w Kijowie (1895)
+
+Co nie jest przecież (nazwa funkcji/urzędu) podane wprost.
+
 
 ## Przykłady
 

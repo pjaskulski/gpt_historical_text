@@ -27,7 +27,7 @@ prompt = "From this text, extract information about the offices, " \
 response = openai.Completion.create(
   model="text-davinci-003", # najlepszy ale i najdroższy model w openai
   prompt=prompt,
-  temperature=0.2, # domyślnie 0.5, zmniejszenie powoduje mniejszą 'płynność'
+  temperature=0.0, # domyślnie 0.5, zmniejszenie powoduje mniejszą 'płynność'
                    # generowanej odpowiedzi, ale jest bardziej konkretna
   max_tokens=500,
   top_p=1.0,
@@ -37,6 +37,6 @@ response = openai.Completion.create(
 
 print(response['choices'][0]['text'])
 
-file_output = Path("..") / "output" / "sedlaczek_urzedy.txt"
+file_output = Path("..") / "output" / "sedlaczek_urzedy_temp_07.txt"
 with open(file_output, 'w', encoding='utf-8') as f:
     f.write(response['choices'][0]['text'])
