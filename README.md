@@ -7,7 +7,8 @@ biografii postaci historycznych.
   - [Wstępne informacje](#wstępne-informacje)
   - [Porównanie dostępnych modeli](#porównanie-dostępnych-modeli)
   - [Uwagi techniczne](#uwagi-techniczne)
-  - [Prawdziwość odpowiedzi](#prawdziwość-odpowiedzi)
+  - [Poprawność odpowiedzi](#poprawność-odpowiedzi)
+  - [Wiedza kontekstowa](#wiedza-kontekstowa)
 
 [Przykłady](#przykłady)
   - [Relacje rodzinne postaci](#relacje-rodzinne)
@@ -74,7 +75,7 @@ inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać cał
 Ogromne znaczenie ma konstrukcja zapytania (prompt), wydaje się że pytania w języku angielskim nawet w odniesieniu do polskiego tekstu dają lepsze rezultaty. Zadanie zlecone modelowi powinno być napisane
 językiem prostym, konkretnym. Dobry wpływ na jakość odpowiedzi mają podane modelowi przykłady, czego i w jakiej formie się spodziewamy.
 
-### Prawdziwość odpowiedzi
+### Poprawność odpowiedzi
 
 Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz bez gwarancji że wszystkie informacje w nich są być prawdziwe. Dotyczy to także sytuacji gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy, ale też przypadku gdy model ma wyciągnąć informację z tekstu mu przekazanego. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje, np. przy przetwarzaniu biografii Edwarda Sedlaczka z parametrem `temperature` = 1.0 model zapytany o funkcje i urzędy tej postaci generuje m.in. informację:
 
@@ -86,7 +87,9 @@ Po obniżeniu wartości `temperature` do 0.0 zwracana jest już prawdziwa inform
 
 1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
 
-To w czym model jest naprawdę dobry, to umiejętność wyciągania informacji z kontekstu. Np. w tej samej biografii fragment tekstu brzmi: _"W r. 1886 S. otrzymał posadę kancelisty w konsulacie austriackim w Warszawie – zapewne za poparciem Władysława Łozińskiego, który opiekował się jego karierą także w l.n. Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
+## Wiedza kontekstowa
+
+To w czym model bywa zadziwiająco dobry, to umiejętność wyciągania informacji z kontekstu. Np. w tej samej biografii fragment tekstu brzmi: _"W r. 1886 S. otrzymał posadę kancelisty w konsulacie austriackim w Warszawie – zapewne za poparciem Władysława Łozińskiego, który opiekował się jego karierą także w l.n. Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
 z czego model wyciąga informację:
 
 3. Kancelista w austriackim konsulacie w Kijowie (1895)
