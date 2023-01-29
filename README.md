@@ -93,7 +93,7 @@ z czego model wyciąga informację:
 
 Co nie jest przecież (nazwa funkcji/urzędu) podane wprost.
 
-Podobny przykład występuje w biografii Ludwika Mortęskiego, model wyszukał informację o urzędzie sprawowanym przez bohatera biografii:
+Podobny przykład występuje w biografii Ludwika Mortęskiego (Polski Słownik Biograficzny t. XXII, 1977, s. 9-11), model wyszukał informację o urzędzie sprawowanym przez bohatera biografii:
 
 2. Kasztelan elbląski (1516–1539)
 
