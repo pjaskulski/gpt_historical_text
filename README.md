@@ -8,7 +8,7 @@ biografii postaci historycznych.
   - [Porównanie dostępnych modeli](#porównanie-dostępnych-modeli)
   - [Uwagi techniczne](#uwagi-techniczne)
   - [Poprawność odpowiedzi](#poprawność-odpowiedzi)
-  - [Wiedza kontekstowa](#wiedza-kontekstowa)
+  - [Wiedza z kontekstu](#wiedza-z-kontekstu)
 
 [Przykłady](#przykłady)
   - [Relacje rodzinne postaci](#relacje-rodzinne)
@@ -87,7 +87,7 @@ Po obniżeniu wartości `temperature` do 0.0 zwracana jest już prawdziwa inform
 
 1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
 
-## Wiedza kontekstowa
+### Wiedza z kontekstu
 
 To w czym model bywa zadziwiająco dobry, to umiejętność wyciągania informacji z kontekstu. Np. w tej samej biografii fragment tekstu brzmi: _"W r. 1886 S. otrzymał posadę kancelisty w konsulacie austriackim w Warszawie – zapewne za poparciem Władysława Łozińskiego, który opiekował się jego karierą także w l.n. Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
 z czego model wyciąga informację:
