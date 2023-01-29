@@ -39,7 +39,7 @@ Najlepszy model `text-davinci-003` (to jednocześnie najdroższy model językowy
 
 Modele słabsze np. `text-curie-001` czy `text-babbage-001` dają w przypadku wyciągania danych z przekazanego tekstu wyraźnie gorsze wyniki np.:
 
-Funkcje/urzędy z biografii Edwarda Sedlaczka wg. `text-davinci-003`:
+Funkcje/urzędy z biografii Edwarda Sedlaczka wg. `text-davinci-003` (przy standardowych ustawieniach parametrów, np. `temperature` = 0.5):
 
 1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
 2. Kancelista w konsulacie austriackim w Warszawie (1886)
@@ -52,7 +52,7 @@ Funkcje/urzędy z biografii Edwarda Sedlaczka wg. `text-davinci-003`:
 9. Wicekonsulat Ploieşti, Rumunia
 10. Redaktor serii Wydawnictwa Towarzystwa imienia Piotra Skargi (ok 1910).
 
-Funkcje/urzędy wg modelu `text-curie-001`:
+Funkcje/urzędy wg modelu `text-curie-001` (parametry jak wyżej):
 
 - literat
 - urzędnik
