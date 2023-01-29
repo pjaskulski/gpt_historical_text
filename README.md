@@ -65,7 +65,7 @@ Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jed
 
 ### Uwagi techniczne
 
-Parametr `temperature` ma domyślnie wartość 0.5, jego zmniejszenie że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa. Podobny wpływ ma obniżenie domyślnej wartości parametru `top_p` = 1.0.
+Parametr `temperature` ma domyślnie wartość 0.5, jego zmniejszenie że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa, mniej kreatywna. Podobny wpływ ma obniżenie domyślnej wartości parametru `top_p` = 1.0.
 
 Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
 
@@ -77,7 +77,7 @@ językiem prostym, konkretnym, ale nie musi być bardzo krótkie. Dobry wpływ n
 
 ### Poprawność odpowiedzi
 
-Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz bez gwarancji że wszystkie informacje w nich są prawdziwe. Dotyczy to także sytuacji gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy, ale też przypadku gdy model ma wyciągnąć informację z przekazanego mu tekstu. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje, np. przy przetwarzaniu biografii Edwarda Sedlaczka z parametrem `temperature` = 1.0 model zapytany o funkcje i urzędy tej postaci generuje m.in. informację:
+Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz bez gwarancji że wszystkie informacje w nich są prawdziwe. Dotyczy to także sytuacji gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy, ale też przypadku gdy model ma wyciągnąć informację z przekazanego mu tekstu. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje - jest bardziej kreatywny, np. przy przetwarzaniu biografii Edwarda Sedlaczka z parametrem `temperature` = 1.0 model zapytany o funkcje i urzędy tej postaci generuje m.in. informację:
 
 1. Kierownik literacki prasy lwowskiej ("Dziennik dla Wszystkich”, „Dziennik Polski”, „Gazeta Lwowska”, „Gazeta Narodowa”, „Przyjaciel Domowy”) i warszawskiej („Biesiada Literacka”, „Echo”, „Kłosy”, „Kurier Codzienny”, „Kurier Warszawski”, „Niwa", "Słowo", "Tygodnik Ilustrowany", "Tygodni Mód i Powieści" , "Tygodnik Powszechny" i "Wiek").
 
