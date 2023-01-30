@@ -65,8 +65,7 @@ Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jed
 
 ### Uwagi techniczne
 
-Parametr `temperature` ma domyślnie wartość 0.5, jego zmniejszenie że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa, mniej kreatywna. Podobny wpływ ma wyniki mają modyfikacje domyślnej wartości parametru `top_p` = 1.0 tylko tym razem w drugą stronę, zmniejszanie wartości
-poniżej 1.0 spowoduje przygotowywanie mniej prawdopodobnych wyników.
+Parametr `temperature` ma domyślnie wartość 1.0, jego zmniejszenie że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa, mniej kreatywna. Alternatywnie można modyfikować domyślną wartość parametru `top_p` = 1.0, tym razem w drugą stronę, zmniejszając jego wartość - nie jest jednak zalecane jednoczesne modyfikowanie obu parametrów (zob. [API reference](https://beta.openai.com/docs/api-reference/completions/create)).
 
 Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
 
