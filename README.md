@@ -39,7 +39,7 @@ Przykładowo biografia Edwarda Józefa Sedlaczka (Polski Słownik Biograficzny t
 
 - _"Structured information extraction from complex scientific text with fine-tuned large language models"_ (Alexander Dunn, John Dagdelen, Nicholas Walker, Sanghoon Lee, Andrew S. Rosen, Gerbrand Ceder, Kristin Persson and Anubhav Jain) [link](https://arxiv.org/pdf/2212.05238.pdf)
 
-- _"Text Pattern Extraction: Comparing GPT-3 & Human-in-the-Loop Tool"_ [link](https://towardsdatascience.com/text-pattern-extraction-comparing-gpt-3-human-in-the-loop-tool-f2380fd13cf1)
+- _"Text Pattern Extraction: Comparing GPT-3 & Human-in-the-Loop Tool"_ (Maeda Hanafi) [link](https://towardsdatascience.com/text-pattern-extraction-comparing-gpt-3-human-in-the-loop-tool-f2380fd13cf1)
 
 - _"Getting tabular data from unstructured text with GPT-3: an ongoing experiment"_ (ROBERTO ROCHA) [link](https://robertorocha.info/getting-tabular-data-from-unstructured-text-with-gpt-3-an-ongoing-experiment/)
 
@@ -81,8 +81,10 @@ Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
 Zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
 inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
 
-Ogromne znaczenie ma konstrukcja zapytania (prompt), wydaje się że pytania w języku angielskim nawet w odniesieniu do polskiego tekstu dają lepsze rezultaty. Zadanie zlecone modelowi powinno być napisane
-językiem prostym, konkretnym, ale nie musi być bardzo krótkie. Dobry wpływ na jakość odpowiedzi mają podane modelowi przykłady, czego i w jakiej formie się spodziewamy.
+Ogromne znaczenie ma konstrukcja zapytania (prompt), całkiem poprawnie działają pytania w języku angielskim dotyczące podanego polskiego tekstu, czasem dają nawet lepsze rezultaty. Zadanie zlecone modelowi powinno być napisane językiem prostym, konkretnym, ale nie musi być bardzo krótkie. Dobry wpływ na jakość odpowiedzi mają podane modelowi przykłady, czego i w jakiej formie się spodziewamy.
+
+Odpowiedzi modelu davinci-003 zadawane przez API, często różnią się od wyników pytań zadanych
+podczas 'rozmowy' z ChatGPT.
 
 ### Poprawność odpowiedzi
 
