@@ -86,7 +86,7 @@ Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jed
 
 Parametr `temperature` ma wartość 0.0 - 1.0, niższa wartość powoduje że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa i mniej kreatywna. Wyższa pozwala modelowi na więcej elastyczności. Alternatywnie można modyfikować domyślną wartość parametru `top_p` = 1.0, zmniejszając jego wartość - nie jest jednak zalecane jednoczesne modyfikowanie obu parametrów (zob. [API reference](https://beta.openai.com/docs/api-reference/completions/create)).
 
-Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki.
+Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki, jeżeli wartość parametru temperature jest większa od zera.
 
 Zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
 inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
@@ -108,7 +108,8 @@ Po obniżeniu wartości `temperature` do 0.0 zwracana jest już prawdziwa inform
 
 1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
 
-Ciekawy wpływ ma poprawność odpowiedzi ma także parametr `frequency_penalty` (standardowo wartość 0.8) zmniejszenie go do zera powoduje na przykładowym biogramie Sedlaczka generowanie fałszywych przybliżeń, zamiast:
+Wpływ ma jakość odpowiedzi mają także parametry `frequency_penalty` (standardowo wartość 0.8)
+i `presence penalty`: kontrolujący tendencję modelu do powtarzania generowanych słów oraz zachęcający model do generowania nowatorskich sformułowań. Manipulowanie nimi spowodowało na przykładowym biogramie Sedlaczka wygenerowanie fałszywego przybliżenia, zamiast:
 
 3. Kancelista w austriackim konsulacie w Kijowie (1895)
 
