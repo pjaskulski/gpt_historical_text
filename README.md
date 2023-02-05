@@ -20,6 +20,7 @@ biografii postaci historycznych.
   - [Lista urzędów i funkcji w formie xml](#lista-urzędów-i-funkcji-w-xml)
   - [Relacje rodzinne](#relacje-rodzinne-nr-2)
   - [Konwersja tekstu do formatu TEI](#tei-xml-output)
+  - [Analiza NER fragmentu publikacji](#analiza-ner-fragmentu-publikacji)
   - [Inne przykłady](#inne-przykłady)
 
 
