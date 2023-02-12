@@ -6,7 +6,7 @@ biografii postaci historycznych.
 [Notatki](#notatki)
   - [Wstępne informacje](#wstępne-informacje)
   - [Literatura, blogi, repozytoria](#literatura)
-  - [Porównanie dostępnych modeli](#porównanie-dostępnych-modeli)
+  - [Porównanie dostępnych modeli GPT](#porównanie-dostępnych-modeli-gpt)
   - [Uwagi techniczne](#uwagi-techniczne)
   - [Poprawność odpowiedzi](#poprawność-odpowiedzi)
   - [Wiedza z kontekstu](#wiedza-z-kontekstu)
@@ -31,7 +31,7 @@ biografii postaci historycznych.
 Definicja GPT-3 (napisana przez ChatGPT):
 "GPT-3 (Generative Pretrained Transformer 3) jest trzecią wersją sztucznej inteligencji opracowaną przez OpenAI. Jest to jeden z największych modeli językowych na świecie, który został wytrenowany na ogromnych zbiorach danych tekstowych, aby rozumieć i generować język ludzki. GPT-3 jest używany do wielu zastosowań, takich jak generowanie tekstu, tłumaczenie, odpowiadanie na pytania i rozumienie tekstu. Model ten wykorzystuje architekturę Transformer i jest w stanie uczyć się zadanie z niewielką ilością danych, co czyni go bardzo efektywnym i elastycznym narzędziem dla różnych zastosowań."
 
-Testy GPT-3 zostały przeprowadzone poprzez API udostępnione przez firmę OpenAI, wykorzystano głównie model `text-davinci-003`.
+Testy GPT-3 zostały przeprowadzone poprzez API udostępnione przez firmę OpenAI, wykorzystano głównie model `text-davinci-003` (nazywany czasem modelem GPT-3.5).
 
 Istnieją ograniczenia podczas korzystania z API dotyczące liczby zapytań na minutę (3 tys.) i liczby przetworzonych tokenów na minutę (250 tys.).
 
@@ -53,7 +53,10 @@ Przykładowo biografia Edwarda Józefa Sedlaczka (Polski Słownik Biograficzny t
 
 - _"Language Models are Few-Shot Learners"_ (Tom B. Brown et al.) [link](https://arxiv.org/abs/2005.14165)
 
-### Porównanie dostępnych modeli
+- _"Training language models to follow instructions with human feedback"_ (Long Ouyang et al., OpenAI) [link](https://arxiv.org/pdf/2203.02155.pdf)
+
+
+### Porównanie dostępnych modeli GPT
 
 Najlepszy model `text-davinci-003` (to jednocześnie najdroższy model językowy w OpenAI) ma ograniczenie do 4000 tokenów, przy czym dotyczy to wejścia i wyjścia razem.
 

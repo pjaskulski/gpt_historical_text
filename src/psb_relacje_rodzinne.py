@@ -17,9 +17,9 @@ def get_data_gpt3(text:str='', prompt:str='') -> str:
          model="text-davinci-003",
          prompt=f"{prompt}\n\n {text}",
          temperature=0.0,
-         max_tokens=1000,
+         max_tokens=800,
          top_p=1.0,
-         frequency_penalty=0.8,
+         frequency_penalty=0.0,
          presence_penalty=0.0)
 
     result = response['choices'][0]['text']
@@ -42,15 +42,15 @@ nlp = spacy.load('pl_core_news_sm')
 data_folder = Path("..") / "data" / "psb_probki_200_txt_gpt3"
 
 data_file_list = data_folder.glob('*.txt')
-max_char = 6000
+max_char = 5000
 
 licznik = 0
 for data_file in data_file_list:
     # ograniczona liczba biogramów
     licznik += 1
-    if licznik < 5:
-        continue
-    if licznik > 7:
+    #if licznik < 7:
+    #    continue
+    if licznik > 5:
         break
 
     # if 'Pion_Maurice' not in data_file.as_posix():
@@ -90,16 +90,27 @@ for data_file in data_file_list:
              "Write the result in the form of a list. " \
              "If there is no such information in the text write: no data."
 
-    #"(możliwe rodzaje relacji rodzinnych: ojciec, matka, brat, siostra, żona, mąż, teść, teściowa, dziadek, babcia, wnuk, wnuczka," \
-    #"szwagier, szwagierka, siostrzeniec, siostrzenica, bratanek, bratanica, kuzyn, kuzynka, zięć, synowa)" \
+    # "możliwe rodzaje relacji rodzinnych: ojciec, matka, brat, siostra, żona, mąż, teść, teściowa, dziadek, babcia, wnuk, wnuczka," \
+    # "szwagier, szwagierka, siostrzeniec, siostrzenica, bratanek, bratanica, kuzyn, kuzynka, zięć, synowa)" \
 
+
+    prompt = "Na podstawie podanego tekstu wyszukaj " \
+             "wszystkie relacje rodzinne głównego bohatera (tylko jego krewnych, powinowatych, teściów, szwagrów, szwagierki). " \
+             "Wynik wypisz w formie listy nienumerowanej " \
+             "z rodzajem pokrewieństwa w nawiasie. Na przykład: " \
+             "- Jan Kowalski (brat) " \
+             "- Anna (siostra) " \
+             "Jeżeli w tekście nie ma takich informacji napisz: brak danych."
 
     # prompt = "Na podstawie podanego tekstu wyszukaj " \
     #          "wszystkie relacje rodzinne głównego bohatera, jego krewnych lub powinowatych. " \
-    #          "Wynik wypisz w formie listy nienumerowanej " \
-    #          "z rodzajem pokrewieństwa w nawiasie. Na przykład: " \
-    #          "- Jan Kowalski (brat) " \
-    #          "- Anna (siostra) " \
+    #          "Wynik wypisz w formie listy nienumerowanej. " \
+    #          "Możliwe rodzaje relacji rodzinnych: ojciec, matka, syn, córka, brat, siostra, żona, mąż, teść, teściowa, dziadek, babcia, wnuk, wnuczka," \
+    #          "szwagier, szwagierka, siostrzeniec, siostrzenica, bratanek, bratanica, kuzyn, kuzynka, zięć, synowa, teść bratanicy." \
+    #          "w formie: główny bohater -> rodzaj pokrewieństwa -> osoba będąca krewnym lub powinowatym " \
+    #          "Na przykład: " \
+    #          "- główny bohater -> brat -> Jan Kowalski" \
+    #          "- główny bohater -> siostra -> Anna (siostra) " \
     #          "Jeżeli w tekście nie ma takich informacji napisz: brak danych."
 
     #prompt = "Proszę wydobyć dane o relacjach rodzinnych głównego bohatera " \
@@ -120,6 +131,6 @@ for data_file in data_file_list:
             if line and line not in output_lines:
                 output_lines.append(line)
 
-    file_output = Path("..") / "output" / "psb_probki_200_txt_gpt3" / data_file_name.replace('.txt', '.out')
+    file_output = Path("..") / "output" / "psb_probki_200_txt_gpt3" / data_file_name.replace('.txt', '.relacje')
     with open(file_output, 'w', encoding='utf-8') as f:
         f.write('\n'.join(output_lines))

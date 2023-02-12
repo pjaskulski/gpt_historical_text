@@ -17,14 +17,14 @@ OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 openai.api_key = OPENAI_API_KEY
 
 # dane z pliku tekstowego
-file_data = Path("..") / "data" / "morteski_ludwik.txt"
-with open(file_data, 'r', encoding='utf-8') as f:
-    data = f.read()
+#file_data = Path("..") / "data" / "morteski_ludwik.txt"
+#with open(file_data, 'r', encoding='utf-8') as f:
+#    data = f.read()
 
 response = openai.Completion.create(
     model="text-davinci-003",
-    prompt=f"From this text extract information about parents, wife, children and grandchildren for the person Ludwik Mortęski:\n\n {data}",
-    temperature=0.5,
+    prompt=f"Na podstawie poprzednich pytań wymień krewnych postaci Pion Maurice.",
+    temperature=0.0,
     max_tokens=500,
     top_p=1.0,
     frequency_penalty=0.8,
