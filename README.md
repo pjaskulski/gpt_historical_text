@@ -645,7 +645,7 @@ W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki z
 | Stańczakowa ze Strancmanów | True |
 | Stanisław_Cielątko | True (pominięty mąż bratanicy ale czy to w sumie pokrewieństwo?) |
 | Strzelecki Wiesław Marian | True |
-| Świrski Jerzy Włodzimierz | True (ale część ze znalezionych relacji jest niepoprawnego typu, sistrzenica zamiast ciotka, brat zaiast siostra) |
+| Świrski Jerzy Włodzimierz | True (ale część ze znalezionych relacji jest niepoprawnego typu, siostrzenica zamiast ciotka, brat zamiast siostra) |
 | Szapira Majer | True |
 | Szapocznikow Alina | **False**, pominięta informacja o 2 mężach |
 | Szczubioł Andrzej | True |
