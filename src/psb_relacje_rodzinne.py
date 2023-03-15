@@ -62,9 +62,7 @@ def short_version(text:str) -> str:
 env_path = Path(".") / ".env"
 load_dotenv(dotenv_path=env_path)
 
-#OPENAI_ORG_ID = os.environ.get('OPENAI_ORG_ID')
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-
 openai.api_key = OPENAI_API_KEY
 
 # spacy do podziału tekstu na zdania
@@ -80,8 +78,6 @@ licznik = 0
 for data_file in data_file_list:
     # ograniczona liczba biogramów
     licznik += 1
-    if licznik < 41:
-        continue
     if licznik > 50:
         break
 
