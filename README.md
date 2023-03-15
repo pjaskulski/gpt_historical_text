@@ -609,3 +609,44 @@ W 5 z tych przypadków jest to prawdopodobnie błąd.
 | Spycigniew z Dąbrowy | **False** (w biogramie występuje inf. o prawdopodobnym synu i wnuku, być może problemem jest skrót S-a na oznaczenie głównego bohatera)
 | Swach | **False** (jest inf. o ojcu, matce i bracie) |
 | Sztaffel Izrael | True |
+
+W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki zdarzało się, że była to tylko część informacji na temat relacji rodzinnych - w 12 na 36 biogramów. Szczegółowy wykaz poniżej.
+
+| Postać | Czy uwzgl. wszystkie ralacje, ew. jakich brakuje |
+| ---    | ---                               |
+| Aloe Franciszek Eljasz  |  True |
+| Bezprym  |  True |
+| Dąbrowska Pelagia | **False**, pominięta matka Pelagia i ojciec Michał, ciotki Waleria i Ignacja, mąż Jarosław. Może to wynikać ze specyficzneg stylu podania tych informacji i stosowania skrótów: "Ur. 10 IX w Dubience (w Lubelskiem) z Pelagii z Piotrowskich i Michała Zgliczyńskiego, wcześnie osierocona, wychowywała się u ciotek Walerii i Ignacji Piotrowskich." |
+| Daszyński Ignacy | True |
+| Dzierżek Natalia | True |
+| Eufrozyna | **False**, pominięta informacja o pierwszym mężu - Kazimierzu |
+| Ewild al. Eywild | True |
+| Fuzorius Bartłomiej | True |
+| Gliński Iwan | **False**, pominięta informacja o bracie Wasylu |
+| Hincza z Rogowa | True (jest wzmianka o małoletnich dzieciach ale bez konkretów) |
+| Jadwiga Jagiellonka | True (część informacji jest pomylona - Jerzy Bawarski nie jest żoną bohaterki tylko mężem, ale inf. została znaleziona...) |
+| Kakowski Aleksander | True |
+| Krumhausen Gabriel | **False**, pominięta informacja o 'dziadku po kądzieli' |
+| Łańcucki Wojciech | True |
+| Leymiter Stanisław | **False**, pominięta inf. o szwagrze i 2 szwagierkach, bracie oraz o zięciach (z tym że córki wyszły za mąż po śmierci bohatera), biogram napisany dość zawile, jeżeli chodzi o opis rodziny bohatera. |
+| Mierzeński Aleksander | **False**, pominięta informacja o ojcu i matce. |
+| Mostowska z Bujwidów | True |
+| Patruus | True (są tylko wzmianki o nieznanych z imienia synach i córkach) |
+| Pichgiel | **False**, pominięta inf. o stryju i o żonie bohatera biogramu |
+| Pion Maurice | True |
+| Piotrowiczowa z Rogolińskich | True |
+| Renard Benedykt | True |
+| Rossi Piotr | **False**, pominięta informacja o teściu |
+| Sapieha Jan Fryderyk | **False**, brak informacji o dziadku i o zięciu |
+| Śląska Aleksandra | True (brak tylko inf. o 'dalekiej krewnej' Eugenii Deutsch) |
+| Słowicki Józef | True |
+| Śniadecka Kornelia Ludwika | **False**, brak informacji o szwagrze (mężu siostry), fragment o krewnych dość zawiły. |
+| Spektor Mordechaj - True (krewni są wzmiankowani, ale bez konkretów) |
+| Stańczakowa ze Strancmanów | True |
+| Stanisław_Cielątko | True (pominięty mąż bratanicy ale czy to w sumie pokrewieństwo?) |
+| Strzelecki Wiesław Marian | True |
+| Świrski Jerzy Włodzimierz | True (ale część ze znalezionych relacji jest niepoprawnego typu, sistrzenica zamiast ciotka, brat zaiast siostra) |
+| Szapira Majer | True |
+| Szapocznikow Alina | **False**, pominięta informacja o 2 mężach |
+| Szczubioł Andrzej | True |
+| Szumski Boksa | **False**, pominięta informacja o przodku - dziad lub pradzad Jakub |
