@@ -590,3 +590,22 @@ Szczegółowa lista **znalezionych** relacji:
 | główny bohater-> bratanek-> Stogniew, żonaty z Małgorzatą | True |
 
 Ważne jest oczywiście także to czego model **nie znajduje**.
+Dla 14 biogramów model ocenił, że nie ma danych dotyczących relacji rodzinnych dla głównego bohatera.
+W 5 z tych przypadków jest to prawdopodobnie błąd.
+
+| Postać | Wynik |
+| ---    | ---   |
+| Bartoszewski Jan | True |
+| Ezra_ben_Nisan | True (w biogramie jest tylko niejasna wzmianka, że miał jakieś córki)
+| Falęta | True
+| Fiorentini Władysław | **False** (jest informacja o ojcu, dziadku i żonie)
+| Gołaski Jan | True
+| Grzegorzewski Jan | **False** (jest informacja o ojcu i matce)
+| Guicciardini Galeazzo | True (występuje tylko niesjasna wzmianka o jego bracie, niewymienionym z imienia)
+| Hirschenfeld-Mielecki Józef | True
+| Langfort Teodor Henryk | True
+| Popiel | True
+| Siemowit | **False** (w biogramie wymieniony ojciec, matka, syn, wnuk i prawnuk)
+| Spycigniew z Dąbrowy | **False** (w biogramie występuje inf. o prawdopodobnym synu i wnuku, być może problemem jest skrót S-a na oznaczenie głównego bohatera)
+| Swach | **False** (jest inf. o ojcu, matce i bracie) |
+| Sztaffel Izrael | True |
