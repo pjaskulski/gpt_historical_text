@@ -371,8 +371,8 @@ Dla 36 z 50 biogramów model znalazł jakieś relacje - w sumie 182 przypadki po
 Szczegółowa lista **znalezionych** relacji:
 
 | Postać -> rodzaj pokrewieństwa/relacja -> osoba spokrewniona | Prawidłowa? |
-| ---                                                          | ---         |
-| **Aloe** | |
+| ------------------------------------------------------------ | :---------: |
+| **Aloe Franciszek Eljasz** | |
 | główny bohater -> ojciec -> Jan Baptysty d'Aloy | True |
 | główny bohater -> matka -> Henryka Rakocy | True |
 | główny bohater -> brat -> Emanuel | True |
