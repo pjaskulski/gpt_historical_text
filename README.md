@@ -342,9 +342,7 @@ Skrypty do tych i pozostałych przykładów w folderze `src`, wyniki w folderze 
 ### Analiza relacji rodzinnych na serii biografii
 
 Jak model GPT-3 ('davinci-003') radzi sobie z rozpoznawaniem relacji rodzinnych można spróbować ocenić 
-na większej próbce 50 biogramów wybranych z t. 1-51 Polskiego Słownika Biograficznego. Biogramy mają różną długość, od miej więcej
-1 tys. znaków do kilkudziesięciu tys. Ograniczeniem jest liczba tokenów, które 'davinci' jest w stanie przetworzyć w jednym
-zapytaniu - 4000 wliczając wygenerowaną odpowiedź. W przypadku dłuższych biogramów zostały one wstępnie 'streszczone': 5 pierwszych i pięć ostatnich zdań (pomijając najpierw część bibliograficzną biogramu) oraz wszystkie zdania pomiędzy nimi jeżeli zawierają treść wskazującą na informacje o rodzinie, krewnych (biogram podzielony na zdania za pomocą spaCy, w zdaniach analizowane formy podstawowe tokenów i porównywane ze słownikiem pojęć związanych z pokrewieństwem). Skracanie biogramów może oczywiście wpłynąć negatywnie na wyniki.W teście skupiono się na pokrewieństwie w stosunku do głównego bohatera/bohaterki biogramu.
+na większej próbce 50 biogramów wybranych z t. 1-51 Polskiego Słownika Biograficznego. Biogramy mają różną długość, od mniej więcej 1 tys. znaków do kilkudziesięciu tys. Ograniczeniem jest liczba tokenów, które 'davinci' jest w stanie przetworzyć w jednym zapytaniu - 4000 wliczając wygenerowaną odpowiedź. W przypadku dłuższych biogramów zostały one wstępnie 'streszczone': uwzględniono 5 pierwszych i pięć ostatnich zdań (pomijając najpierw część bibliograficzną biogramu) oraz wszystkie zdania pomiędzy nimi jeżeli zawierały treść wskazującą na informacje o rodzinie i krewnych (biogram został podzielony na zdania za pomocą spaCy, w zdaniach analizowano formy podstawowe tokenów i porównywano z przygotowanym słownikiem pojęć związanych z pokrewieństwem). Skracanie biogramów może oczywiście wpłynąć negatywnie na wyniki. W teście skupiono się na pokrewieństwie w stosunku do głównego bohatera/bohaterki biogramu.
 
 Teksty biogramów przetwarzane były promptem o treści:
 
