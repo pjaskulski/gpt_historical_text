@@ -588,3 +588,5 @@ Szczegółowa lista **znalezionych** relacji:
 | główny bohater-> teściowa-> Świątka, żona Mikołaja z Barczkowic, następnie Wisława z Kościelca | **False** |
 | główny bohater-> bratanek-> Jan Rey (zm. 1468) | True |
 | główny bohater-> bratanek-> Stogniew, żonaty z Małgorzatą | True |
+
+Ważne jest oczywiście także to czego model **nie znajduje**.
