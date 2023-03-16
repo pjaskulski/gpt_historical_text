@@ -610,7 +610,7 @@ W 5 z tych przypadków jest to prawdopodobnie błąd (15 brakujących relacji).
 | Swach | **False** (jest inf. o ojcu, matce i bracie) |
 | Sztaffel Izrael | True |
 
-W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki zdarzało się, że była to tylko część informacji na temat relacji rodzinnych - w 12 na 36 biogramów (pominiętych 26 relacji rodzinnych). Szczegółowy wykaz poniżej.
+W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki zdarzało się, że była to tylko część informacji na temat relacji rodzinnych - teki problem wystąpił w 12 na 36 biogramów (pominiętych 26 relacji rodzinnych). Szczegółowy wykaz poniżej.
 
 | Postać | Czy uwzgl. wszystkie ralacje, ew. jakich brakuje |
 | ---    | ---                               |
@@ -649,7 +649,6 @@ W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki z
 | Szapira Majer | True |
 | Szapocznikow Alina | **False**, pominięta informacja o 2 mężach |
 | Szczubioł Andrzej | True |
-| Szumski Boksa | **False**, pominięta informacja o przodku - dziad lub pradzad Jakub |
+| Szumski Boksa | **False**, pominięta informacja o przodku - dziad lub pradziad Jakub |
 
-Podsumowując, w biogramach znajdują się 223 relacje, model wymienił 182, z tego 38 błędnie,
-co oznacza 64.5% dokładności. Zupełnie innym pytaniem pozostaje czy i jak uzyskane dane można wykorzystać np. do budowania baz wiedzy.
+Jeśli przeanalizuje się wspólnie dane z powyższych trzech tabel w biogramach znajdują się 223 relacje, model wymienił 182, z tego 38 błędnie, co oznacza 64.5% dokładności. Zupełnie innym pytaniem pozostaje czy i jak uzyskane dane można wykorzystać np. do budowania baz wiedzy.
