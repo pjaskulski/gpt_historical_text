@@ -653,8 +653,18 @@ W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki z
 
 Jeśli przeanalizuje się wspólnie dane z powyższych trzech tabel w biogramach znajdują się 223 relacje, model wymienił 182, z tego 38 błędnie, co oznacza 64.5% dokładności (144 prawidłowe). Zupełnie innym pytaniem pozostaje czy i jak uzyskane dane można wykorzystać np. do budowania baz wiedzy.
 
-Powyższe testy dotyczyły działania modelu GPT-3 ('davinci-003'), jakie wyniki mógłby osiągnąc najnowszy model GPT-4 można spróbować ocenić poprzez działanie ChatGPT Plus z włączonym modelem GPT-4 właśnie. Jeden z problematycznych biogramów 'Natalia Dzierżek (1861-1931)' dla którego wyszukane zostało 5 relacji z tego 3 błędnie, tym razem został przetworzony całkowicie poprawnie:
+Powyższe testy dotyczyły działania modelu GPT-3 ('davinci-003'), jakie wyniki mógłby osiągnąć najnowszy model GPT-4 można spróbować ocenić poprzez działanie ChatGPT Plus z włączonym modelem GPT-4. Jeden z problematycznych biogramów: 'Natalii Dzierżek (1861-1931)' dla którego wyszukane zostało 5 relacji z tego 3 błędnie, tym razem został przetworzony całkowicie poprawnie:
 
 - główna bohaterka -> ojciec -> Henryk Dzierżek
 - główna bohaterka -> matka -> Maria z Piątkowskich Nieczuja-Dzierżków
 - główna bohaterka -> wujek (brat matki) -> Henryk Piątkowski
+
+Podobnie poprawił się wynik przetwarzania dla Pelagii Dąbrowskiej (1843-1909), gdzie poprzednio model GPT-3 znalazł tylko dwie i to błędne relacje, obecne GPT-4 zwraca poprawną listę:
+
+- Główna bohaterka -> ojciec -> Michał Zgliczyński
+- Główna bohaterka -> matka -> Pelagia z Piotrowskich
+- Główna bohaterka -> mąż -> Jarosław Dąbrowski
+- Główna bohaterka -> syn -> trzech synów
+- Główna bohaterka -> ciotka -> Waleria Piotrowska
+- Główna bohaterka -> ciotka -> Ignacja Piotrowska
+- Główna bohaterka -> wuj -> Piotr Falkenhagen-Zaleski.
