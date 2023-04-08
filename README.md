@@ -23,7 +23,7 @@ biografii postaci historycznych.
   - [Analiza NER fragmentu publikacji](#analiza-ner-fragmentu-publikacji)
   - [Inne przykłady](#inne-przykłady)
   - [Analiza 50 biogramów - relacje rodzinne](#analiza-relacji-rodzinnych-na-serii-biografii)
-  - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii-gpt4)
+  - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii---model-gpt4)
 
 ## Notatki
 
@@ -653,7 +653,7 @@ W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki z
 
 Jeśli przeanalizuje się wspólnie dane z powyższych trzech tabel w biogramach znajdują się 223 relacje, model wymienił 182, z tego 38 błędnie, co oznacza 64.5% dokładności (144 prawidłowe). Zupełnie innym pytaniem pozostaje czy i jak uzyskane dane można wykorzystać np. do budowania baz wiedzy.
 
-### Analiza relacji rodzinnych na serii biografii GPT4
+### Analiza relacji rodzinnych na serii biografii - model GPT4
 
 Poprzednie testy dotyczyły działania modelu GPT-3 ('davinci-003'), nie mam jeszcze dostępu do API z GPT4, ale jakie wyniki mógłby osiągnąć najnowszy model można spróbować ocenić poprzez działanie ChatGPT Plus z włączonym modelem GPT-4. Jeden z problematycznych biogramów: 'Natalii Dzierżek (1861-1931)' dla którego wyszukane zostało 5 relacji z tego 3 błędnie, tym razem został przetworzony całkowicie poprawnie:
 
