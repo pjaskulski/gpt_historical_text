@@ -895,7 +895,7 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | główny bohater -> ojciec -> kramarz, chasyd | True |
 | główny bohater -> matka (niewymieniona z imienia) | True |
 | główny bohater -> brat (niewymieniony z imienia) | True |
-| główny bohater -> żona -> Izabela z Frydbergów @ True |
+| główny bohater -> żona -> Izabela z Frydbergów | True |
 | główny bohater -> syn | **False** |
 | główny bohater -> córka | **False** |
 | **Spycigniew_z_Dąbrowy** | |
