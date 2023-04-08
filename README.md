@@ -23,7 +23,7 @@ biografii postaci historycznych.
   - [Analiza NER fragmentu publikacji](#analiza-ner-fragmentu-publikacji)
   - [Inne przykłady](#inne-przykłady)
   - [Analiza 50 biogramów - relacje rodzinne](#analiza-relacji-rodzinnych-na-serii-biografii)
-
+  - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii-gpt4)
 
 ## Notatki
 
@@ -653,13 +653,15 @@ W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki z
 
 Jeśli przeanalizuje się wspólnie dane z powyższych trzech tabel w biogramach znajdują się 223 relacje, model wymienił 182, z tego 38 błędnie, co oznacza 64.5% dokładności (144 prawidłowe). Zupełnie innym pytaniem pozostaje czy i jak uzyskane dane można wykorzystać np. do budowania baz wiedzy.
 
-Powyższe testy dotyczyły działania modelu GPT-3 ('davinci-003'), jakie wyniki mógłby osiągnąć najnowszy model GPT-4 można spróbować ocenić poprzez działanie ChatGPT Plus z włączonym modelem GPT-4. Jeden z problematycznych biogramów: 'Natalii Dzierżek (1861-1931)' dla którego wyszukane zostało 5 relacji z tego 3 błędnie, tym razem został przetworzony całkowicie poprawnie:
+### Analiza relacji rodzinnych na serii biografii GPT4
+
+Poprzednie testy dotyczyły działania modelu GPT-3 ('davinci-003'), nie mam jeszcze dostępu do API z GPT4, ale jakie wyniki mógłby osiągnąć najnowszy model można spróbować ocenić poprzez działanie ChatGPT Plus z włączonym modelem GPT-4. Jeden z problematycznych biogramów: 'Natalii Dzierżek (1861-1931)' dla którego wyszukane zostało 5 relacji z tego 3 błędnie, tym razem został przetworzony całkowicie poprawnie:
 
 - główna bohaterka -> ojciec -> Henryk Dzierżek
 - główna bohaterka -> matka -> Maria z Piątkowskich Nieczuja-Dzierżków
 - główna bohaterka -> wujek (brat matki) -> Henryk Piątkowski
 
-Podobnie poprawił się wynik przetwarzania dla Pelagii Dąbrowskiej (1843-1909), gdzie poprzednio model GPT-3 znalazł tylko dwie i to błędne relacje, obecne GPT-4 zwraca poprawną listę:
+Podobnie poprawił się wynik przetwarzania dla Pelagii Dąbrowskiej (1843-1909), gdzie poprzednio model GPT-3 znalazł tylko dwie i to błędne relacje, obecnie GPT-4 zwraca poprawną listę:
 
 - Główna bohaterka -> ojciec -> Michał Zgliczyński
 - Główna bohaterka -> matka -> Pelagia z Piotrowskich
@@ -668,3 +670,301 @@ Podobnie poprawił się wynik przetwarzania dla Pelagii Dąbrowskiej (1843-1909)
 - Główna bohaterka -> ciotka -> Waleria Piotrowska
 - Główna bohaterka -> ciotka -> Ignacja Piotrowska
 - Główna bohaterka -> wuj -> Piotr Falkenhagen-Zaleski.
+
+Jak wyglądają wyniki dla całej serii 50 biogramów?
+
+| Postać -> rodzaj pokrewieństwa/relacja -> osoba spokrewniona | Prawidłowa? |
+| ------------------------------------------------------------ | :---------: |
+| **Aloe Franciszek Eljasz** | |
+| główny bohater -> ojciec -> Jan Baptysta d'Aloy | True |
+| główny bohater -> matka -> Henryka Rakocy | True |
+| główny bohater -> brat -> Emanuel d'Aloy  | True |
+| główny bohater -> siostry -> piękne siostry Aloe (imię niepodane) | True |
+| **Bartoszewski Jan** | |
+| brak danych | True |
+| **Bezprym** | |
+| główny bohater -> ojciec -> Bolesław Chrobry | True |
+| główny bohater -> matka -> nieznana z imienia Węgierka (być może córka księcia Gejzy) | True |
+| główny bohater -> brat -> Mieszko II  | True |
+| główny bohater -> brat -> Otton | True |
+| **Dąbrowska_Pelagia** | |
+| główna bohaterka -> ojciec -> Michał Zgliczyński | True |
+| główna bohaterka -> matka -> Pelagia z Piotrowskich  | True |
+| główna bohaterka -> mąż -> Jarosław Dąbrowski | True |
+| główna bohaterka -> ciotka -> Waleria Piotrowska | True |
+| główna bohaterka -> ciotka -> Ignacja Piotrowska | True |
+| główna bohaterka -> wuj -> Piotr Falkenhagen-Zaleski | True |
+| główna bohaterka -> syn -> (trzej synowie, imiona nie podane) | True |
+| **Daszyński Ignacy** | |
+| główny bohater -> ojciec -> Ferdynand Daszyński | True |
+| główny bohater -> matka -> Kamila Daszyńska z Mierzeńskich | True |
+| główny bohater -> brat -> Feliks Daszyński | True |
+| główny bohater -> żona (pierwsza) -> Maria Daszyńska z Paszkowskich | True |
+| główny bohater -> żona (druga) -> Cecylia Daszyńska z domu Kempnerówna | True |
+| **Dzierżek_Natalia** | |
+| główna bohaterka -> ojciec -> Henryk Dzierżek | True |
+| główna bohaterka -> matka -> Maria z Piątkowskich Nieczuja-Dzierżków | True |
+| główna bohaterka -> wujek (brat matki) -> Henryk Piątkowski | True |
+| **Eufrozyna** | |
+| główna bohaterka -> ojciec -> Kazimierz, ks. opolski | True |
+| główna bohaterka -> mąż (pierwszy) -> Kazimierz, ks. kujawski | True |
+| główna bohaterka -> syn -> Władysław Łokietek | True |
+| główna bohaterka -> syn -> Kazimierz | True |
+| główna bohaterka -> syn -> Ziemowit | True |
+| główna bohaterka -> mąż (drugi) -> Mszczuj II, ks. pomorski | True |
+| **Ewild al. Eywild** | |
+| główny bohater -> brat -> Eynurem | True |
+| **Ezra ben Nisan** | |
+| główny bohater -> ojciec -> Nisan | True |
+| główny bohater -> córka -> córka Jana Kazimierza (niepodane imię) | **False** |
+| **Falęta** | |
+| brak danych | True |
+| **Fiorentini Władysław** | |
+| główny bohater -> ojciec -> Antoni | True |
+| główny bohater -> dziadek -> Franciszek | True |
+| główny bohater -> żona -> Anna | True |
+| główny bohater -> teść -> Bazyle Popow | True |
+| główny bohater -> teściowa -> Bogumiła z Gizbertów | True |
+| **Fuzorius Bartłomiej** | |
+| główny bohater -> ojciec -> Stanisław Lwowczyk | True |
+| **Gliński Iwan** | |
+| główny bohater -> ojciec -> Lew Borysowicz | True |
+| główny bohater -> brat -> Michał | True |
+| główny bohater -> brat -> Wasyl | True |
+| główny bohater -> bratanica -> Helena | True |
+| **Gołaski Jan** | |
+| brak danych | True
+| **Grzegorzewski Jan** | |
+| główny bohater -> ojciec -> Jakub Grzegorzewski | True |
+| główny bohater -> matka -> Anna Grzegorzewska z domu Zaleska | True |
+| **Guicciardini Galeazzo** | |
+| główny bohater -> brat -> nieznane imię | True |
+| **Hincza z Rogowa** | |
+| główny bohater -> ojciec -> Hinczka z Rogowa | True |
+| główny bohater -> brat -> Jakub | True |
+| główny bohater -> brat -> Henryk | True |
+| główny bohater -> żona -> Dorota z Koziegłowskich | True |
+| główny bohater -> siostra -> Małgorzata | True |
+| **Hirschenfeld-Mielecki Józef** | |
+| brak danych | True |
+| **Jadwiga Jagiellonka** | |
+| główna bohaterka -> ojciec -> Kazimierz Jagiellończyk | True |
+| główna bohaterka -> matka -> Elżbieta Rakuszanka | True |
+| główna bohaterka -> mąż -> Jerzy Bawarski | True |
+| główna bohaterka -> brat -> Władysław Jagiellończyk | True |
+| główna bohaterka -> brat -> Aleksander Jagiellończyk | True |
+| główna bohaterka -> brat -> Zygmunt I Jagiellończyk | True |
+| główna bohaterka -> córka -> Elżbieta | True |
+| główna bohaterka -> córka -> Małgorzata | True |
+| główna bohaterka -> wnuk -> Ruprecht hr. Palatynatu | **False** |
+| brak -> syn -> Ludwik | False |
+| brak -> syn -> Ruprecht | False |
+| brak -> wnuk -> (niewymieniony z imienia) | **False** |
+| **Kakowski Aleksander** | |
+| łówny bohater -> ojciec -> Franciszek Kakowski | True |
+| główny bohater -> matka -> Paulina Kakowska z domu Ossowska | True |
+| **Krumhausen Gabriel** | |
+| główny bohater -> ojciec -> Joachim Krumhausen | True |
+| główny bohater -> matka -> Gertruda Krumhausen z domu Schumann | True |
+| główny bohater -> żona -> Konstancja Krumhausen z domu Falcke  | True |
+| główny bohater -> dziadek (po kądzieli) -> Stanisław Bornbach | True |
+| główny bohater -> brat -> Joachim Krumhausen | True |
+| **Łańcucki Wojciech** | |
+| główny bohater -> ojciec -> Stanisław | True |
+| **Langfort Teodor Henryk** | |
+| brak danych | True
+| **Leymiter Stanisław** | |
+| główny bohater -> ojciec -> Mikołaj | True |
+| główny bohater -> matka -> Benigna | True |
+| główny bohater -> żona -> Zofia | True |
+| główny bohater -> teść -> Jan Tesznar | True |
+| główny bohater -> syn -> Jan | True |
+| główny bohater -> syn -> Stanisław | True |
+| główny bohater -> córka -> Barbara | True |
+| główny bohater -> córka -> Benigna | True |
+| główny bohater -> szwagier -> Jan Wierzyniek | True |
+| główny bohater -> szwagier -> Mikołaj Kreidler | True |
+| brak -> szwagierka -> Agnieszka | **False** |
+| brak -> szwagierka -> Katarzynę | **False** |
+| brak -> szwagierka -> Jan Tesznar | **False** |
+| brak -> brat -> Mikołaj Leymiter | **False** |
+| brak -> zięć -> Wincenty Beck | **False** |
+| brak -> zięć -> Jan Tretkop | **False** |
+| **Mierzeński Aleksander** | |
+| główny bohater -> ojciec -> Abraham | True |
+| główny bohater -> matka -> Elżbieta Morsztynówna | True |
+| główny bohater -> brat -> Jan Mierzeński | True |
+| główny bohater -> brat -> Samuel Mierzeński | True |
+| główny bohater -> brat -> Krzysztof Mierzeński | True |
+| główny bohater -> brat -> Daniel Mierzeński | True |
+| **Mostowska z Bujwidów** | |
+| Mostowska z Bujwidów Zofia -> ojciec -> Odo Bujwida | True |
+| Mostowska z Bujwidów Zofia -> matka -> Kazimiera z Klimontowiczów | True |
+| Mostowska z Bujwidów Zofia -> siostra -> Kazimiera Rouppertowa | True |
+| Mostowska z Bujwidów Zofia -> siostra -> Jadwiga Demelowa | True |
+| Mostowska z Bujwidów Zofia -> siostra -> Helena Jurgielewiczowa | True |
+| Mostowska z Bujwidów Zofia -> mąż -> Włodzimierz Mostowski | True |
+| Mostowska z Bujwidów Zofia -> syn -> Jerzy Mostowski | True |
+| Mostowska z Bujwidów Zofia -> syn -> Czesław Mostowski | True |
+| **Patruus** | |
+| główny bohater -> ojciec -> Jan «ojciec» (zm. 1538) | **False** |
+| główny bohater -> syn -> Jan | True |
+| główny bohater -> żona -> nieznana | True |
+| **Pichgiel** | |
+| główny bohater -> stryj -> Matthias Pichel | True |
+| główny bohater -> kuzyn -> Matthias Pichgiel młodszy | True |
+| główny bohater -> syn -> Christian Pichgiel młodszy | True |
+| główny bohater -> żona -> Barbara z domu Biettin | True |
+| główny bohater -> syn -> Christian | True (dublet) |
+| główny bohater -> syn -> Johan | True |
+| główny bohater -> syn -> Daniel | True |
+| główny bohater -> syn -> Emanuel | True |
+| **Pion Maurice** | |
+| główny bohater -> ojciec -> Antoine Claude | True |
+| główny bohater -> matka -> Anne z domu Pauli | True |
+| główny bohater -> żona -> Aleksandra Antonina z Budzyńskich | True |
+| główny bohater -> córka -> Adela | True |
+| główny bohater -> syn -> Adolf Stanisław | True |
+| główny bohater -> syn -> Władysław Stanisław | True |
+| główny bohater -> córka -> Kornelia, zamężna Quattrini | True |
+| główny bohater -> siostra -> Eugenia, zamężna Koss | True |
+| **Piotrowiczowa z Rogolińskich** | |
+| główna bohaterka -> ojciec -> Zygmunt Rogoliński | True |
+| główna bohaterka -> matka -> Ansberty z Badeńskich | True |
+| główna bohaterka -> mąż -> Konstanty Piotrowicz | True |
+| **Popiel** | |
+| główny bohater -> syn -> dwóch synów (ich imion nie podano) | True |
+| **Renard Benedykt** | |
+| główny bohater -> ojciec -> Andrzej | True |
+| główny bohater -> brat -> Jan Baptysta | True |
+| główny bohater -> siostra -> Anna Katarzyna (Anna Orzelska) | True ? |
+| **Rossi Piotr** | |
+| główny bohater -> ojciec -> Andrzej | True |
+| główny bohater -> żona -> Małgorzata (córka Józefa Baltazary) | True |
+| główny bohater -> syn -> Andrzej (ur. 1790) | True |
+| główny bohater -> syn -> Kornel (ur. 1791) | True |
+| główny bohater -> syn -> Klemens (ur. 1794) | True |
+| główny bohater -> córka -> Izabella (ur. 1792) | True |
+| główny bohater -> córka -> Feliksa (ur. 1793) | True |
+| brak -> teść -> Józef Baltazary | **False** |
+| **Sapieha_Jan_Fryderyk** | |
+| główny bohater -> dziadek -> Mikołaj (wojewoda witebski) | True |
+| główny bohater -> ojciec -> Fryderyk (podkomorzy włodzimierski) | True |
+| główny bohater -> matka -> Ewa ze Skaszewskich | True |
+| główny bohater -> brat -> Tomasz Kazimierz (oboźny litewski) | True |
+| główny bohater -> brat -> Aleksander Kazimierz (biskup wileński) | True |
+| główny bohater -> brat -> Krzysztof Franciszek (krajczy litewski) | True |
+| główny bohater -> kuzyn -> Kazimierz Leon Sapieha | True |
+| główny bohater -> żona -> Konstancja | True |
+| główny bohater -> córka -> Ludwika Konstancja (żona ks. Konstantego Szujskiego, pisarza wielkiego litewskiego) | True |
+| główny bohater -> syn -> Mikołaj Leon (wojewoda bracławski) | True |
+| główny bohater -> syn -> Kazimierz Władysław (wojewoda trocki) | True |
+| główny bohater -> syn -> Paweł Franciszek (biskup żmudzki) | True |
+| brak -> brata stryjecznego -> Jana Ferdynanda | **False** |
+| **Siemowit** | |
+| Siemowit -> ojciec -> Piast | True |
+| Siemowit -> matka -> Rzepicha (Rzepka) | True |
+| Siemowit -> syn -> Lestik (Lestek) | True |
+| Siemowit -> wnuk -> Siemomysł | True |
+| Siemowit -> prawnuk -> Mieszko I | True |
+| **Śląska Aleksandra** | |
+| Aleksandra Śląska -> ojciec -> Edmund Wąsik | True |
+| Aleksandra Śląska -> matka -> Helena Wąsik (z domu Masłowska) | True |
+| Aleksandra Śląska -> siostra przyrodnia -> Bożena Jewasińska (Naturska) | True |
+| Aleksandra Śląska -> brat -> Olgierd Edmund Wąsik | True |
+| Aleksandra Śląska -> krewne -> Eugenia Deutsch (z domu Taczanowska) | True |
+| Aleksandra Śląska -> mąż (1) -> Czesław Michał Górski | True |
+| Aleksandra Śląska -> syn -> Szczęsny Tadeusz Górski | True |
+| Aleksandra Śląska -> mąż (2) -> Janusz Warmiński | True |
+| **Słowicki Józef** | |
+| Słowicki Józef -> ojciec -> Józef Słowicki | True |
+| **Śniadecka Kornelia Ludwika**
+| główna bohaterka -> ojciec -> Jędrzej Śniadecki | True |
+| główna bohaterka -> matka -> Konstancja z Mikułowskich | True |
+| główna bohaterka -> siostra -> Zofia Balińska | True |
+| główna bohaterka -> brat -> Józef Konstanty Śniadecki | True |
+| główna bohaterka -> szwagier -> Michał Baliński | True |
+| główna bohaterka -> bratanek -> Jan Śniadecki | **False** |
+| główna bohaterka -> szwagierka -> Antonina Śniadecka | True |
+| główna bohaterka -> teść -> Kazimierz Sulistrowski | **False** |
+| główna bohaterka -> siostrzeniec -> Ignacy Abramowicz | **False** |
+| główna bohaterka -> siostrzeniec -> Mikołaj Abramowicz | **False** |
+| główna bohaterka -> szwagier -> Aleksander Skirmunt | **False** |
+| główna bohaterka -> mąż -> Michał Czajkowski (Mehmed Sadyk) | True |
+| **Spektor Mordechaj** | |
+| główny bohater -> ojciec -> kramarz, chasyd | True |
+| główny bohater -> matka (niewymieniona z imienia) | True |
+| główny bohater -> brat (niewymieniony z imienia) | True |
+| główny bohater -> żona -> Izabela z Frydbergów @ True |
+| główny bohater -> syn | **False** |
+| główny bohater -> córka | **False** |
+| **Spycigniew_z_Dąbrowy** | |
+| główny bohater -> syn -> Zawisza | True |
+| główny bohater -> wnuk -> Spycigniew | True |
+| **Stańczakowa ze Strancmanów** | |
+| główna bohaterka -> ojciec -> Adolf Strancman (Franciszek Kotarbiński) | True |
+| główna bohaterka -> matka -> Maria Weinfeld (Helena z Koprowskich Kotarbińska) | True |
+| główna bohaterka -> brat -> Jan | True |
+| główna bohaterka -> mąż -> Zdzisław Stańczak | True |
+| główna bohaterka -> córka -> Anna | True |
+| główna bohaterka -> zięć -> Tadeusz Sobolewski | True |
+| **Stanisław_Cielątko** | |
+| główny bohater -> ojciec -> Jan | True |
+| główny bohater -> brat -> Jan Cielątki z Liszyna i Prusiecka | True |
+| główny bohater -> brat -> Mikołaj | True |
+| główny bohater -> szwagierka -> Anna z Oględowa | True |
+| główny bohater -> siostrzenica -> Małgorzata Marta | **False** |
+| główny bohater -> zięć (Małgorzaty Marty) -> Mikołaj Cikowski | **False** |
+| główny bohater -> teść (Małgorzaty Marty) -> Piotr Cikowski z Mikluszowic | **False** ? |
+| **Strzelecki Wiesław Marian** | |
+| główny bohater -> ojciec -> Felicjan | True |
+| główny bohater -> matka -> Stefania z Łękawskich | True |
+| główny bohater -> żona -> Barbara z Krzemińskich | True |
+| główny bohater -> syn -> Krzysztof | True |
+| **Świrski Jerzy Włodzimierz** | |
+| główny bohater -> ojciec -> Włodzimierz | True |
+| główny bohater -> matka -> Celina z Wasiłowskich | True |
+| główny bohater -> siostra -> Małgorzata (1. v. Kucharska, 2. v. Łyszkowska) | True |
+| główny bohater -> siostrzeniec -> Maria Konopnicka | **False** |
+| główny bohater -> żona -> pierwsza żona (imię nieznane) | True |
+| główny bohater -> żona -> Maria Wiercińska | True |
+| **Szapira Majer** | |
+| główny bohater -> ojciec -> Jakub Szamszon | True |
+| główny bohater -> matka -> Margula Szor | True |
+| główny bohater -> dziadek -> Samuel Izaak Szor | True |
+| główny bohater -> brat -> Abraham | True |
+| główny bohater -> żona -> Małka Towa | True |
+| **Szapocznikow_Alina** | |
+| główna bohaterka -> ojciec -> Jakub | True |
+| główna bohaterka -> matka -> Regina (Ryfka) z Auerbachów | True |
+| główna bohaterka -> brat -> Mirosław | True |
+| główna bohaterka -> mąż (1) -> Ryszard Stanisławski | True |
+| główna bohaterka -> mąż (2) -> Roman Cieślewicz | True |
+| główna bohaterka -> syn -> Piotr Stanisławski (adoptowany) | True |
+| **Szczubioł_Andrzej** | |
+| główny bohater -> ojciec -> Stefan (Szczepan) z Jasieńca i Ciechomic | True |
+| główny bohater -> matka -> Sędka (imię nieznane) | True |
+| główny bohater -> brat -> Mikołaj z Ciechomic | True |
+| główny bohater -> brat -> Jan z Dłotowa (Dłutowo) | True |
+| główny bohater -> żona (1) -> nieznana | True |
+| główny bohater -> syn (z 1. małżeństwa) -> Maciej | True |
+| główny bohater -> syn (z 1. małżeństwa) -> Szymon zwany Gostyńskim z Ciechomic | True |
+| główny bohater -> żona (2) -> Anna | True |
+| główny bohater -> syn (z 2. małżeństwa) -> Andrzej | True |
+| główny bohater -> synowa -> Anna, córka Ścibora z Sąchocina | **False** |
+| **Sztaffel Izrael** | |
+| brak danych | True |
+| **Szumski Boksa** | |
+| główny bohater -> dziadek lub pradziadek -> Jakub | True |
+| główny bohater -> prawdopodobny ojciec -> Krzesław z Szumska | True |
+| główny bohater -> brat -> Jan (Jaszek) Rej z Nagłowic | True |
+| główny bohater -> żona -> Stachna h. Poraj | True |
+| główny bohater -> syn -> Jan Rey | True |
+| główny bohater -> bratanek -> Jan Rey | True |
+| główny bohater -> bratanek -> Stogniew | True |
+| brak -> dziad -> Jakub | **False** |
+| brak -> synowa -> Prakseda | **False** |
+| brak -> szwgier -> Chociemir Garnek (Garnysz) z Pojałowic i Suchcic | **False** |
+| brak -> szwagierka -> Świątka | **False** |
+
+W analizowanych biogramach znajdują się w sumie 244 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych), z tego model GPT-4  **215 (88.1%) określił poprawnie** zaś **29 (11.9%) błędnie**.
