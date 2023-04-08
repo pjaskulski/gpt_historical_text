@@ -967,4 +967,4 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | brak -> szwgier -> Chociemir Garnek (Garnysz) z Pojałowic i Suchcic | **False** |
 | brak -> szwagierka -> Świątka | **False** |
 
-W analizowanych biogramach znajdują się w sumie 244 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych), z tego model GPT-4  **215 (88.1%) określił poprawnie** zaś **29 (11.9%) błędnie**.
+W analizowanych biogramach znajdują się w sumie 244 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych), z tego model GPT-4  **215 (88.1%)** określił poprawnie zaś **29 (11.9%)** błędnie.
