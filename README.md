@@ -757,8 +757,8 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | główna bohaterka -> córka -> Elżbieta | True |
 | główna bohaterka -> córka -> Małgorzata | True |
 | główna bohaterka -> wnuk -> Ruprecht hr. Palatynatu | **False** |
-| brak -> syn -> Ludwik | False |
-| brak -> syn -> Ruprecht | False |
+| brak -> syn -> Ludwik | **False** |
+| brak -> syn -> Ruprecht | **False** |
 | brak -> wnuk -> (niewymieniony z imienia) | **False** |
 | **Kakowski Aleksander** | |
 | łówny bohater -> ojciec -> Franciszek Kakowski | True |
@@ -921,6 +921,10 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | główny bohater -> matka -> Stefania z Łękawskich | True |
 | główny bohater -> żona -> Barbara z Krzemińskich | True |
 | główny bohater -> syn -> Krzysztof | True |
+| **Swach Jerzy** | |
+| główny bohater -> ojciec -> Udalryk (Oldrzych) | True |
+| główny bohater -> matka -> Katarzyna | True |
+| główny bohater -> brat -> Karol Antoni | True |
 | **Świrski Jerzy Włodzimierz** | |
 | główny bohater -> ojciec -> Włodzimierz | True |
 | główny bohater -> matka -> Celina z Wasiłowskich | True |
@@ -967,4 +971,4 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | brak -> szwgier -> Chociemir Garnek (Garnysz) z Pojałowic i Suchcic | **False** |
 | brak -> szwagierka -> Świątka | **False** |
 
-W analizowanych biogramach znajdują się w sumie 244 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych), z tego model GPT-4  **215** określił poprawnie - czyli osiągnął **88.1%** dokładności.
+W analizowanych biogramach znajdują się w sumie 245 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych), z tego model GPT-4  **215** określił poprawnie - czyli osiągnął ponad **88%** dokładności.
