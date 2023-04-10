@@ -671,6 +671,18 @@ Podobnie poprawił się wynik przetwarzania dla Pelagii Dąbrowskiej (1843-1909)
 - Główna bohaterka -> ciotka -> Ignacja Piotrowska
 - Główna bohaterka -> wuj -> Piotr Falkenhagen-Zaleski.
 
+Niewielkim modyfikacjom uległ użyty prompt:
+
+```
+Na podstawie podanego tekstu wyszukaj wszystkich krewnych lub powinowatych głównej bohaterki/bohatera tekstu: {name}. Możliwe rodzaje pokrewieństwa: ojciec, matka, syn, córka, brat, siostra, żona, mąż, teść, teściowa, dziadek, babcia, wnuk, wnuczka, szwagier, szwagierka, siostrzeniec, siostrzenica, bratanek, bratanica, kuzyn, kuzynka, zięć, synowa.
+Wynik wypisz jako listę nienumerowaną w formie: główna bohaterka -> rodzaj pokrewieństwa (kim osoba była dla niej) -> osoba.
+Każda pozycja w osobnej linii. Na przykład:
+- główna bohaterka -> brat -> Jan Kowalski
+- główna bohaterka -> siostra -> Anna
+Wypisz tylko rodzaje pokrewieństwa, które występują w tekście.
+Jeżeli w tekście nie ma żadnych informacji o pokrewieństwach głównego bohatera/bohaterki napisz: brak danych.
+```
+
 Jak wyglądają wyniki dla całej serii 50 biogramów?
 
 | Postać -> rodzaj pokrewieństwa/relacja -> osoba spokrewniona | Prawidłowa? |
@@ -971,4 +983,4 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | brak -> szwgier -> Chociemir Garnek (Garnysz) z Pojałowic i Suchcic | **False** |
 | brak -> szwagierka -> Świątka | **False** |
 
-W analizowanych biogramach znajdują się w sumie 245 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych), z tego model GPT-4  **215** określił poprawnie - czyli osiągnął ponad **88%** dokładności.
+W analizowanych biogramach znajdują się w sumie 245 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych), z tego model GPT-4  **215** określił poprawnie - czyli osiągnął **88%** dokładności.
