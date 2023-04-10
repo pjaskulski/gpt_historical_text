@@ -1,48 +1,48 @@
-# GPT3/GPT4 - Large Language Model as a tool for extracting knowledge from text - tests on excerpts from historical publications (GPT3/GPT4 - Large Language Model jako narzędzie do wydobywania wiedzy z tekstu - testy na fragmentach publikacji historycznych)
+# GPT3/GPT4 - Large Language Model as a tool for extracting knowledge from text - tests on excerpts from historical publications
 
-English version: [link](https://github.com/pjaskulski/gpt_historical_text/blob/main/README_en.md)
+(Polish version: GPT3/GPT4 - Large Language Model jako narzędzie do wydobywania wiedzy z tekstu - testy na fragmentach publikacji historycznych - [link](https://github.com/pjaskulski/gpt_historical_text))
 
 
-Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fragmentach publikacji i opracowań historycznych w celu automatycznej ekstrakcji informacji, wyciągania ustrukturyzowanych danych ze źródeł dostępnych w formie nieustrukturyzowanej. Testowany materiał to głównie fragmenty biografii postaci historycznych.
+Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerpts of historical publications and studies for the purpose of automatic information extraction and deriving structured data from unstructured sources. The test material primarily consists of excerpts from biographies of historical figures.
 
-[Notatki](#notatki)
-  - [Wstępne informacje](#wstępne-informacje)
-  - [Literatura, blogi, repozytoria](#literatura)
-  - [Porównanie dostępnych modeli GPT](#porównanie-dostępnych-modeli-gpt)
-  - [Uwagi techniczne](#uwagi-techniczne)
-  - [Poprawność odpowiedzi](#poprawność-odpowiedzi)
-  - [Wiedza z kontekstu](#wiedza-z-kontekstu)
+[Notes](#notes)
+  - [Preliminary information](#preliminary-information)
+  - [References](#references)
+  - [Comparison of available GPT models](#comparison-of-available-gpt-models)
+  - [Technical notes](#technical-notes)
+  - [Correctness of answers](#correctness-of-answers)
+  - [Knowledge from context](#knowledge-from-context)
 
-[Przykłady](#przykłady)
-  - [Relacje rodzinne postaci](#relacje-rodzinne)
-  - [Funkcje i urzędy](#funkcje-i-urzędy-głównej-postaci)
-  - [Lista instytucji](#lista-instytucji)
-  - [Imię, nazwisko, data śmierci](#wynik-w-formie-tabeli)
-  - [Lista urzędów](#lista-urzędów)
-  - [Lista urzędów i funkcji w formie xml](#lista-urzędów-i-funkcji-w-xml)
-  - [Relacje rodzinne](#relacje-rodzinne-nr-2)
-  - [Konwersja tekstu do formatu TEI](#tei-xml-output)
-  - [Analiza NER fragmentu publikacji](#analiza-ner-fragmentu-publikacji)
-  - [Inne przykłady](#inne-przykłady)
-  - [Analiza 50 biogramów - relacje rodzinne](#analiza-relacji-rodzinnych-na-serii-biografii)
-  - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii---model-gpt4)
+[Examples](#examples)
+  - [Family relationships](#family-relationships)
+  - [Functions and offices of the main character](#functions-and-offices-of-the-main-character)
+  - [List of institutions](#list-of-institutions)
+  - [The result in the form of a table](#the-result-in-the-form-of-a-table)
+  - [List of offices](#list-of-offices)
+  - [List of offices and functions in xml](#list-of-offices-and-functions-in-xml)
+  - [Family relationships - test 2](#family-relationships---test-2)
+  - [TEI XML output](#tei-xml-output)
+  - [NER analysis of an excerpt from a publication](#ner-analysis-of-an-excerpt-from-a-publication)
+  - [Other examples](#other-examples)
+  - [Analysis of family relations on a series of biographies](#analysis-of-family-relations-on-a-series-of-biographies)
+  - [Analysis of family relationships in a series of biographies - GPT-4 model](#analysis-of-family-relationships-in-a-series-of-biographies---gpt-4-model)
 
-## Notatki
+## Notes
 
-### Wstępne informacje
+### Preliminary information
 
-Definicja GPT-3 (napisana przez ChatGPT):
-"GPT-3 (Generative Pretrained Transformer 3) jest trzecią wersją sztucznej inteligencji opracowaną przez OpenAI. Jest to jeden z największych modeli językowych na świecie, który został wytrenowany na ogromnych zbiorach danych tekstowych, aby rozumieć i generować język ludzki. GPT-3 jest używany do wielu zastosowań, takich jak generowanie tekstu, tłumaczenie, odpowiadanie na pytania i rozumienie tekstu. Model ten wykorzystuje architekturę Transformer i jest w stanie uczyć się zadanie z niewielką ilością danych, co czyni go bardzo efektywnym i elastycznym narzędziem dla różnych zastosowań."
+Definition of GPT-3 (written by ChatGPT):
+"GPT-3 (Generative Pretrained Transformer 3) is the third version of artificial intelligence developed by OpenAI. It is one of the largest language models in the world, trained on massive text datasets to understand and generate human language. GPT-3 is used for many applications, such as text generation, translation, answering questions, and text comprehension. The model utilizes the Transformer architecture and can learn tasks with a small amount of data, making it a highly efficient and flexible tool for various applications."
 
-Testy GPT-3 zostały przeprowadzone poprzez API udostępnione przez firmę OpenAI, wykorzystano głównie model `text-davinci-003`.
+GPT-3 tests were conducted through the API provided by OpenAI, mainly using the `text-davinci-003` model.
 
-Istnieją ograniczenia podczas korzystania z API dotyczące liczby zapytań na minutę (3 tys.) i liczby przetworzonych tokenów na minutę (250 tys.).
+There are limitations when using the API regarding the number of requests per minute (3,000) and the number of processed tokens per minute (250,000).
 
-Token jest rozumiany trochę inaczej niż zwykle w NLP, tu dłuższe wyrazy są rozbijane na krótkie tokeny 3-4 znaki, oprócz tego tokenem są też znaki interpunkcyjne itp. Podawane jest że średnio token to 4 znaki w języku angielskim, na stronie OpenAI jest narzędzie w którym (https://beta.openai.com/tokenizer) można wkleić tekst i zobaczyć ile zawiera tokenów.
+A token is understood a bit differently than usual in NLP; here, longer words are broken down into shorter 3-4 character tokens, in addition to punctuation marks, etc. It is stated that on average, a token consists of 4 characters in English. On the OpenAI website, there is a tool (https://beta.openai.com/tokenizer) where you can paste text and see how many tokens it contains.
 
-Przykładowo biografia Edwarda Józefa Sedlaczka (Polski Słownik Biograficzny t. XXXVI, 1995-6, s. 137-138) zawiera 4433 znaków co przekłada się na 2291 tokenów. W przypadku tekstów polskich sytuację pogarszają polskie znaki, wygląda na to że każdy dwubajtowy unicodowy znak jest traktowany jako osobny token.
+For example, the biography of Edward Józef Sedlaczek (Polish Biographical Dictionary vol. XXXVI, 1995-6, pp. 137-138) contains 4,433 characters, which translates to 2,291 tokens. In the case of Polish texts, the situation is worsened by Polish characters, as it seems that each double-byte Unicode character is treated as a separate token.
 
-### Literatura
+### References
 
 - _"Structured information extraction from complex scientific text with fine-tuned large language models"_ (Alexander Dunn, John Dagdelen, Nicholas Walker, Sanghoon Lee, Andrew S. Rosen, Gerbrand Ceder, Kristin Persson and Anubhav Jain) [link](https://arxiv.org/pdf/2212.05238.pdf)
 
@@ -59,13 +59,15 @@ Przykładowo biografia Edwarda Józefa Sedlaczka (Polski Słownik Biograficzny t
 - _"Training language models to follow instructions with human feedback"_ (Long Ouyang et al., OpenAI) [link](https://arxiv.org/pdf/2203.02155.pdf)
 
 
-### Porównanie dostępnych modeli GPT
+### Comparison of available GPT models
 
-Najlepszy model `text-davinci-003` (to jednocześnie najdroższy model językowy w OpenAI) ma ograniczenie do 4000 tokenów, przy czym dotyczy to wejścia i wyjścia razem.
+The best model `text-davinci-003` (which is also the most expensive language model in OpenAI) has a limitation of 4,000 tokens, which applies to both input and output combined.
 
-Modele słabsze np. `text-curie-001` czy `text-babbage-001` dają w przypadku wyciągania danych z przekazanego tekstu wyraźnie gorsze wyniki np.:
+Weaker models, such as `text-curie-001` or `text-babbage-001`, provide noticeably worse results when extracting data from the provided text, for example:
 
-Funkcje/urzędy z biografii Edwarda Sedlaczka wg. `text-davinci-003` (przy standardowych ustawieniach parametrów, np. `temperature` = 0.5):
+Roles/positions from Edward Sedlaczek's biography according to `text-davinci-003` (with standard parameter settings, e.g., `temperature` = 0.5):
+
+(biographies are processed in Polish, all model results will also be presented in Polish)
 
 1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
 2. Kancelista w konsulacie austriackim w Warszawie (1886)
@@ -78,7 +80,7 @@ Funkcje/urzędy z biografii Edwarda Sedlaczka wg. `text-davinci-003` (przy stand
 9. Wicekonsulat Ploieşti, Rumunia
 10. Redaktor serii Wydawnictwa Towarzystwa imienia Piotra Skargi (ok 1910).
 
-Funkcje/urzędy wg modelu `text-curie-001` (parametry jak wyżej):
+Functions/offices according to the `text-curie-001` model (parameters as above):
 
 - literat
 - urzędnik
@@ -86,74 +88,71 @@ Funkcje/urzędy wg modelu `text-curie-001` (parametry jak wyżej):
 - posada kancelisty w konsulacie austriackim w Warszawie
 - kierował kolejno wicekonsulatem w Batumi (Rosja, 1896–7), a od r.n. – agencją konsularną w Nowosielicy (Rosja), agencją konsularną w Burgas (Bułgaria), wicekonsulatem w Batumi, wicekonsulatem w Burgas i wicekonsulatem w Ploieşti (Rumunia)
 
-Te słabsze modele, mają też większe ograniczenia: do 2 tys. tokenów w jednym zapytaniu, są jednak znacznie tańsze.
+These weaker models, also have greater limitations: up to 2,000 tokens per query, but are much cheaper.
 
-### Uwagi techniczne
+### Technical notes
 
-Parametr `temperature` ma wartość 0.0 - 1.0, niższa wartość powoduje że odpowiedź jest bardziej konkretna, deterministyczna, mniej losowa i mniej kreatywna. Wyższa pozwala modelowi na więcej elastyczności. Alternatywnie można modyfikować domyślną wartość parametru `top_p` = 1.0, zmniejszając jego wartość - nie jest jednak zalecane jednoczesne modyfikowanie obu parametrów (zob. [API reference](https://beta.openai.com/docs/api-reference/completions/create)).
+The `temperature` parameter has a value of 0.0 - 1.0; a lower value makes the response more specific, deterministic, less random, and less creative. A higher value allows the model more flexibility. Alternatively, you can modify the default value of the `top_p` parameter = 1.0 by reducing its value - however, it is not recommended to modify both parameters simultaneously (see [API reference](https://beta.openai.com/docs/api-reference/completions/create)).
 
-Wielokrotne uruchamianie tego samego zapytania może dawać nieco inne wyniki, jeżeli wartość parametru temperature jest większa od zera.
+Running the same query multiple times may yield slightly different results if the temperature parameter value is greater than zero.
 
-Zapytania uruchamiane przez API nie znają kontekstu zapytań uruchamianych chwilę przed,
-inaczej niż w trakcie rozmowy z ChatGPT, należy za każdym razem podawać całą informację w zapytaniu.
+Queries run through the API do not know the context of queries run moments before, unlike during a conversation with ChatGPT, so you need to provide all the information in the query each time.
 
-Ogromne znaczenie ma konstrukcja zapytania (prompt), całkiem poprawnie działają pytania w języku angielskim dotyczące podanego polskiego tekstu, czasem dają nawet lepsze rezultaty. Zadanie zlecone modelowi powinno być napisane językiem prostym, konkretnym, ale nie musi być bardzo krótkie. Dobry wpływ na jakość odpowiedzi mają podane modelowi przykłady, czego i w jakiej formie się spodziewamy.
+The construction of the query (prompt) is of great importance. Questions in English concerning the provided Polish text work quite correctly and sometimes even yield better results. The task assigned to the model should be written in simple, specific language, but it does not have to be very short. Providing the model with examples of what we expect and in what form has a positive impact on the quality of the response.
 
-Odpowiedzi modelu davinci-003 zadawane przez API, często różnią się od wyników pytań zadanych
-podczas 'rozmowy' z ChatGPT.
+Responses from the `davinci-003` model given through the API often differ from the results of questions asked during a 'conversation' with ChatGPT.
 
-### Poprawność odpowiedzi
+### Correctness of answers
 
-Model `text-davinci-003` jest zoptymalizowany do generowania tekstów, sprawiających wrażenie że są przygotowane przez człowieka, lecz bez gwarancji że wszystkie informacje w nich są prawdziwe. Dotyczy to także sytuacji gdy nie zleca się modelowi wygenerowania tekstu na jakiś temat na podstawie jego wewnętrznej wiedzy, lecz model ma wyciągnąć informację z przekazanego mu tekstu. Szczególnie gdy parametr `temperature` ma wyższą wartość, model potrafi 'zaokrąglać' informacje - jest bardziej kreatywny, np. przy przetwarzaniu biografii Edwarda Sedlaczka z parametrem `temperature` = 1.0 model zapytany o funkcje i urzędy tej postaci generuje m.in. informację:
+The `text-davinci-003` model is optimized for generating texts that give the impression of being prepared by a human, but without a guarantee that all information in them is true. This also applies to situations where the model is not asked to generate text on a given topic based on its internal knowledge, but rather to extract information from the provided text. Especially when the temperature parameter has a higher value, the model tends to 'round off' information - it becomes more creative, for example, when processing Edward Sedlaczek's biography with the `temperature` parameter = 1.0, the model, when asked about the roles and positions of this figure, generates information such as:
 
 1. Kierownik literacki prasy lwowskiej ("Dziennik dla Wszystkich”, „Dziennik Polski”, „Gazeta Lwowska”, „Gazeta Narodowa”, „Przyjaciel Domowy”) i warszawskiej („Biesiada Literacka”, „Echo”, „Kłosy”, „Kurier Codzienny”, „Kurier Warszawski”, „Niwa", "Słowo", "Tygodnik Ilustrowany", "Tygodni Mód i Powieści" , "Tygodnik Powszechny" i "Wiek").
 
-Tymczasem w rzeczywistości bohater biografii był kierownikiem literackim tylko pisma "Przyjaciel Domowy".
+In reality, the subject of the biography was the literary editor of only the magazine "Przyjaciel Domowy" (The Home Friend).
 
-Po obniżeniu wartości `temperature` do 0.0 zwracana jest już prawdziwa informacja:
+After reducing the `temperature` value to 0.0, the true information is returned:
 
 1. Kierownik literacki dwutygodnika lwowskiego „Przyjaciel Domowy” (1 VI 1882)
 
-Wpływ ma jakość odpowiedzi mają także parametry `frequency_penalty` (standardowo wartość 0.8)
-i `presence penalty`: kontrolujący tendencję modelu do powtarzania generowanych słów oraz zachęcający model do generowania nowatorskich sformułowań. Manipulowanie nimi spowodowało na przykładowym biogramie Sedlaczka wygenerowanie fałszywego przybliżenia, zamiast:
+The quality of the response is also influenced by the parameters `frequency_penalty` (default value 0.8) and `presence_penalty`: controlling the model's tendency to repeat generated words and encouraging the model to generate innovative formulations. Manipulating these parameters resulted in a false approximation in the example of Sedlaczek's biogram, instead of:
 
 3. Kancelista w austriackim konsulacie w Kijowie (1895)
 
-otrzymujemy:
+the result is:
 
 3. Konsul w Kijowie (1882-1895)
 
-gdzie odpowiedni fragment biografii brzmi: _"Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_. Ta skłonność do 'halucynacji' jest jednym z głównych problemów przy ekstrakcji informacji z tekstów historycznych, oczywiście dane wyciągane przez model musiałyby być weryfikowane przez ludzkiego eksperta, warto również przeprowadzić test na większej próbie testów i ocenić poprawność (i kompletność) zwracanych przez model danych.
+where the relevant fragment of the biography reads: "_Later, he held a similar position at the Austrian consulate in Kyiv (until 1895)_". This tendency to 'hallucinate' is one of the main problems when extracting information from historical texts. Of course, the data extracted by the model would have to be verified by a human expert. It is also worthwhile to conduct a test on a larger sample of tests and assess the correctness (and completeness) of the data returned by the model.
 
-Najbardziej przydatne wartości parametrów (w przypadku wyciągania informacji z tekstów):
+The most useful parameter values (for extracting information from texts) are:
+
 - temperature: 0
 - top p: 1.0
 - frequency penalty: 0.0
 - presence penalty: 0.0
 
-### Wiedza z kontekstu
+### Knowledge from context
 
-To w czym model bywa zadziwiająco dobry, to umiejętność wyciągania informacji z kontekstu. Dłuższy fragment tej samej biografii Sedlaczka związany jego pracą kancelisty brzmi: _"W r. 1886 S. otrzymał posadę kancelisty w konsulacie austriackim w Warszawie – zapewne za poparciem Władysława Łozińskiego, który opiekował się jego karierą także w l.n. Później pełnił takąż funkcję w austriackim konsulacie w Kijowie (do r. 1895)"_.
-z czego model (uruchomiony z właściwymi parametrami!) wyciąga informację:
+One thing the model is surprisingly good at is extracting information from context. A longer fragment of the same biography of Sedlaczek related to his work as a clerk reads: "In 1886, S. received a position as a clerk in the Austrian consulate in Warsaw - probably with the support of Władysław Łoziński, who also took care of his career in the following years. Later, he held a similar position at the Austrian consulate in Kyiv (until 1895)". From this, the model (run with the appropriate parameters!) extracts the information:
 
 3. Kancelista w austriackim konsulacie w Kijowie (1895)
 
-Co nie jest przecież (nazwa funkcji/urzędu) podane wprost.
+Which, after all, is not (the name of the function/office) stated explicitly (only 'similar position' is mentioned).
 
-Podobny przykład występuje w biografii Ludwika Mortęskiego (Polski Słownik Biograficzny t. XXII, 1977, s. 9-11), model wyszukał informację o urzędzie sprawowanym przez bohatera biografii:
+A similar example can be found in the biography of Ludwik Mortęski (Polski Słownik Biograficzny vol. XXII, 1977, pp. 9-11), where the model found information about the office held by the biography's subject:
 
-2. Kasztelan elbląski (1516–1539)
+2. Kasztelan elbląski (1516–1539) - Castellan of Elbląg (1516-1539)
 
-na podstawie wpisu _"Jako kasztelan gdański brał M. udział w licznych komisjach powoływanych przez króla dla rozstrzygania spraw spornych na terenie Prus Królewskich. Dn. 4 III 1516 przeszedł M. na kasztelanię elbląską (po zmarłym Janie Wulkowskim) i trzymał ją do śmierci."_.
+based on the entry "As the castellan of Gdańsk, M. took part in numerous commissions appointed by the king to settle disputed matters in the territory of Royal Prussia. On March 4, 1516, M. moved to the Elbląg castellany (after the deceased Jan Wulkowski) and held it until his death.".
 
 
-## Przykłady
+## Examples
 
 Model: text-davinci-003<br>
 Text: biografia Ludwika Mortęskiego (zm. 1539), w języku polskim.
 (Polski Słownik Biograficzny t. XXII, 1977, s. 9-11)
 
-### Relacje rodzinne
+### Family relationships
 
 **Prompt**: From this text extract information about parents, wife, children and grandchildren for the person Ludwik Mortęski
 
@@ -166,7 +165,7 @@ Children: Katarzyna, Dorota, Gertruda, Elżbieta, Małgorzata, Ludwik and Melchi
 
 Grandchildren: Magdalena Mortęskiej and Ludwik
 
-### Funkcje i urzędy głównej postaci
+### Functions and offices of the main character
 
 **Prompt**: From this text, extract information about the offices, functions and positions held by the person Ludwik Mortęski, present them in the form of a list
 
@@ -186,7 +185,7 @@ Offices, Functions and Positions Held by Ludwik Mortęski:
 11. Starostwo pokrzywnickie(1505).
 12. Starostwo Pokrzywno with Villages Okonin, Nicwałd, Węgrowo Skarszewo Nowawieś i Wiewiórki as a Feudal Estate from Zygmunt Stary for Military Service(1521).
 
-### Lista instytucji
+### List of institutions
 
 **Prompt**:
 From this text, extract information about institutions related to the the person Ludwik Mortęski, present them in the form of a list.
@@ -206,7 +205,7 @@ Institutions related to Ludwik Mortęski:
 10. Kasztelania Gdańska (4/3/1512)
 11. Kasztelania Elbląska (4/3/1516)
 
-### Wynik w formie tabeli
+### The result in the form of a table
 
 **Prompt**: From this text give the name, surname and date of death of the main character. Show the result in the form of a table.
 
@@ -224,7 +223,7 @@ Institutions related to Ludwik Mortęski:
 | ------ | ----------------------- | ---- |
 ```
 
-### Lista urzędów
+### List of offices
 
 Text: biografia Mikołaja z Woli (zm. 1346 lub 1347) - w języku polskim.
 (Polski Słownik Biograficzny t. XXI, 1976, s. 151)
@@ -240,7 +239,7 @@ List of offices held by Mikołaj z Woli:
 - Podkomorzy brzeski
 - Asesor sądu ziemskiego w Inowrocławiu
 
-### Lista urzędów i funkcji w xml
+### List of offices and functions in xml
 
 Text: biografia Edwarda Józefa Sedlaczka
 (Polski Słownik Biograficzny t. XXXVI, 1995-6, s. 137-138)
@@ -270,7 +269,7 @@ the form of xml: `<xml><person><office>office, function or position</office><per
 </xml
 ```
 
-### Relacje rodzinne nr 2
+### Family relationships - test 2
 
 Text: biografia Andrzeja Rosickiego (1814-1904),
 (Polski Słownik Biograficzny t. XXXII, 1989-1991, s. 82)
@@ -313,17 +312,18 @@ Text: Fragment Bullarium Poloniae.
 </tei>
 ```
 
-### Analiza NER fragmentu publikacji
+### NER analysis of an excerpt from a publication
 
-Text: Fragment publikacji Stanisława Bodniaka _"Polska a Bałtyk za ostatniego z Jagiellona"_ (1946):
+Text: Excerpt from Stanislaw Bodniak's publication _"Polska a Bałtyk za ostatniego z Jagiellona"_ (1946) (Poland and the Baltic during the last of the Jagiellons):
 
 Było to w roku 1552. Już od czerwca bawił król Zygmunt August w pomorskiej  ziemi, lipiec i sierpień spędził w Gdańsku, we wrześniu po kilkudniowym  pobycie w Malborgu w czasie sejmiku podążył do Królewca na zaproszenie ks. Albrechta. Towarzyszyli mu w podróży hetman Jan Tarnowski, marszałek koronny Piotr Kmita, bp. Stanisław Hozjusz, kanclerz Jan Ocieski, podkanclerzy Jan Przerębski i inni przedniejsi senatorowie i dostojnicy polscy obok przedstawicieli świata umysłowego w osobach Marcina Kromera, Szymona Maricjusa-Czystochlebskiego i Łukasza Górnickiego. Orszak dworzan i rycerstwa przenosił 5 tysięcy osób.
 Najokazalej podejmował swego władcę Gdańsk, cały roztaczając przed nim przepych, na jaki pozwalało miastu u ujścia Wisły rosnące pod polskim panowaniem bogactwo. Stawił się tam z Zachodniego Pomorza ks. Barnim XI w 300 koni i ze znaczną liczbą pomorskiej szlachty, ażeby spotkać się ze swym dostojnym krewniakiem i suwerenem z tytułu lenna na Lęborgu i Bytowie. W programie gdańskim przyjęcia, obfitującym w uczty, zabawy i gry rycerskie, nie zapomniano o morzu.
 W dniu 13 lipca zwiedził król w towarzystwie ks. Barnima statek na stoczni  w Gdańsku i przyglądał się jego spuszczeniu na wodę. W tydzień później (20 VII) wybrał się barką, wybitą czerwonym suknem i przybraną chorągiewkami, na obejrzenie warowni, nazywanej wówczas „Latarnią” albo „wieżą”,* położonej u ujścia Wisły. Gdy tam wchodził, grzmiały na jego cześć działa warowni i okrętu „Żelazny Henryk", naprzeciw niej umieszczonego , miotając na morze ogniste kule, Po posiłku w warowni powrócił na swą barkę i popłynął dalej — na Bałtyk, wtedy spokojny. Wielu także panów polskich z otoczenia zapuściło się daleko na fale, korzystając z pogody.
 
 **Prompt**: W podanym tekście wyszukaj informacje o osobach, znalezione osoby wypisz w formie listy, jeżeli są znane funkcje lub urzędy osób umieść te informacje w nawiasach obok osób:
+(In the given text search for information about people, list the people found, if the functions or offices of the people are known put this information in brackets next to the people:)
 
-**Wynik**:
+**Result**:
 
 - Zygmunt August (król)
 - Jan Tarnowski (hetman)
@@ -337,17 +337,17 @@ W dniu 13 lipca zwiedził król w towarzystwie ks. Barnima statek na stoczni  w 
 - Barnim XI (książę)
 
 
-### Inne przykłady
+### Other examples
 
-Skrypty do tych i pozostałych przykładów w folderze `src`, wyniki w folderze `output`.
+Scripts for these and other examples in the `src` folder, results in the `output` folder.
 
-### Analiza relacji rodzinnych na serii biografii
+### Analysis of family relations on a series of biographies
 
-(_zob. też w dalszej części tekstu analogiczną analizę wykonaną z użyciem GPT-4_)
+(_see also later in the text an analogous analysis performed with GPT-4_)
 
-Jak model GPT-3 ('davinci-003') radzi sobie z rozpoznawaniem relacji rodzinnych można spróbować ocenić na większej próbce 50 biogramów wybranych losowo z tomów 1-51 Polskiego Słownika Biograficznego. Biogramy mają różną długość, od mniej więcej 1 tys. znaków do kilkudziesięciu tys. Ograniczeniem jest liczba tokenów, które 'davinci' jest w stanie przetworzyć w jednym zapytaniu - 4000 wliczając wygenerowaną odpowiedź. W przypadku dłuższych biogramów zostały one wstępnie 'streszczone': uwzględniono 5 pierwszych i pięć ostatnich zdań (pomijając najpierw część bibliograficzną biogramu) oraz wszystkie zdania pomiędzy nimi jeżeli zawierały treść wskazującą na informacje o rodzinie i krewnych (biogram został podzielony na zdania za pomocą spaCy, w zdaniach analizowano formy podstawowe tokenów i porównywano z przygotowanym słownikiem pojęć związanych z pokrewieństwem). Skracanie biogramów może oczywiście wpłynąć negatywnie na wyniki (zdania są wyrwane z kontekstu, niekiedy użyty model spaCy 'pl_core_news_lg' niepoprawnie dzielił tekst na zdania). W teście skupiono się na pokrewieństwie w stosunku do głównego bohatera/bohaterki biogramu.
+How well the GPT-3 model (`davinci-003`) can recognize family relationships can be tried to evaluate on a larger sample of 50 biographical entries randomly selected from volumes 1-51 of the Polish Biographical Dictionary. The biographical entries vary in length, from about 1,000 characters to tens of thousands. The limitation is the number of tokens that 'davinci' can process in a single query - 4,000, including the generated response. For longer biographical entries, they were initially 'summarized': the first 5 and last 5 sentences were included (omitting the bibliographic part of the entry first) and all the sentences between them if they contained content indicating information about family and relatives (the biographical entry was divided into sentences using spaCy, the base forms of tokens in sentences were analyzed and compared with a prepared dictionary of concepts related to kinship). Shortening the biographical entries can, of course, negatively affect the results (sentences are taken out of context, and sometimes the spaCy model 'pl_core_news_lg' used incorrectly divided the text into sentences). The test focused on kinship in relation to the main character of the biographical entry.
 
-Teksty biogramów przetwarzane były promptem o treści:
+The texts of the biographies were processed with a prompt that read (in Polish):
 
 ```
 Na podstawie podanego tekstu wyszukaj
@@ -365,13 +365,13 @@ Jeżeli w tekście nie ma żadnych informacji o pokrewieństwach głównego boha
 napisz: brak danych.
 ```
 
-(kod skryptu w pliku psb_relacje_rodzinne.py)
+(script code in file psb_relations_family.py)
 
-Dla 36 z 50 biogramów model znalazł jakieś relacje - w sumie 182 przypadki pokrewieństwa głównego bohatera z inną osobą. Po szczegółowym przeanalizowaniu, **38 z nich było błędne (20.9%)**, **144 oceniono jako prawdziwe (79.1%)**.
+For 36 out of 50 biographical entries, the model found some relationships - a total of 182 cases of kinship between the main character and another person. After a detailed analysis, **38** of them were incorrect (**20.9%**), while **144** were assessed as **true** (**79.1%**).
 
-Szczegółowa lista **znalezionych** relacji:
+A detailed list of **found** relationships:
 
-| Postać -> rodzaj pokrewieństwa/relacja -> osoba spokrewniona | Prawidłowa? |
+| Character -> type of relationship/relationship -> related person | Correct? |
 | ------------------------------------------------------------ | :---------: |
 | **Aloe Franciszek Eljasz** | |
 | główny bohater -> ojciec -> Jan Baptysty d'Aloy | True |
@@ -592,11 +592,9 @@ Szczegółowa lista **znalezionych** relacji:
 | główny bohater-> bratanek-> Jan Rey (zm. 1468) | True |
 | główny bohater-> bratanek-> Stogniew, żonaty z Małgorzatą | True |
 
-Ważne jest oczywiście także to czego model **nie znajduje**.
-Dla 14 biogramów model ocenił, że nie ma danych dotyczących relacji rodzinnych dla głównego bohatera.
-W 5 z tych przypadków jest to prawdopodobnie błąd (15 brakujących relacji).
+It is, of course, also important what the model **does not find**. For 14 biographical entries, the model assessed that there were no data on family relationships for the main character. In 5 of these cases, this is likely an error (15 missing relationships).
 
-| Postać | Wynik |
+| Character | Correct? |
 | ---    | ---   |
 | Bartoszewski Jan | True |
 | Ezra_ben_Nisan | True (w biogramie jest tylko niejasna wzmianka, że miał jakieś córki)
@@ -613,9 +611,9 @@ W 5 z tych przypadków jest to prawdopodobnie błąd (15 brakujących relacji).
 | Swach | **False** (jest inf. o ojcu, matce i bracie) |
 | Sztaffel Izrael | True |
 
-W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki zdarzało się, że była to tylko część informacji na temat relacji rodzinnych - teki problem wystąpił w 12 na 36 biogramów (pominiętych 26 relacji rodzinnych). Szczegółowy wykaz poniżej.
+In the biographical entries where the model found relatives of the main character, it sometimes happened that this was only a part of the information about family relationships - this problem occurred in 12 out of 36 biographical entries (26 missing family relationships). A detailed list is provided below.
 
-| Postać | Czy uwzgl. wszystkie ralacje, ew. jakich brakuje |
+| Character | Does it include all relationships? Which ones are missing? |
 | ---    | ---                               |
 | Aloe Franciszek Eljasz  |  True |
 | Bezprym  |  True |
@@ -654,17 +652,17 @@ W biogramach w których model odnalazł krewnych głównego bohatera/bohaterki z
 | Szczubioł Andrzej | True |
 | Szumski Boksa | **False**, pominięta informacja o przodku - dziad lub pradziad Jakub |
 
-Jeśli przeanalizuje się wspólnie dane z powyższych trzech tabel w biogramach znajdują się 223 relacje, model wymienił 182, z tego 38 błędnie, co oznacza 64.5% dokładności (144 prawidłowe). Zupełnie innym pytaniem pozostaje czy i jak uzyskane dane można wykorzystać np. do budowania baz wiedzy.
+If we analyze the data from the three tables above, there are 223 relationships in the biographical entries, the model mentioned 182, of which 38 were incorrect, which means **64.5%** accuracy (144 correct). It is a completely different question whether and how the obtained data can be used, for example, to build knowledge bases.
 
-### Analiza relacji rodzinnych na serii biografii - model GPT4
+### Analysis of family relationships in a series of biographies - GPT-4 model
 
-Poprzednie testy dotyczyły działania modelu GPT-3 ('davinci-003'), nie mam jeszcze dostępu do API z GPT4, ale jakie wyniki mógłby osiągnąć najnowszy model można spróbować ocenić poprzez działanie ChatGPT Plus z włączonym modelem GPT-4. Jeden z problematycznych biogramów: 'Natalii Dzierżek (1861-1931)' dla którego wyszukane zostało 5 relacji z tego 3 błędnie, tym razem został przetworzony całkowicie poprawnie:
+The previous tests concerned the operation of the GPT-3 model ('davinci-003'); I do not yet have access to the API with GPT-4, but one can try to assess what results the latest model might achieve through the operation of ChatGPT Plus with the GPT-4 model enabled. One of the problematic biographical entries: 'Natalia Dzierżek (1861-1931)' for which 5 relationships were found, including 3 incorrect ones, this time was processed entirely correctly:
 
 - główna bohaterka -> ojciec -> Henryk Dzierżek
 - główna bohaterka -> matka -> Maria z Piątkowskich Nieczuja-Dzierżków
 - główna bohaterka -> wujek (brat matki) -> Henryk Piątkowski
 
-Podobnie poprawił się wynik przetwarzania dla Pelagii Dąbrowskiej (1843-1909), gdzie poprzednio model GPT-3 znalazł tylko dwie i to błędne relacje, obecnie GPT-4 zwraca poprawną listę:
+Similarly, the processing result for Pelagia Dąbrowska (1843-1909) improved, where the previous GPT-3 model found only two and incorrect relationships, and now GPT-4 returns the correct list:
 
 - Główna bohaterka -> ojciec -> Michał Zgliczyński
 - Główna bohaterka -> matka -> Pelagia z Piotrowskich
@@ -674,7 +672,7 @@ Podobnie poprawił się wynik przetwarzania dla Pelagii Dąbrowskiej (1843-1909)
 - Główna bohaterka -> ciotka -> Ignacja Piotrowska
 - Główna bohaterka -> wuj -> Piotr Falkenhagen-Zaleski.
 
-Niewielkim modyfikacjom uległ użyty prompt:
+The prompt used underwent minor modifications:
 
 ```
 Na podstawie podanego tekstu wyszukaj wszystkich krewnych lub powinowatych głównej bohaterki/bohatera tekstu: {name}. Możliwe rodzaje pokrewieństwa: ojciec, matka, syn, córka, brat, siostra, żona, mąż, teść, teściowa, dziadek, babcia, wnuk, wnuczka, szwagier, szwagierka, siostrzeniec, siostrzenica, bratanek, bratanica, kuzyn, kuzynka, zięć, synowa.
@@ -686,9 +684,9 @@ Wypisz tylko rodzaje pokrewieństwa, które występują w tekście.
 Jeżeli w tekście nie ma żadnych informacji o pokrewieństwach głównego bohatera/bohaterki napisz: brak danych.
 ```
 
-Jak wyglądają wyniki dla całej serii 50 biogramów?
+What do the results look like for the entire series of 50 biographical entries?
 
-| Postać -> rodzaj pokrewieństwa/relacja -> osoba spokrewniona | Prawidłowa? |
+| Character -> type of relationship/relationship -> related person | Correct? |
 | ------------------------------------------------------------ | :---------: |
 | **Aloe Franciszek Eljasz** | |
 | główny bohater -> ojciec -> Jan Baptysta d'Aloy | True |
@@ -986,4 +984,4 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | brak -> szwgier -> Chociemir Garnek (Garnysz) z Pojałowic i Suchcic | **False** |
 | brak -> szwagierka -> Świątka | **False** |
 
-W analizowanych biogramach znajdują się w sumie 245 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych, w poprzedniej analizie z uzyciem GPT-3 nie zauważyłem kilku relacji), z tego model GPT-4  **215** określił poprawnie - czyli osiągnął **88%** dokładności.
+In the analyzed biographical entries, there are a total of **245** relationships or lack of relationships (when the content of the biographical entry does not contain information about relatives and in-laws; in the previous analysis using GPT-3, I did not notice several relationships), of which the GPT-4 model correctly identified **215** - achieving **88%** accuracy.
