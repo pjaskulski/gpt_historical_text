@@ -1,4 +1,6 @@
-# GPT3/GPT4 - Large Language Model as a tool for extracting knowledge from text - tests on excerpts from historical publications (GPT3/GPT4 - Large Language Model jako narzędzie do wydobywania wiedzy z tekstu - testy na fragmentach publikacji historycznych)
+# GPT3/GPT4 - Large Language Model as a tool for extracting knowledge from text - tests on excerpts from historical publications
+
+(GPT3/GPT4 - Large Language Model jako narzędzie do wydobywania wiedzy z tekstu - testy na fragmentach publikacji historycznych)
 
 English version: [link](https://github.com/pjaskulski/gpt_historical_text/blob/main/README_en.md)
 
