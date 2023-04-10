@@ -1,7 +1,6 @@
-# GPT3 - Large Language Model as a tool for extracting knowledge from text - tests on excerpts from historical publications.
+# GPT3/GPT4 - Large Language Model as a tool for extracting knowledge from text - tests on excerpts from historical publications.
 
-Testy modeli GPT 3.5 udostępnionych przez API OpenAI przeprowadzane na fragmentach publikacji i opracowań historycznych w celu automatycznej ekstrakcji informacji, wyciągania ustrukturyzowanych danych ze źródeł dostępnych w formie nieustrukturyzowanej. Testowany materiał to głównie fragmenty
-biografii postaci historycznych.
+Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fragmentach publikacji i opracowań historycznych w celu automatycznej ekstrakcji informacji, wyciągania ustrukturyzowanych danych ze źródeł dostępnych w formie nieustrukturyzowanej. Testowany materiał to głównie fragmenty biografii postaci historycznych.
 
 [Notatki](#notatki)
   - [Wstępne informacje](#wstępne-informacje)
@@ -32,7 +31,7 @@ biografii postaci historycznych.
 Definicja GPT-3 (napisana przez ChatGPT):
 "GPT-3 (Generative Pretrained Transformer 3) jest trzecią wersją sztucznej inteligencji opracowaną przez OpenAI. Jest to jeden z największych modeli językowych na świecie, który został wytrenowany na ogromnych zbiorach danych tekstowych, aby rozumieć i generować język ludzki. GPT-3 jest używany do wielu zastosowań, takich jak generowanie tekstu, tłumaczenie, odpowiadanie na pytania i rozumienie tekstu. Model ten wykorzystuje architekturę Transformer i jest w stanie uczyć się zadanie z niewielką ilością danych, co czyni go bardzo efektywnym i elastycznym narzędziem dla różnych zastosowań."
 
-Testy GPT-3 zostały przeprowadzone poprzez API udostępnione przez firmę OpenAI, wykorzystano głównie model `text-davinci-003` (nazywany czasem modelem GPT-3.5).
+Testy GPT-3 zostały przeprowadzone poprzez API udostępnione przez firmę OpenAI, wykorzystano głównie model `text-davinci-003`.
 
 Istnieją ograniczenia podczas korzystania z API dotyczące liczby zapytań na minutę (3 tys.) i liczby przetworzonych tokenów na minutę (250 tys.).
 
@@ -341,8 +340,9 @@ Skrypty do tych i pozostałych przykładów w folderze `src`, wyniki w folderze 
 
 ### Analiza relacji rodzinnych na serii biografii
 
-Jak model GPT-3 ('davinci-003') radzi sobie z rozpoznawaniem relacji rodzinnych można spróbować ocenić 
-na większej próbce 50 biogramów wybranych z t. 1-51 Polskiego Słownika Biograficznego. Biogramy mają różną długość, od mniej więcej 1 tys. znaków do kilkudziesięciu tys. Ograniczeniem jest liczba tokenów, które 'davinci' jest w stanie przetworzyć w jednym zapytaniu - 4000 wliczając wygenerowaną odpowiedź. W przypadku dłuższych biogramów zostały one wstępnie 'streszczone': uwzględniono 5 pierwszych i pięć ostatnich zdań (pomijając najpierw część bibliograficzną biogramu) oraz wszystkie zdania pomiędzy nimi jeżeli zawierały treść wskazującą na informacje o rodzinie i krewnych (biogram został podzielony na zdania za pomocą spaCy, w zdaniach analizowano formy podstawowe tokenów i porównywano z przygotowanym słownikiem pojęć związanych z pokrewieństwem). Skracanie biogramów może oczywiście wpłynąć negatywnie na wyniki (zdania są wyrwane z kontekstu). W teście skupiono się na pokrewieństwie w stosunku do głównego bohatera/bohaterki biogramu.
+(_zob. też w dalszej części tekstu analogiczną analizę wykonaną z użyciem GPT-4_)
+
+Jak model GPT-3 ('davinci-003') radzi sobie z rozpoznawaniem relacji rodzinnych można spróbować ocenić na większej próbce 50 biogramów wybranych losowo z tomów 1-51 Polskiego Słownika Biograficznego. Biogramy mają różną długość, od mniej więcej 1 tys. znaków do kilkudziesięciu tys. Ograniczeniem jest liczba tokenów, które 'davinci' jest w stanie przetworzyć w jednym zapytaniu - 4000 wliczając wygenerowaną odpowiedź. W przypadku dłuższych biogramów zostały one wstępnie 'streszczone': uwzględniono 5 pierwszych i pięć ostatnich zdań (pomijając najpierw część bibliograficzną biogramu) oraz wszystkie zdania pomiędzy nimi jeżeli zawierały treść wskazującą na informacje o rodzinie i krewnych (biogram został podzielony na zdania za pomocą spaCy, w zdaniach analizowano formy podstawowe tokenów i porównywano z przygotowanym słownikiem pojęć związanych z pokrewieństwem). Skracanie biogramów może oczywiście wpłynąć negatywnie na wyniki (zdania są wyrwane z kontekstu, niekiedy użyty model spaCy 'pl_core_news_lg' niepoprawnie dzielił tekst na zdania). W teście skupiono się na pokrewieństwie w stosunku do głównego bohatera/bohaterki biogramu.
 
 Teksty biogramów przetwarzane były promptem o treści:
 
