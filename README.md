@@ -989,3 +989,5 @@ Jak wyglądają wyniki dla całej serii 50 biogramów?
 | brak -> szwagierka -> Świątka | **False** |
 
 W analizowanych biogramach znajdują się w sumie 245 relacje lub braki relacji (gdy w treści biogramu nie ma informacji o krewnych i powinowatych, w poprzedniej analizie z uzyciem GPT-3 nie zauważyłem kilku relacji), z tego model GPT-4  **215** określił poprawnie - czyli osiągnął **88%** dokładności.
+
+To wyraźnie lepszy wynik niż poprzedni osiągnięty przez GPT3 (model 'davinci-003'), ale też zgodny z oczekiwaniem, skoro wg raportu technicznego OpenAI na temat GPT4 (https://arxiv.org/abs/2303.08774), nowy model jest o 29% lepszy w unikaniu 'closed domain hallucinations' czyli wymyślania nieprawdziwych informacji, mimo instrukcji że informacje maja pochodzić tylko z podanego kontekstu, np. anlizowanwgo artykułu.
