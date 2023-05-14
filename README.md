@@ -999,7 +999,7 @@ Nadal pewnym problemem jest niedeterministyczny charakter dużych modeli języko
 
 ### Przetwarzanie hasła SHG do formatu XML - GPT4
 
-Test automatycznego przetwarzania fragmentu Słownika Historyczno-Geograficznego (hasło Balice, część punktu 3) za pomocą modelu GPT4 (przez API) do formatu XML. Użyty prompt:
+Test automatycznego przetwarzania fragmentu Słownika Historyczno-Geograficznego (hasło [Balice](http://www.slownik.ihpan.edu.pl/search.php?id=2348), część punktu 3) za pomocą modelu GPT4 (przez API, parametr temperature = 0) do formatu XML. Użyty prompt:
 
 ```
 Przetwórz proszę poniższy tekst zawierający regesty na plik XML. Regest zaczyna się od daty np. 1245 lub zakresu dat 1245-56 lub daty przybliżonej np. a. 1456, po której następuje treść regestu, a po niej - w nawiasie - źródło informacji. Po nawiasie pojawia się średnik oddzielający regesty. Jeżeli nie ma daty na początku, oznacza to, że data jest taka sama jak w poprzednim regeście. W treści regestu oznacz występujące w niej osoby tagiem <persName>, miejsca tagiem <placeName>, nazwy geograficzne tagiem <geogName> zaś nazwy urzędów zawodów lub funkcji tagiem <occupation>. Pamiętaj, że jednoliterowe skróty, takie jak 'B.', oznaczają miejscowość, której dotyczą regesty. Osoby pojawiające się w treści regestu to postacie średniowieczne, które nie miały nazwisk za to dopisywały do imienia miejscowość z której pochodzą np. Jan z Grzędowa, w takich przypadkach oznacz osobę tagiem <persName> z miejscowością włącznie.
