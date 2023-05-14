@@ -28,6 +28,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Inne przykłady](#inne-przykłady)
   - [Analiza 50 biogramów - relacje rodzinne](#analiza-relacji-rodzinnych-na-serii-biografii)
   - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii---model-gpt4)
+  - [Przetwarzanie haseł SHG do formatu XML - GPT4](#przetwarzanie-hasła-shg-do-formatu-xml---gpt4)
 
 ## Notatki
 
@@ -995,3 +996,100 @@ To wyraźnie lepszy wynik niż poprzedni osiągnięty przez GPT3 (model 'davinci
 Dla niektórych biogramów np. 'Śniadecka Kornelia Ludwika' , 'Leymiter Stanisław' czy 'Stanisław Cielątko' błędy są liczne, być może wynika to z długości i zawiłości zdań. Być może ma na to wpływ konstrukcja zadania - oczekiwane są informacje o relacjach rodzinnych głównego bohatera, jeżeli są one podane nie wprost, np. 'Siostrą żony Jana Kowalskiego była Amelia...' wymaga to przekształcenia podanej informacji do wymaganej formy -> 'szwagierka'.
 
 Nadal pewnym problemem jest niedeterministyczny charakter dużych modeli językowych, ten sam prompt uruchamiany wielokrotnie może dawać nieco inne wyniki, nawet o tej samej poprawności, lecz nieco inaczej sformułowane. Mimo zaleconego wprost formatu odpowiedzi w powyższej analizie (główny bohater/ka -> relacja -> osoba) zdarzało się, że model zwracał albo sformułowanie "główny bohater/ka" albo podawał w tym miejscu rzeczywiste imie i nazwisko głównego bohatera. Zdarzało się także, że zwracane były relacje rodzinne innych osób występujących w tekście. Wynik nie jest więc zawsze gotowym do dalszych analiz produktem, wymaga przetworzenia i uspójnienia.
+
+### Przetwarzanie hasła SHG do formatu XML - GPT4
+
+Test automatycznego przetwarzania fragmentu Słownika Historyczno-Geograficznego (hasło Balice, część punktu 3) za pomocą modelu GPT4 (przez API) do formatu XML. Użyty prompt:
+
+```
+Przetwórz proszę poniższy tekst zawierający regesty na plik XML. Regest zaczyna się od daty np. 1245 lub zakresu dat 1245-56 lub daty przybliżonej np. a. 1456, po której następuje treść regestu, a po niej - w nawiasie - źródło informacji. Po nawiasie pojawia się średnik oddzielający regesty. Jeżeli nie ma daty na początku, oznacza to, że data jest taka sama jak w poprzednim regeście. W treści regestu oznacz występujące w niej osoby tagiem <persName>, miejsca tagiem <placeName>, nazwy geograficzne tagiem <geogName> zaś nazwy urzędów zawodów lub funkcji tagiem <occupation>. Pamiętaj, że jednoliterowe skróty, takie jak 'B.', oznaczają miejscowość, której dotyczą regesty. Osoby pojawiające się w treści regestu to postacie średniowieczne, które nie miały nazwisk za to dopisywały do imienia miejscowość z której pochodzą np. Jan z Grzędowa, w takich przypadkach oznacz osobę tagiem <persName> z miejscowością włącznie.
+
+Przykład regestu:
+a. 1396 kaszt. wiśl. Jaśko za zasługi przy chrystianizacji Litwy dostał od Władysława Jag. m. Wojsław [nie zid.] i kilka wsi w ziemi krak. w tym wieś Grzędy w pow. sand., którą sprzedał Krzesławowi z Wolicy. Synem Jaśka był Jan z B. (J. Ossoliński, Pamiętnik 1595-1621, Wr. 1952, s. 4);
+
+Przykład wyniku:
+<s type="regest">
+<date>a. 1396</date>
+<content><occupation>kaszt. wiśl.</occupation> <persName>Jaśko</persName> za zasługi przy chrystianizacji <geogName>Litwy</geogName> dostał od <persName>Władysława Jag.</persName> m. <placeName>Wojsław</placeName> [nie zid.] i kilka wsi w ziemi krak. w tym wieś <placeNme>Grzędy</PlaceName> w pow. sand., którą sprzedał <persName>Krzesławowi z Wolicy</persName>. Synem <persName>Jaśka</persName> był <persName>Jan z B.</persName></content>
+<biblio>(J. Ossoliński, Pamiętnik 1595-1621, Wr. 1952, s. 4)</biblio>;
+</s>
+
+Przykład regestu:
+1467 Albert kmieć z B. (KRK 3 s. 23);
+
+Przykład wyniku:
+<s type="regest">
+<date>1467</date>
+<content><persName>Albert</persName> <occupation>kmieć</occupation> z <placeName>B.</placeName></content>
+</s>
+
+Oto tekst do przetworzenia:
+1229 papież Grzegorz IX potwierdza kl. tyn. posiadanie m. in. B. (Tyn. 11b - bulla interpol. w XV w., por. J. Wyrozumski, Państwowa gospodarka solna w Polsce do schyłku XIV w., Kr. 1968, s. 25); a. 1286 komes Grzegorz zw. Żegocic dz. B., zabraniał kl. dominikanów w Krakowie przeprowadzić wodę z rz. Rudawy przez Krowodrzę, → też p. 6 (KK 1, 86); 1304-6 komes Andrzej z B. (KK 2, 242; 1, 114 przy tym dok. wisiała jego pieczęć); 1321, 1351-2, 1363 Grzegorz z B. (AS 2, 7; Mp. 3, 761; Wp. 3, 1495; ZDM 1, 63; KMK 1, 27); 1366 Jan z B. (ZDM 1, 117); 1367 Betico kmieć z B. (KRK 2 s. 13); 1387-96 Jan, Jaśko z Goźlic [pow. sand.], B. i Ossolina [pow. sand.], kaszt. wiśl. 1388-96, wg Długosza zabity przez Grota ze Słupczy [pow. sand.] w sporze o granice wsi Dwikozy [pow. sand.] (AGZ 5, 16; AS 2, 61; KK 2, 392, 401; Mp. 4, 1022; ZDM 6, 1540, 1548, 1584; KUJ 1, 8; AKP 8, 63; Proch. 12; DH 3 s. 552 na s. 372 i 466 wiadomości odnoszą się do kaszt. wiśl. Mikołaja z Bogorii [pow. sand.], a nie z Ossolina; MH 10 s. 148-9; Bon. 1 s. 86); a. 1396 kaszt. wiśl. Jaśko za zasługi przy chrystianizacji Litwy dostał od Władysława Jag. m. Wojsław [nie zid.] i kilka wsi w ziemi krak. (J. Ossoliński, Pamiętnik 1595-1621, Wr. 1952, s. 4);
+```
+
+Wynik w formie XML
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<regests>
+    <s type="regest">
+        <date>1229</date>
+        <content><persName>papież Grzegorz IX</persName> potwierdza <placeName>kl. tyn.</placeName>
+        posiadanie m. in. <placeName>B.</placeName></content>
+        <biblio>(Tyn. 11b - bulla interpol. w XV w., por. J. Wyrozumski, Państwowa gospodarka solna w Polsce do schyłku XIV w., Kr. 1968, s. 25)</biblio>;
+    </s>
+    <s type="regest">
+        <date>a. 1286</date>
+        <content><occupation>kom</occupation> <persName>Grzegorz zw. Żegocic</persName> dz.
+        <placeName>B.</placeName>, zabraniał <placeName>kl. dominikanów</placeName> w
+        <placeName>Krakowie</placeName> przeprowadzić wodę z rz. <geogName>Rudawy</geogName> przez
+        <placeName>Krowodrzę</placeName>, → też p. 6</content>
+        <biblio>(KK 1, 86)</biblio>;
+    </s>
+    <s type="regest">
+        <date>1304-6</date>
+        <content><occupation>kom</occupation> <persName>Andrzej z B.</persName></content>
+        <biblio>(KK 2, 242; 1, 114 przy tym dok. wisiała jego pieczęć)</biblio>;
+    </s>
+    <s type="regest">
+        <date>1321</date>
+        <content><persName>Grzegorz z B.</persName></content>
+        <biblio>(AS 2, 7; Mp. 3, 761; Wp. 3, 1495; ZDM 1, 63; KMK 1, 27)</biblio>;
+    </s>
+    <s type="regest">
+        <date>1351-2</date>
+        <content><persName>Grzegorz z B.</persName></content>
+    </s>
+    <s type="regest">
+        <date>1363</date>
+        <content><persName>Grzegorz z B.</persName></content>
+    </s>
+    <s type="regest">
+        <date>1366</date>
+        <content><persName>Jan z B.</persName></content>
+        <biblio>(ZDM 1, 117)</biblio>;
+    </s>
+    <s type="regest">
+        <date>1367</date>
+        <content><persName>Betico</persName> <occupation>kmieć</occupation> z <placeName>B.</placeName>
+        </content>
+        <biblio>(KRK 2 s. 13)</biblio>;
+    </s>
+    <s type="regest">
+        <date>1387-96</date>
+        <content><persName>Jan</persName>, <persName>Jaśko z Goźlic</persName> [pow. sand.],
+        <placeName>B.</placeName> i <placeName>Ossolina</placeName> [pow. sand.],
+        <occupation>kaszt. wiśl.</occupation> 1388-96, wg <persName>Długosza</persName> zabity
+        przez <persName>Grota ze Słupczy</persName> [pow. sand.] w sporze o granice wsi
+        <placeName>Dwikozy</placeName> [pow. sand.]</content>
+        <biblio>(AGZ 5, 16; AS 2, 61; KK 2, 392, 401; Mp. 4, 1022; ZDM 6, 1540, 1548, 1584; KUJ 1, 8; AKP 8, 63; Proch. 12; DH 3 s. 552 na s. 372 i 466 wiadomości odnoszą się do kaszt. wiśl. Mikołaja z Bogorii [pow. sand.], a nie z Ossolina; MH 10 s. 148-9; Bon. 1 s. 86)</biblio>;
+    </s>
+    <s type="regest">
+        <date>a. 1396</date>
+        <content><occupation>kaszt. wiśl.</occupation> <persName>Jaśko</persName> za zasługi
+        przy chrystianizacji <geogName>Litwy</geogName> dostał od <persName>Władysława Jag.</persName>
+        m. <placeName>Wojsław</placeName> [nie zid.] i kilka wsi w ziemi krak.</content>
+        <biblio>(J. Ossoliński, Pamiętnik 1595-1621, Wr. 1952, s. 4)</biblio>;
+    </s>
+</regests>
+```
