@@ -26,6 +26,7 @@ Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerp
   - [Other examples](#other-examples)
   - [Analysis of family relations on a series of biographies](#analysis-of-family-relations-on-a-series-of-biographies)
   - [Analysis of family relationships in a series of biographies - GPT-4 model](#analysis-of-family-relationships-in-a-series-of-biographies---gpt-4-model)
+  - [Processing of the Historical and Geographical Dictionary entry into XML format - GPT4](#processing-of-the-historical-and-geographical-dictionary-entry-into-xml-format---gpt4)
 
 ## Notes
 
