@@ -1140,7 +1140,7 @@ osoba: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)```
 
 a także podaniu nowego przykładowego wyniku:
 
-```
+```JSON
 [{"relacja":"ojciec", "osoba":"Niccola Ricasoli"},
  {"relacja":"matka": "osoba":"Annalena Ricasoli"},
  {"relacja":"brat": "osoba":"Bernard"}],
