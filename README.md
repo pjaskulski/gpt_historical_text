@@ -29,6 +29,8 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Analiza 50 biogramów - relacje rodzinne](#analiza-relacji-rodzinnych-na-serii-biografii)
   - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii---model-gpt4)
   - [Przetwarzanie haseł SHG do formatu XML - GPT4](#przetwarzanie-hasła-shg-do-formatu-xml---gpt4)
+  - [Formatowanie wyników - JSON](#formatowanie-wyników---json)
+
 
 ## Notatki
 
@@ -1127,3 +1129,24 @@ Wynik w formie XML
     </s>
 </regests>
 ```
+
+### Formatowanie wyników - JSON
+
+W przykładach ekstracji informacji z biogramów postaci historycznych wynik prezentowany był w formie listy, wygodniejszą opcją do dalszego przetwarzania byłby jednak wynik w formacie JSON. Model GPT jest oczywiście w stanie to zrobić. Modyfikacja promptu polega na zastąpieniu fragmentu opisującego format wyniku w fomie listy przez tekst:
+
+```Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+relacja: rodzaj pokrewieństwa (kim osoba była dla bohatera/bohaterki )
+osoba: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)```
+
+a także podaniu nowego przykładowego wyniku:
+
+```
+[{"relacja":"ojciec", "osoba":"Niccola Ricasoli"},
+ {"relacja":"matka": "osoba":"Annalena Ricasoli"},
+ {"relacja":"brat": "osoba":"Bernard"}],
+ {"relacja":"bratanica": "osoba":"Małgorzata Anna"},
+ {"relacja":"żona": "osoba":"Joanna"},
+ {"relacja":"teść": "osoba":"Adam Kurozwęcki"}
+]
+```
+

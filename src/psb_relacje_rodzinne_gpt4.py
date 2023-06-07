@@ -145,10 +145,11 @@ ożenił się z Joanną, córką burgrabiego krakowskiego Adama Kurozwęckiego."
         example_answer = """
 [{"relacja":"ojciec", "osoba":"Niccola Ricasoli"},
  {"relacja":"matka": "osoba":"Annalena Ricasoli"},
- {"relacja":"brat": "osoba":"Bernard"}],
- {"relacja":"bratanica": "osoba":"Małgorzata Anna"}],
- {"relacja":"żona": "osoba":"Joanna"}],
- {"relacja":"teść": "osoba":"Adam Kurozwęcki"}],
+ {"relacja":"brat": "osoba":"Bernard"},
+ {"relacja":"bratanica": "osoba":"Małgorzata Anna"},
+ {"relacja":"żona": "osoba":"Joanna"},
+ {"relacja":"teść": "osoba":"Adam Kurozwęcki"}
+]
 """
 
         file_output = Path("..") / "output" / "gpt-4-api-dane" / data_file_name.replace('.txt', '.dane')
