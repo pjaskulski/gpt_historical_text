@@ -1136,7 +1136,8 @@ W przykładach ekstracji informacji z biogramów postaci historycznych wynik pre
 
 ```Wynik przedstaw w formie listy obiektów JSON zawierających pola:
 relacja: rodzaj pokrewieństwa (kim osoba była dla bohatera/bohaterki )
-osoba: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)```
+osoba: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)
+```
 
 a także podaniu nowego przykładowego wyniku:
 
