@@ -1143,11 +1143,11 @@ a także podaniu nowego przykładowego wyniku:
 
 ```JSON
 [{"relacja":"ojciec", "osoba":"Niccola Ricasoli"},
- {"relacja":"matka": "osoba":"Annalena Ricasoli"},
- {"relacja":"brat": "osoba":"Bernard"}],
- {"relacja":"bratanica": "osoba":"Małgorzata Anna"},
- {"relacja":"żona": "osoba":"Joanna"},
- {"relacja":"teść": "osoba":"Adam Kurozwęcki"}
+ {"relacja":"matka", "osoba":"Annalena Ricasoli"},
+ {"relacja":"brat", "osoba":"Bernard"},
+ {"relacja":"bratanica", "osoba":"Małgorzata Anna"},
+ {"relacja":"żona", "osoba":"Joanna"},
+ {"relacja":"teść", "osoba":"Adam Kurozwęcki"}
 ]
 ```
 
