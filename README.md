@@ -1151,3 +1151,18 @@ a także podaniu nowego przykładowego wyniku:
 ]
 ```
 
+skrypt przetwarza biogram, np. Jadwigi Jagiellonki, zwracając wynik w formacie JSON, ułatwiając późniejsze automatyczne przetwarzanie, porównywanie wyniku z oczekiwanym itp.
+
+```JSON
+[{"relacja":"ojciec", "osoba":"Kazimierz Jagiellończyk"},
+ {"relacja":"matka", "osoba":"Elżbieta Rakuszanka"},
+ {"relacja":"mąż", "osoba":"Jerzy Bawarski"},
+ {"relacja":"syn", "osoba":"Ludwik"},
+ {"relacja":"syn", "osoba":"Ruprecht"},
+ {"relacja":"córka", "osoba":"Elżbieta"},
+ {"relacja":"córka", "osoba":"Małgorzata"},
+ {"relacja":"brat", "osoba":"Władysław Jagiellończyk"},
+ {"relacja":"brat", "osoba":"Aleksander"},
+ {"relacja":"brat", "osoba":"Zygmunt I"},
+ {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"}]
+ ```
