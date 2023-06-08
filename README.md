@@ -1132,7 +1132,7 @@ Wynik w formie XML
 
 ### Formatowanie wyników - JSON
 
-W przykładach ekstracji informacji z biogramów postaci historycznych wynik prezentowany był w formie listy, wygodniejszą opcją do dalszego przetwarzania byłby jednak wynik w formacie JSON. Model GPT jest oczywiście w stanie to zrobić. Modyfikacja promptu polega na zastąpieniu fragmentu opisującego format wyniku w fomie listy przez tekst:
+W przykładach ekstrakcji informacji z biogramów postaci historycznych wynik prezentowany był w formie listy, wygodniejszą opcją do dalszego przetwarzania byłby jednak wynik w formacie JSON. Model GPT jest oczywiście w stanie to zrobić. Modyfikacja promptu polega na zastąpieniu fragmentu opisującego format wyniku w formie listy przez tekst:
 
 ```TXT
 Wynik przedstaw w formie listy obiektów JSON zawierających pola:
