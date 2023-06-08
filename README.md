@@ -1134,7 +1134,8 @@ Wynik w formie XML
 
 W przykładach ekstracji informacji z biogramów postaci historycznych wynik prezentowany był w formie listy, wygodniejszą opcją do dalszego przetwarzania byłby jednak wynik w formacie JSON. Model GPT jest oczywiście w stanie to zrobić. Modyfikacja promptu polega na zastąpieniu fragmentu opisującego format wyniku w fomie listy przez tekst:
 
-```Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+```TXT
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
 relacja: rodzaj pokrewieństwa (kim osoba była dla bohatera/bohaterki )
 osoba: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)
 ```
