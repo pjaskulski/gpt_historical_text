@@ -1165,5 +1165,10 @@ skrypt przetwarza biogram, np. Jadwigi Jagiellonki, zwracając wynik w formacie 
  {"relacja":"brat", "osoba":"Władysław Jagiellończyk"},
  {"relacja":"brat", "osoba":"Aleksander"},
  {"relacja":"brat", "osoba":"Zygmunt I"},
- {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"}]
+ {"relacja":"teść", "osoba":"Ludwik Bogaty"},
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"}
+]
  ```
+
+A przy okazji, jaki jest koszt przetworzenia biogramu Jadwigi Jagiellonki? Tekst biogramu ma niecałe 5000 znaków (2504 tokeny), zaś odpowiedź to 264 tokeny, cena użycia moelu GPT-4 przez API to 0.03$ za dane wejściowe, 0.06$ za wygenerowaną odpowiedź (ceny za 1 tys. tokenów). W przypadku
+omawianego biogramu przekłada się to obecnie na 0.09$ (czerwiec 2023). Nie jest to więc tani proces.

@@ -1126,5 +1126,9 @@ the script processes the biography, e.g., of Jadwiga Jagiellonka, returning the 
  {"relacja":"brat", "osoba":"Władysław Jagiellończyk"},
  {"relacja":"brat", "osoba":"Aleksander"},
  {"relacja":"brat", "osoba":"Zygmunt I"},
- {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"}]
+ {"relacja":"teść", "osoba":"Ludwik Bogaty"},
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"}
+]
  ```
+
+By the way, what is the cost of processing the biography of Jadwiga Jagiellonka? The biography text is less than 5000 characters (2504 tokens), while the answer is 264 tokens, the price for using the GPT-4 model via the API is $0.03 for input data, $0.06 for the generated response (prices per 1,000 tokens). In the case of the discussed biography, this currently means a cost of $0.09 (June 2023). Therefore, it is not a cheap process.
