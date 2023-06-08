@@ -1142,6 +1142,11 @@ osoba: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)
 
 a także podaniu nowego przykładowego wyniku:
 
+```TXT
+Przykład: "Soderini Carlo (ok. 1537–1581), kupiec i bankier. Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym bratem Bernarda (zob.).
+Jego bratanicą była Małgorzata Anna, żona Winfrida de Loeve. S. ożenił się z Joanną, córką burgrabiego krakowskiego Adama Kurozwęckiego."
+Wynik:
+```
 ```JSON
 [{"relacja":"ojciec", "osoba":"Niccola Ricasoli"},
  {"relacja":"matka", "osoba":"Annalena Ricasoli"},
