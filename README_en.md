@@ -1089,3 +1089,41 @@ The result in the form of XML
     </s>
 </regests>
 ```
+
+### Formatting results - JSON
+
+In the examples of extracting information from biographies of historical figures, the result was presented in the form of a list, however, a more convenient option for further processing would be the result in JSON format. The GPT model is of course capable of doing this. The modification of the prompt involves replacing the part describing the result format in the form of a list with the text (in Polish):
+
+```TXT
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+relacja: rodzaj pokrewieństwa (kim osoba była dla bohatera/bohaterki )
+osoba: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)
+```
+
+and also providing a new example result:
+
+```JSON
+[{"relacja":"ojciec", "osoba":"Niccola Ricasoli"},
+ {"relacja":"matka", "osoba":"Annalena Ricasoli"},
+ {"relacja":"brat", "osoba":"Bernard"},
+ {"relacja":"bratanica", "osoba":"Małgorzata Anna"},
+ {"relacja":"żona", "osoba":"Joanna"},
+ {"relacja":"teść", "osoba":"Adam Kurozwęcki"}
+]
+```
+
+the script processes the biography, e.g., of Jadwiga Jagiellonka, returning the result in JSON format, facilitating later automatic processing, comparing the result with the expected one, etc.
+
+```JSON
+[{"relacja":"ojciec", "osoba":"Kazimierz Jagiellończyk"},
+ {"relacja":"matka", "osoba":"Elżbieta Rakuszanka"},
+ {"relacja":"mąż", "osoba":"Jerzy Bawarski"},
+ {"relacja":"syn", "osoba":"Ludwik"},
+ {"relacja":"syn", "osoba":"Ruprecht"},
+ {"relacja":"córka", "osoba":"Elżbieta"},
+ {"relacja":"córka", "osoba":"Małgorzata"},
+ {"relacja":"brat", "osoba":"Władysław Jagiellończyk"},
+ {"relacja":"brat", "osoba":"Aleksander"},
+ {"relacja":"brat", "osoba":"Zygmunt I"},
+ {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"}]
+ ```
