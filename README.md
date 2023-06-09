@@ -30,6 +30,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii---model-gpt4)
   - [Przetwarzanie haseł SHG do formatu XML - GPT4](#przetwarzanie-hasła-shg-do-formatu-xml---gpt4)
   - [Formatowanie wyników - JSON](#formatowanie-wyników---json)
+  - [Niedeterminizm i halucynacje](#niedeterminizm-i-halucynacje)
 
 
 ## Notatki
@@ -1181,3 +1182,65 @@ skrypt przetwarza biogram, np. Jadwigi Jagiellonki, zwracając wynik w formacie 
 
 A przy okazji, jaki jest koszt przetworzenia biogramu Jadwigi Jagiellonki? Tekst biogramu ma niecałe 5000 znaków (2504 tokeny), zaś odpowiedź to 264 tokeny, cena użycia moelu GPT-4 przez API to 0.03$ za dane wejściowe, 0.06$ za wygenerowaną odpowiedź (ceny za 1 tys. tokenów). W przypadku
 omawianego biogramu przekłada się to obecnie na 0.09$ (czerwiec 2023). Nie jest to więc tani proces.
+
+### Niedeterminizm i halucynacje
+
+Ekstracja informacji z opracowań i źródeł historycznych wymaga dokładności i poprawności wyników. Model językowy mimo swoich ogromnych możliwości
+w dziedzinie przetwarzania tekstu będzie przygotowywał także błędne odpowiedzi ('halucynacje'), będzie też 'zmieniał zdanie'. Ustawienie parametru uruchomienia modelu 'temperature' na wartość 0 zmniejsza jego twórcze skłonności, co jest efektem pożądanym w przypadku wydobywania wiedzy z tekstu, jednak wynik zapytań do API zwracany przez model GPT-4 nadal może i będzie się nieco różnić przy każdym wywołaniu. LLM są z natury niedeterministyczne (zob. https://platform.openai.com/docs/guides/gpt/faq - punkt: "Why are model outputs inconsistent?"). Można ten efekt zaobserować uruchamiając wielokrotnie to samo zapytanie dotyczące
+relacji rodzinnych Jadwigi Jagiellonki, które przetwarza ten sam tekst biogramu. Około 80-90% odpowiedzi pozostaje niezmienna (i poprawna),
+jednak pozostała część wyniku zmienia się, czasem są to odpowiedzi poprawne, czasem całkowicie błędne. Wydaje się na podstawie prostej obserwacji, że zmienność dotyczy trudniejszych do wyodrębnienia realacji typu 'zięć', 'teść', 'wnuk', zaś realcje typu 'ojciec', 'matka', 'mąż', 'córka', 'syn', 'brat' wyszukiwane są
+konwekwentnie i poprawnie. Być może znaczenie ma sposób formułowania treści w analizowanym biogramie. Im bardziej zawiły, 'literacki' sposób opisu tym większa szansa, że model będzie niepoprawnie interpretował informacje.
+
+Po wykonaniu 10 testów na biogramie Jadwigi Jagiellonki, pozyskane informacje były inne praktycznie za każdym razem - przy tej samej zawartości promptu i tekstu wejściowego. Z tego 10 relacji powtarzało się dla każdego testu:
+
+```JSON
+ {"relacja":"ojciec", "osoba":"Kazimierz Jagiellończyk"},
+ {"relacja":"matka", "osoba":"Elżbieta Rakuszanka"},
+ {"relacja":"mąż", "osoba":"Jerzy Bawarski"},
+ {"relacja":"syn", "osoba":"Ludwik"},
+ {"relacja":"syn", "osoba":"Ruprecht"},
+ {"relacja":"córka", "osoba":"Elżbieta"},
+ {"relacja":"córka", "osoba":"Małgorzata"},
+ {"relacja":"brat", "osoba":"Władysław Jagiellończyk"},
+ {"relacja":"brat", "osoba":"Aleksander"},
+ {"relacja":"brat", "osoba":"Zygmunt I"},
+```
+
+Zaś dodatkowo mogły pojawiać się inne relacje, od 1 do 4. W dwóch testach dodatkowych relacji nie było.
+
+```JSON
+test 1:
+ {"relacja":"teść", "osoba":"Ludwik Bogaty"} = OK
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+test 2:
+ {"relacja":"teściowa", "osoba":"Dorota Koniecpolska"} = BŁĄÐ
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+ {"relacja":"wnuczka", "osoba":"Małgorzata"} = BŁĄÐ
+test 3:
+ {"relacja":"wnuk", "osoba":"Ruprecht hr. Palatynatu"} = BŁĄÐ
+test 4:
+ {"relacja":"siostrzeniec", "osoba":"Ruprecht hr. Palatynatu"} = BŁĄÐ
+ {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"} = OK
+test 5:
+ brak dodatkowych relacji (a są trzy, takie jak w teście nr 1 oraz anonimowy wnuk bohaterki biogramu)
+test 6:
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+ {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"} = OK
+test 7:
+ {"relacja":"wnuk", "osoba":"Ruprecht hr. Palatynatu"} = BŁĄÐ
+test 8
+ brak dodatkowych relacji (jw)
+test 9
+ {"relacja":"teściowa", "osoba":"Dorota Koniecpolska"} = BŁĄÐ
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+ {"relacja":"wnuczka", "osoba":"Małgorzata"} = BŁĄÐ
+test 10:
+ {"relacja":"wnuk", "osoba":"Ruprecht hr. Palatynatu"} = BŁĄÐ
+ {"relacja":"siostrzeniec", "osoba":"Ruprecht hr. Palatynatu"} = BŁĄÐ
+ {"relacja":"szwagierka", "osoba":"Anna, księżna wdowa cieszyńska"} = BŁĄÐ
+ {"relacja":"siostrzenica", "osoba":"Małgorzata, ksieni benedyktynek w Neuburg"} = BŁĄÐ
+```
+
+Jak widać w 6 na 10 testów pojawiają się relacje nieprawdziwe, nie da się ich w żaden sposób uzasadnić zawartością tekstu biogramu, mniej szkoldliwy wydaje się kompletny brak odnalezienia istniejących relacji co zdarzyło się w 2 testach.
+
+Ponieważ w przypadku esktrakcji informacji z tekstów zajmujemy się informacjami których jeszcze nie znamy, trudno byłoby przeprowadzić werfikację faktów inaczej niż manualnie porównując tekst z pozyskanymi przez model danymi. Taki proces jest jednak czasochłonny i zniwelowałby cały zysk z automatyzacji przetwarzania dużej ilości tekstu. Czy rozwiązaniem było by powtarzanie każdego zapytania np. 3 razy i uznawanie powtarzających się odpowiedzi za wiarygodne zaś pozostałych za wymagające weryfikacji - trudno powiedzieć, ale jest przecież możliwe, że konsekwetnie w każdym teście pojawiać będą się informację błędne a więc niewiarygodne. Manualna weryfikacja danych pozyskanych dzięki dużym modelom językowym wydaje się - na dziś - nieunikniona.
