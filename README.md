@@ -30,7 +30,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii---model-gpt4)
   - [Przetwarzanie haseł SHG do formatu XML - GPT4](#przetwarzanie-hasła-shg-do-formatu-xml---gpt4)
   - [Formatowanie wyników - JSON](#formatowanie-wyników---json)
-  - [Indeterminizm i halucynacje](#niedeterminizm-i-halucynacje)
+  - [Indeterminizm i halucynacje](#indeterminizm-i-halucynacje)
 
 
 ## Notatki
