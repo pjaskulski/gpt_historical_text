@@ -30,7 +30,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Analiza 50 biogramów - relacje rodzinne - GPT4](#analiza-relacji-rodzinnych-na-serii-biografii---model-gpt4)
   - [Przetwarzanie haseł SHG do formatu XML - GPT4](#przetwarzanie-hasła-shg-do-formatu-xml---gpt4)
   - [Formatowanie wyników - JSON](#formatowanie-wyników---json)
-  - [Niedeterminizm i halucynacje](#niedeterminizm-i-halucynacje)
+  - [Indeterminizm i halucynacje](#niedeterminizm-i-halucynacje)
 
 
 ## Notatki
@@ -1183,7 +1183,7 @@ skrypt przetwarza biogram, np. Jadwigi Jagiellonki, zwracając wynik w formacie 
 A przy okazji, jaki jest koszt przetworzenia biogramu Jadwigi Jagiellonki? Tekst biogramu ma niecałe 5000 znaków (2504 tokeny), zaś odpowiedź to 264 tokeny, cena użycia moelu GPT-4 przez API to 0.03$ za dane wejściowe, 0.06$ za wygenerowaną odpowiedź (ceny za 1 tys. tokenów). W przypadku
 omawianego biogramu przekłada się to obecnie na 0.09$ (czerwiec 2023). Nie jest to więc tani proces.
 
-### Niedeterminizm i halucynacje
+### Indeterminizm i halucynacje
 
 Ekstracja informacji z opracowań i źródeł historycznych wymaga dokładności i poprawności wyników. Model językowy mimo swoich ogromnych możliwości
 w dziedzinie przetwarzania tekstu będzie przygotowywał także błędne odpowiedzi ('halucynacje'), będzie też 'zmieniał zdanie'. Ustawienie parametru uruchomienia modelu 'temperature' na wartość 0 zmniejsza jego twórcze skłonności, co jest efektem pożądanym w przypadku wydobywania wiedzy z tekstu, jednak wynik zapytań do API zwracany przez model GPT-4 nadal może i będzie się nieco różnić przy każdym wywołaniu. LLM są z natury niedeterministyczne (zob. https://platform.openai.com/docs/guides/gpt/faq - punkt: "Why are model outputs inconsistent?"). Można ten efekt zaobserwować uruchamiając wielokrotnie to samo zapytanie dotyczące
