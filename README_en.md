@@ -1024,10 +1024,9 @@ Oto tekst do przetworzenia:
 1229 papież Grzegorz IX potwierdza kl. tyn. posiadanie m. in. B. (Tyn. 11b - bulla interpol. w XV w., por. J. Wyrozumski, Państwowa gospodarka solna w Polsce do schyłku XIV w., Kr. 1968, s. 25); a. 1286 komes Grzegorz zw. Żegocic dz. B., zabraniał kl. dominikanów w Krakowie przeprowadzić wodę z rz. Rudawy przez Krowodrzę, → też p. 6 (KK 1, 86); 1304-6 komes Andrzej z B. (KK 2, 242; 1, 114 przy tym dok. wisiała jego pieczęć); 1321, 1351-2, 1363 Grzegorz z B. (AS 2, 7; Mp. 3, 761; Wp. 3, 1495; ZDM 1, 63; KMK 1, 27); 1366 Jan z B. (ZDM 1, 117); 1367 Betico kmieć z B. (KRK 2 s. 13); 1387-96 Jan, Jaśko z Goźlic [pow. sand.], B. i Ossolina [pow. sand.], kaszt. wiśl. 1388-96, wg Długosza zabity przez Grota ze Słupczy [pow. sand.] w sporze o granice wsi Dwikozy [pow. sand.] (AGZ 5, 16; AS 2, 61; KK 2, 392, 401; Mp. 4, 1022; ZDM 6, 1540, 1548, 1584; KUJ 1, 8; AKP 8, 63; Proch. 12; DH 3 s. 552 na s. 372 i 466 wiadomości odnoszą się do kaszt. wiśl. Mikołaja z Bogorii [pow. sand.], a nie z Ossolina; MH 10 s. 148-9; Bon. 1 s. 86); a. 1396 kaszt. wiśl. Jaśko za zasługi przy chrystianizacji Litwy dostał od Władysława Jag. m. Wojsław [nie zid.] i kilka wsi w ziemi krak. (J. Ossoliński, Pamiętnik 1595-1621, Wr. 1952, s. 4);
 ```
 
-The result in the form of XML
+The result in the form of XML:
 
 ```XML
-<?xml version="1.0" encoding="UTF-8"?>
 <regests>
     <s type="regest">
         <date>1229</date>
@@ -1090,6 +1089,8 @@ The result in the form of XML
     </s>
 </regests>
 ```
+
+However, it is important to remember that the context that GPT models can handle is limited, and using the API costs money, so you may want to consider a hybrid solution. For example, you could use more conventional methods (Python, spaCy, regex, etc.) to split the input text from the SHG dictionary into points, sub-points, and regests, and then use the LLM model to tag the content of the regests themselves (without the bibliography, which can also be handled by simpler methods).
 
 ### Formatting results - JSON
 

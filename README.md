@@ -1063,10 +1063,9 @@ przy chrystianizacji Litwy dostał od Władysława Jag. m. Wojsław [nie zid.] i
 kilka wsi w ziemi krak. (J. Ossoliński, Pamiętnik 1595-1621, Wr. 1952, s. 4);
 ```
 
-Wynik w formie XML
+Wynik w formie XML:
 
 ```XML
-<?xml version="1.0" encoding="UTF-8"?>
 <regests>
     <s type="regest">
         <date>1229</date>
@@ -1129,6 +1128,8 @@ Wynik w formie XML
     </s>
 </regests>
 ```
+
+Trzeba jednak pamiętać, że kontekst który modele GPT są w stanie przetwarzać jest ograniczony a korzystanie z API kosztuje, można więc rozważyć rozwiązanie hybrydowe. Podzielić na przykład tekst wejściowy ze słownika SHG przy użyciu bardziej konwencjonalnych metod (Python, spaCy, regex itp.) na punkty, podpunkty i regesty, a następnie użyć modelu LLM do otagowania treści samego regestu (bez bibliografii, którą też można obsłużyć prostszymi metodami), dodatkowo model mógłby również określać temat regestu.
 
 ### Formatowanie wyników - JSON
 
