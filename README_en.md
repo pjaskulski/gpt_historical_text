@@ -1141,3 +1141,66 @@ the script processes the biography, e.g., of Jadwiga Jagiellonka, returning the 
  ```
 
 By the way, what is the cost of processing the biography of Jadwiga Jagiellonka? The biography text is less than 5000 characters (2504 tokens), while the answer is 264 tokens, the price for using the GPT-4 model via the API is $0.03 for input data, $0.06 for the generated response (prices per 1,000 tokens). In the case of the discussed biography, this currently means a cost of $0.09 (June 2023). Therefore, it is not a cheap process.
+
+### Indeterminism and hallucinations
+
+Extracting information from studies and historical sources requires accuracy and correctness of results. The language model, despite its immense capabilities in the field of text processing
+will also produce incorrect answers ('hallucinations'), it will also 'change its mind'. Setting the model's run parameter 'temperature' to 0 reduces its creative tendencies, which is a desirable effect for extracting knowledge from text, but the result of queries to the API returned by the GPT-4 model can and will still vary slightly with each call. LLMs are inherently non-deterministic (see https://platform.openai.com/docs/guides/gpt/faq - point: "Why are model outputs inconsistent?"). This effect can be observed by repeatedly running the same query on the
+family relations of Jadwiga Jagiellonka, which processes the same biographical text ([link](https://github.com/pjaskulski/gpt_historical_text/blob/main/src/psb_relacje_rodzinne_biogram.py) to the script). The query (prompt) was accompanied by an example of the data to be processed and an example of the result (few-shot learning). About 80-90% of the answers remain the same (and correct),
+However, the rest of the result changes, sometimes the answers are correct, sometimes they are completely wrong. It seems, based on a simple observation, that the variability applies to the more difficult to extract relations like 'son-in-law', 'father-in-law', 'grandson', while relations like 'father', 'mother', 'husband', 'daughter', 'son', 'brother' are searched for
+conventionally and correctly. Perhaps it is the way the content is formulated in the biography to be analyzed that matters. The more elaborate, "literary" the description, the greater the chance that the model will misinterpret the information.
+
+10 tests were performed on the biography of Jadwiga Jagiellonka, the extracted information was practically different each time - with the same content of the prompt and input text. Of these, 10 relationships were repeated for each test:
+
+```JSON
+ {"relacja":"ojciec", "osoba":"Kazimierz Jagiellończyk"},
+ {"relacja":"matka", "osoba":"Elżbieta Rakuszanka"},
+ {"relacja":"mąż", "osoba":"Jerzy Bawarski"},
+ {"relacja":"syn", "osoba":"Ludwik"},
+ {"relacja":"syn", "osoba":"Ruprecht"},
+ {"relacja":"córka", "osoba":"Elżbieta"},
+ {"relacja":"córka", "osoba":"Małgorzata"},
+ {"relacja":"brat", "osoba":"Władysław Jagiellończyk"},
+ {"relacja":"brat", "osoba":"Aleksander"},
+ {"relacja":"brat", "osoba":"Zygmunt I"},
+```
+
+In addition, other relationships could appear, from 1 to 4. In two tests, the additional relationships were not present.
+
+
+```TXT
+test 1:
+ {"relacja":"teść", "osoba":"Ludwik Bogaty"} = OK
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+test 2:
+ {"relacja":"teściowa", "osoba":"Dorota Koniecpolska"} = ERR
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+ {"relacja":"wnuczka", "osoba":"Małgorzata"} = ERR
+test 3:
+ {"relacja":"wnuk", "osoba":"Ruprecht hr. Palatynatu"} = ERR
+test 4:
+ {"relacja":"siostrzeniec", "osoba":"Ruprecht hr. Palatynatu"} = ERR
+ {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"} = OK
+test 5:
+ No additional relations
+test 6:
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+ {"relacja":"wnuk", "osoba":"wnuk Jadwigi Jagiellonki"} = OK
+test 7:
+ {"relacja":"wnuk", "osoba":"Ruprecht hr. Palatynatu"} = ERR
+test 8
+ No additional relations
+test 9
+ {"relacja":"teściowa", "osoba":"Dorota Koniecpolska"} = ERR
+ {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
+ {"relacja":"wnuczka", "osoba":"Małgorzata"} = ERR
+test 10:
+ {"relacja":"wnuk", "osoba":"Ruprecht hr. Palatynatu"} = ERR
+ {"relacja":"siostrzeniec", "osoba":"Ruprecht hr. Palatynatu"} = ERR
+ {"relacja":"szwagierka", "osoba":"Anna, księżna wdowa cieszyńska"} = ERR
+ {"relacja":"siostrzenica", "osoba":"Małgorzata, ksieni benedyktynek w Neuburg"} = ERR
+```
+
+As you can see, in 6 out of 10 tests there are accounts that are untrue, they cannot be justified in any way by the content of the biographical text, less damaging seems to be the complete failure to find existing accounts which happened in 2 tests.
+
+Since in the case of extracting information from texts, we are dealing with information we do not yet know (we do not have a database or knowledge graph), it would be difficult to perform factual verification other than manually comparing the text with the model's extracted data. However, such a process is time-consuming and would negate any benefit of automating the processing of large amounts of text. Whether the solution would be to repeat each query e.g. 3 times and consider the repeated answers as reliable and the others as requiring verification - it is hard to say, but it is after all possible that consistently in each test there would be incorrect and therefore unreliable information. Manual verification of data obtained through large language models seems - for today - inevitable.
