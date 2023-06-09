@@ -1191,7 +1191,7 @@ relacji rodzinnych Jadwigi Jagiellonki, które przetwarza ten sam tekst biogramu
 jednak pozostała część wyniku zmienia się, czasem są to odpowiedzi poprawne, czasem całkowicie błędne. Wydaje się, na podstawie prostej obserwacji, że zmienność dotyczy trudniejszych do wyodrębnienia realacji typu 'zięć', 'teść', 'wnuk', zaś realcje typu 'ojciec', 'matka', 'mąż', 'córka', 'syn', 'brat' wyszukiwane są
 konwekwentnie i poprawnie. Być może znaczenie ma sposób formułowania treści w analizowanym biogramie. Im bardziej zawiły, 'literacki' sposób opisu tym większa szansa, że model będzie niepoprawnie interpretował informacje.
 
-Po wykonaniu 10 testów na biogramie Jadwigi Jagiellonki, pozyskane informacje były inne praktycznie za każdym razem - przy tej samej zawartości promptu i tekstu wejściowego. Z tego 10 relacji powtarzało się dla każdego testu:
+Wykonano 10 testów na biogramie Jadwigi Jagiellonki, pozyskane informacje były praktycznie za każdym razem inne - przy tej samej zawartości promptu i tekstu wejściowego. Z tego 10 relacji powtarzało się dla każdego testu:
 
 ```JSON
  {"relacja":"ojciec", "osoba":"Kazimierz Jagiellończyk"},
