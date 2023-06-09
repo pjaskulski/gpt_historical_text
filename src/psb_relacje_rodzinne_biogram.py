@@ -82,14 +82,10 @@ if __name__ == '__main__':
     nlp = spacy.load('pl_core_news_md')
 
     # dane z pliku tekstowego
-    data_folder = Path("..") / "data" / "psb_probki_200_txt_gpt3"
-
     data_file_list = ['../data/psb_probki_200_txt_gpt3/Jadwiga_Jagiellonka.txt']
 
     licznik = 0
     for data_file in data_file_list:
-        # ograniczona liczba biogramów
-
         print(data_file)
 
         # wczytanie tekstu z podanego pliku
@@ -109,17 +105,17 @@ if __name__ == '__main__':
         # jeżeli plik ze skróconymi danymi już istnieje to dane są wczytywane z dysku
         max_tokens = 7000
 
-        file_output = Path("..") / "output" / "gpt-4-api-dane" / data_file_name.replace('.txt', '.dane')
-
-        if os.path.exists(file_output):
-            with open(file_output, 'r', encoding='utf-8') as f:
-                data = f.read()
-        else:
-            tokens_in_data = count_tokens(data, "gpt2")
-            if len(data) > max_tokens:
-                data = short_version(data)
-            with open(file_output, 'w', encoding='utf-8') as f:
-                f.write(data)
+        tokens_in_data = count_tokens(text_from_file, "gpt2")
+        print('Liczba tokenów:', tokens_in_data)
+        if tokens_in_data > max_tokens:
+            file_output = Path("..") / "output" / "gpt-4-api-dane" / data_file_name.replace('.txt', '.dane')
+            if os.path.exists(file_output):
+                with open(file_output, 'r', encoding='utf-8') as f:
+                    text_from_file = f.read()
+            else:
+                text_from_file = short_version(text_from_file)
+                with open(file_output, 'w', encoding='utf-8') as f:
+                    f.write(text_from_file)
 
         # ///
         # Przykład 2: "Sapieha Jan Fryderyk h. Lis (1618–1664), pisarz polny kor. Był wnukiem woj.
@@ -145,7 +141,7 @@ Jeżeli w tekście nie ma żadnych informacji o pokrewieństwach głównego boha
 Przykład: "Soderini Carlo (ok. 1537–1581), kupiec i bankier. Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym bratem Bernarda (zob.).
 Jego bratanicą była Małgorzata Anna, żona Winfrida de Loeve. S. ożenił się z Joanną, córką burgrabiego krakowskiego Adama Kurozwęckiego."
 Wynik:
-[{"relacja":"ojciec", "osoba":"Niccola Ricasoli"},
+[{"relacja":"ojciec", "osoba":"Niccolo"},
  {"relacja":"matka": "osoba":"Annalena Ricasoli"},
  {"relacja":"brat": "osoba":"Bernard"},
  {"relacja":"bratanica": "osoba":"Małgorzata Anna"},
@@ -163,3 +159,10 @@ Tekst:
         file_output = Path("..") / "output" / "gpt-4-api" / data_file_name.replace('.txt', '.relacje_gpt4')
         with open(file_output, 'w', encoding='utf-8') as f:
             f.write(output + '\n')
+
+        # koszty
+        tokens_in_data = count_tokens(text_from_file, "gpt2")
+        tokens_in_result = count_tokens(output, "gpt2")
+        # cena gpt-4 w openai 0.03$ za prompt, 0.06$ za wygenerowaną odpowiedź
+        cena = ((tokens_in_data/1000) * 0.03) + ((tokens_in_result/1000) * 0.06)
+        print(f'Koszt: {cena:.2f}$')

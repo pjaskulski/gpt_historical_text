@@ -1186,9 +1186,9 @@ omawianego biogramu przekłada się to obecnie na 0.09$ (czerwiec 2023). Nie je
 ### Niedeterminizm i halucynacje
 
 Ekstracja informacji z opracowań i źródeł historycznych wymaga dokładności i poprawności wyników. Model językowy mimo swoich ogromnych możliwości
-w dziedzinie przetwarzania tekstu będzie przygotowywał także błędne odpowiedzi ('halucynacje'), będzie też 'zmieniał zdanie'. Ustawienie parametru uruchomienia modelu 'temperature' na wartość 0 zmniejsza jego twórcze skłonności, co jest efektem pożądanym w przypadku wydobywania wiedzy z tekstu, jednak wynik zapytań do API zwracany przez model GPT-4 nadal może i będzie się nieco różnić przy każdym wywołaniu. LLM są z natury niedeterministyczne (zob. https://platform.openai.com/docs/guides/gpt/faq - punkt: "Why are model outputs inconsistent?"). Można ten efekt zaobserować uruchamiając wielokrotnie to samo zapytanie dotyczące
-relacji rodzinnych Jadwigi Jagiellonki, które przetwarza ten sam tekst biogramu. Około 80-90% odpowiedzi pozostaje niezmienna (i poprawna),
-jednak pozostała część wyniku zmienia się, czasem są to odpowiedzi poprawne, czasem całkowicie błędne. Wydaje się na podstawie prostej obserwacji, że zmienność dotyczy trudniejszych do wyodrębnienia realacji typu 'zięć', 'teść', 'wnuk', zaś realcje typu 'ojciec', 'matka', 'mąż', 'córka', 'syn', 'brat' wyszukiwane są
+w dziedzinie przetwarzania tekstu będzie przygotowywał także błędne odpowiedzi ('halucynacje'), będzie też 'zmieniał zdanie'. Ustawienie parametru uruchomienia modelu 'temperature' na wartość 0 zmniejsza jego twórcze skłonności, co jest efektem pożądanym w przypadku wydobywania wiedzy z tekstu, jednak wynik zapytań do API zwracany przez model GPT-4 nadal może i będzie się nieco różnić przy każdym wywołaniu. LLM są z natury niedeterministyczne (zob. https://platform.openai.com/docs/guides/gpt/faq - punkt: "Why are model outputs inconsistent?"). Można ten efekt zaobserwować uruchamiając wielokrotnie to samo zapytanie dotyczące
+relacji rodzinnych Jadwigi Jagiellonki, które przetwarza ten sam tekst biogramu ([link](https://github.com/pjaskulski/gpt_historical_text/blob/main/src/psb_relacje_rodzinne_biogram.py) do skryptu). Około 80-90% odpowiedzi pozostaje niezmienna (i poprawna),
+jednak pozostała część wyniku zmienia się, czasem są to odpowiedzi poprawne, czasem całkowicie błędne. Wydaje się, na podstawie prostej obserwacji, że zmienność dotyczy trudniejszych do wyodrębnienia realacji typu 'zięć', 'teść', 'wnuk', zaś realcje typu 'ojciec', 'matka', 'mąż', 'córka', 'syn', 'brat' wyszukiwane są
 konwekwentnie i poprawnie. Być może znaczenie ma sposób formułowania treści w analizowanym biogramie. Im bardziej zawiły, 'literacki' sposób opisu tym większa szansa, że model będzie niepoprawnie interpretował informacje.
 
 Po wykonaniu 10 testów na biogramie Jadwigi Jagiellonki, pozyskane informacje były inne praktycznie za każdym razem - przy tej samej zawartości promptu i tekstu wejściowego. Z tego 10 relacji powtarzało się dla każdego testu:
@@ -1208,7 +1208,7 @@ Po wykonaniu 10 testów na biogramie Jadwigi Jagiellonki, pozyskane informacje b
 
 Zaś dodatkowo mogły pojawiać się inne relacje, od 1 do 4. W dwóch testach dodatkowych relacji nie było.
 
-```JSON
+```TXT
 test 1:
  {"relacja":"teść", "osoba":"Ludwik Bogaty"} = OK
  {"relacja":"zięć", "osoba":"Ruprecht hr. Palatynatu"} = OK
@@ -1241,6 +1241,6 @@ test 10:
  {"relacja":"siostrzenica", "osoba":"Małgorzata, ksieni benedyktynek w Neuburg"} = BŁĄÐ
 ```
 
-Jak widać w 6 na 10 testów pojawiają się relacje nieprawdziwe, nie da się ich w żaden sposób uzasadnić zawartością tekstu biogramu, mniej szkoldliwy wydaje się kompletny brak odnalezienia istniejących relacji co zdarzyło się w 2 testach.
+Jak widać w 6 na 10 testów pojawiają się relacje nieprawdziwe, nie da się ich w żaden sposób uzasadnić zawartością tekstu biogramu, mniej szkodliwy wydaje się kompletny brak odnalezienia istniejących relacji co zdarzyło się w 2 testach.
 
 Ponieważ w przypadku esktrakcji informacji z tekstów zajmujemy się informacjami których jeszcze nie znamy, trudno byłoby przeprowadzić werfikację faktów inaczej niż manualnie porównując tekst z pozyskanymi przez model danymi. Taki proces jest jednak czasochłonny i zniwelowałby cały zysk z automatyzacji przetwarzania dużej ilości tekstu. Czy rozwiązaniem było by powtarzanie każdego zapytania np. 3 razy i uznawanie powtarzających się odpowiedzi za wiarygodne zaś pozostałych za wymagające weryfikacji - trudno powiedzieć, ale jest przecież możliwe, że konsekwetnie w każdym teście pojawiać będą się informację błędne a więc niewiarygodne. Manualna weryfikacja danych pozyskanych dzięki dużym modelom językowym wydaje się - na dziś - nieunikniona.
