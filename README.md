@@ -1248,7 +1248,7 @@ Ponieważ w przypadku ekstrakcji informacji z tekstów zajmujemy się informacja
 
 ### Test modelu Nous-Hermes-13b
 
-Wyniki testów modelu Nous-Hermes-13b uruchamianego lokalnie (tylko CPU) na tej samej próbce 50 biogramów, na których testowane były modele GPT-3 i GPT-4. Badany model (https://huggingface.co/NousResearch/Nous-Hermes-13b) jest dotrenowaną werjsą Llama-13b. Ze względu na to, że jest mniejszy od modeli GPT, uruchamiany był lokalnie (co jest dosyć czasochłonne na komputerze bez GPU), przetwarzanie biogramów zostało uproszczone do jednego pytania - o ojca bohatera/bohaterki tekstu.
+Wyniki testów modelu Nous-Hermes-13b uruchamianego lokalnie (tylko CPU) na tej samej próbce 50 biogramów, na których testowane były modele GPT-3 i GPT-4 w zakresie ekstrakcji informacji dotyczących relacjach rodzinnych. Badany model (https://huggingface.co/NousResearch/Nous-Hermes-13b) jest dotrenowaną wersją Llama-13b. Ze względu na to, że jest mniejszy od modeli GPT i uruchamiany był lokalnie (co jest dosyć czasochłonne na komputerze bez GPU), przetwarzanie biogramów zostało uproszczone do jednego pytania - o ojca bohatera/bohaterki tekstu.
 
 Użyty prompt:
 
