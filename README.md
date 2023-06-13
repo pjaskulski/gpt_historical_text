@@ -31,6 +31,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Przetwarzanie haseł SHG do formatu XML - GPT4](#przetwarzanie-hasła-shg-do-formatu-xml---gpt4)
   - [Formatowanie wyników - JSON](#formatowanie-wyników---json)
   - [Indeterminizm i halucynacje](#indeterminizm-i-halucynacje)
+  - [Test model Nous-Hermes-13b](#test-model-nous-hermes-13b)
 
 
 ## Notatki
@@ -1245,7 +1246,7 @@ Jak widać w 6 na 10 testów pojawiają się relacje nieprawdziwe, nie da się i
 
 Ponieważ w przypadku ekstrakcji informacji z tekstów zajmujemy się informacjami, których jeszcze nie znamy (nie mamy bazy danych czy grafu wiedzy), trudno byłoby przeprowadzić werfikację faktów inaczej niż manualnie porównując tekst z pozyskanymi przez model danymi. Taki proces jest jednak czasochłonny i zniwelowałby cały zysk z automatyzacji przetwarzania dużej ilości tekstu. Czy rozwiązaniem było by powtarzanie każdego zapytania np. 3 razy i uznawanie powtarzających się odpowiedzi za wiarygodne zaś pozostałych za wymagające weryfikacji - trudno powiedzieć, ale jest przecież możliwe, że konsekwetnie w każdym teście pojawiać będą się informację błędne a więc niewiarygodne. Manualna weryfikacja danych pozyskanych dzięki dużym modelom językowym wydaje się - na dziś - nieunikniona.
 
-### Model Nous-Hermes-13b
+### Test model Nous-Hermes-13b
 
 Wyniki testów modelu Nous-Hermes-13b uruchamianego lokalnie (tylko CPU) na tej samej próbce 50 biogramów, na których testowane były modele GPT-3 i GPT-4. Badany model (https://huggingface.co/NousResearch/Nous-Hermes-13b) jest dotrenowaną werjsą Llama-13b. Ze względu na to, że jest mniejszy od modeli GPT, uruchamiany był lokalnie (co jest dosyć czasochłonne na komputerze bez GPU), przetwarzanie biogramów zostało uproszczone do jednego pytania - o ojca bohatera/bohaterki tekstu.
 
