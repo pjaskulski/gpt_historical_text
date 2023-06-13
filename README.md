@@ -1267,7 +1267,7 @@ Tekst: <data>
 Wynik:
 ```
 
-Gdzie w miejscu `<person>` wstawiany było imię i nazwisko bohatera, zaś w miejsce `<data>`
+Gdzie w miejscu `<person>` wstawiane było imię i nazwisko bohatera, zaś w miejsce `<data>`
 uproszczony tekst biogramu. W porównaniu z GPT-4 model  Nous-Hermes-13b może przetworzyć dużo mniejszy rozmiar kontekstu (2048 tokenów), dlatego zarówno treść pytania, przykłady, jak i sam biogram musiały zostać ograniczone. Biogramy w przypadku gdy przekraczały 1700 tokenów były ograniczane do 3 początkowych i 2 końcowych zdań, oraz tych zdań gdzie występowały słowa kluczowe związane z pokrewieństwem, co mogło niestey wpłynąć na efekty działania modelu.
 
 Wyniki:
@@ -1380,5 +1380,5 @@ W 2 wątpliwych przypadkach do wyniku True/False dodano znak zapytania (raz mode
 Inne uwagi:
 
 - model ma niekiedy problem ze zwracaniem wyniku w oczekiwanym formacie,
-- czas oczekiwania na wynik, mimo skrócenia biogramów do 2-7 minut na biogram,
+- czas oczekiwania na wynik, mimo skrócenia biogramów to 2-7 minut na biogram,
 - jest bardzo wrażliwy na kształt i treść promptu, niewielka zmiana potrafiła znacznie pogorszyć wynik
