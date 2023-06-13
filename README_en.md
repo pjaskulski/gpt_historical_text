@@ -29,6 +29,7 @@ Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerp
   - [Processing of the Historical and Geographical Dictionary entry into XML format - GPT4](#processing-of-the-historical-and-geographical-dictionary-entry-into-xml-format---gpt4)
   - [Formatting results - JSON](#formatting-results---json)
   - [Indeterminism and hallucinations](#indeterminism-and-hallucinations)
+  - [Nous-Hermes-13b Model Test](#nous-hermes-13b-model-test)
 
 ## Notes
 
@@ -1205,3 +1206,138 @@ test 10:
 As you can see, in 6 out of 10 tests there are accounts that are untrue, they cannot be justified in any way by the content of the biographical text, less damaging seems to be the complete failure to find existing accounts which happened in 2 tests.
 
 Since in the case of extracting information from texts, we are dealing with information we do not yet know (we do not have a database or knowledge graph), it would be difficult to perform factual verification other than manually comparing the text with the model's extracted data. However, such a process is time-consuming and would negate any benefit of automating the processing of large amounts of text. Whether the solution would be to repeat each query e.g. 3 times and consider the repeated answers as reliable and the others as requiring verification - it is hard to say, but it is after all possible that consistently in each test there would be incorrect and therefore unreliable information. Manual verification of data obtained through large language models seems - for today - inevitable.
+
+### Nous-Hermes-13b Model Test
+
+Test results of the Nous-Hermes-13b model run locally (CPU only) on the same sample of 50 biographies on which the GPT-3 and GPT-4 models were tested for extracting family relationship information. The model tested (https://huggingface.co/NousResearch/Nous-Hermes-13b) is a version of Llama-13b. Since it is smaller than the GPT models and was run locally (which is quite time-consuming on a non-GPU computer), the processing of the biographies was simplified to a single question - about the father of the main character of the text.
+
+Used prompt (in Polish):
+
+```TXT
+Based only on the information from the given text, write who was the father of <person>.
+Save the result in JSON format.
+For example:
+Text: "Łukasz Kowalski (1901-1987) ur. w Bogatce z ojca Hieronima i matki Heleny z Kruszyńskich."
+Result: {"ojciec": "Hieronim Kowalski"}
+Text: "Marcin Wielopolski (1700-1776), szlachcic pomorski, ur. w Ustce. Ojcem W. był Antoni, herbu Trójnóg."
+Result: {"ojciec": "Antoni Wielopolski"}
+Text: "Eustachy Wikozy (zm. 1233), pochodzenie nienane, klucznik gnieźnieński."
+Result: {"ojciec":"brak danych"}
+
+Text: <data>
+Result:
+```
+
+Where in place of `<person>` was inserted the name of the main character, while in place of `<date>`.
+the simplified text of the biography. Compared to GPT-4, the Nous-Hermes-13b model can process a much smaller context size (2048 tokens), so both the question content, examples and the biography itself had to be limited. Biographies where they exceeded 1,700 tokens were limited to 3 initial and 2 final sentences, and those sentences where affinity keywords occurred. Shortening the text could unfortunately affect the model's performance.
+
+| Person / Result | Correct? |
+| ------------------------------------------------------------ | :---------: |
+| **Aloe Franciszek Eljasz** | |
+| {"ojciec": "Jan Baptysta d’Aloy i Henryka Rakocy"} | True? |
+| **Bartoszewski Jan** | |
+| "The father of Jan Bartoszewski is not mentioned in the given text." | True |
+| **Bezprym** | |
+| {"ojciec": "Bolesław Chrobry"} | True |
+| **Dąbrowska_Pelagia** | |
+| {"ojciec": "Michał Zgliczyński"} | True |
+| **Daszyński Ignacy** | |
+| ...Ignacy Daszyński miał ojca Ferdynanda. | True |
+| **Dzierżek_Natalia** | |
+| {"ojciec": "Henryk Dzierżek"} | True |
+| **Eufrozyna** | |
+| {"ojciec": "Kazimierz, ks. opolski"} | True |
+| **Ewild al. Eywild** | |
+| {"ojciec": "Eywild al. Eywild Jan"} | **False** |
+| **Ezra ben Nisan** | |
+| {"ojciec": "Ezra ben Nisan z Trok, inaczej Ezra Nisanowicz (ok. 1596–1666)"} | **False** |
+| **Falęta** | |
+| {"ojciec": "brak danych"} | True |
+| **Fiorentini Władysław** | |
+| {"ojciec": "Antoni Fiorentini"} | True |
+| **Fuzorius Bartłomiej** | |
+| {"ojciec": "Stanisław Lwowczyk"} | True |
+| **Gliński Iwan** | |
+| {"ojciec": "Lew Borysowicz"} | True |
+| **Gołaski Jan** | |
+| {"ojciec": "Jan Gołaski"} | **False** |
+| **Grzegorzewski Jan** | |
+| {"ojciec": "Jakub"} | True |
+| **Guicciardini Galeazzo** | |
+| {"ojciec": "Guicciardini Galeazzo"} | **False** |
+| **Hincza z Rogowa** | |
+| {"ojciec": "Hinczka z Rogowa (zm. przed 1415)"} | True |
+| **Hirschenfeld-Mielecki Józef** | |
+| {"ojciec": "brak danych"} | True |
+| **Jadwiga Jagiellonka** | |
+| {"ojciec": "Kazimierz Jagiellończyk"} | True |
+| **Kakowski Aleksander** | |
+| {"ojciec": "Franciszek Kakowski"} | True |
+| **Krumhausen Gabriel** | |
+| {"ojciec": "Joachim Krumhausen"} | True |
+| **Łańcucki Wojciech** | |
+| {"ojciec": "Stanisław Łańcucki"} | True |
+| **Langfort Teodor Henryk** | |
+| {"ojciec": "brak danych"} | True |
+| **Leymiter Stanisław** | |
+| {"ojciec": "Mikołaj Leymiter"} | True |
+| **Mierzeński Aleksander** | |
+| {"ojciec": "Abraham Mierzeński"} | True |
+| **Mostowska z Bujwidów** | |
+| {"ojciec": "Odo Bujwid, prof. bakteriologii UJ"} | True |
+| **Patruus** | |
+| {"ojciec": "Jan Patruus"} | **False** |
+| **Pichgiel** | |
+| {"ojciec": "Christian Pichgiel młodszy"} | **False** |
+| **Pion Maurice** | |
+| {"ojciec": "Antoine Claude Pion"} | True |
+| **Piotrowiczowa z Rogolińskich** | |
+| {"ojciec": "Zygmunt Rogoliński"} | True |
+| **Popiel** | |
+| {"ojciec": "Popiel"} | **False** |
+| **Renard Benedykt** | |
+| {"ojciec": ""} | True |
+| **Rossi Piotr** | |
+| {"ojciec": "Andrzej Rossi"} | True |
+| **Sapieha_Jan_Fryderyk** | |
+|  ...ojcem Jan Fryderyk Sapieha był Fryderyk | True |
+| **Siemowit** | |
+| The prompt asks to determine who was the father of Siemowit.. | **False** |
+| **Śląska Aleksandra** | |
+| {"ojciec": "Edmund Wąsik"} | True |
+| **Słowicki Józef** | |
+| {"ojciec": "Józef Słowicki"} | True |
+| **Śniadecka Kornelia Ludwika**
+| {"ojciec": "Jędrzej Śniadecki"} | True |
+| **Spektor Mordechaj** | |
+| {"ojciec": "Mordechaj Spektor"} | **False** |
+| **Spycigniew_z_Dąbrowy** | |
+| {"ojciec": "brak danych"} | True |
+| **Stańczakowa ze Strancmanów** | |
+| {"ojciec": "Adolf Strancman"} | True |
+| **Stanisław_Cielątko** | |
+| {"ojciec": "Jan Cielątko"} | True |
+| **Strzelecki Wiesław Marian** | |
+| {"ojciec": "Felicjan Strzelecki"} | True |
+| **Swach Jerzy** | |
+| {"ojciec": "Udalryk (Oldrzycha) Swach"} | True |
+| **Świrski Jerzy Włodzimierz** | |
+| {"ojciec": "Włodzimierz Świrski"} | True |
+| **Szapira Majer** | |
+| {"ojciec": "Jakub Szamszon (1861–1948)"} | True |
+| **Szapocznikow_Alina** | |
+| The father of Alina Szapocznikow is Jakub Szapocznik (1896-1938) | True |
+| **Szczubioł_Andrzej** | |
+| {"ojciec": "Stefan Szczubioł z Jasieńca i Ciechomic"} | True |
+| **Sztaffel Izrael** | |
+| {"ojciec": "Izrael Abraham Sztaffel"} | True |
+| **Szumski Boksa** | |
+| {"ojciec": "brak danych"} | **False?** |
+
+In 2 doubtful cases a question mark was added to the True/False result (once the model returned both father and mother, the second time no data, meanwhile the biography mentions a probable father). **The result of the model's work is 40/50 correct answers which means 80% accuracy**, which seems a very good result. However, comparing it with the achievements of GPT-4, if you look only at the results for the 'father' category, the current best language model made only 1 error (98% accuracy) and the 'main character->father' relationship itself seems to be one of the easiest to obtain. Despite all this, however, Nous-Hermes-13b is many times a smaller and simpler model, is available for free for non-commercial use, can be run on a regular laptop without a GPU (but with 16GB RAM and it will run very slowly), but most importantly **processes texts in Polish**!
+
+Other comments:
+
+- the model sometimes has a problem with returning the result in the expected format,
+- waiting time for the result, despite the shortening of the biographies is 2-7 minutes per biography,
+- the model is very sensitive to the shape and content of the prompt, a small change was able to significantly degrade the result
