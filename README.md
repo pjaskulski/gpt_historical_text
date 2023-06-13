@@ -1244,3 +1244,140 @@ test 10:
 Jak widać w 6 na 10 testów pojawiają się relacje nieprawdziwe, nie da się ich w żaden sposób uzasadnić zawartością tekstu biogramu, mniej szkodliwy wydaje się kompletny brak odnalezienia istniejących relacji co zdarzyło się w 2 testach.
 
 Ponieważ w przypadku ekstrakcji informacji z tekstów zajmujemy się informacjami, których jeszcze nie znamy (nie mamy bazy danych czy grafu wiedzy), trudno byłoby przeprowadzić werfikację faktów inaczej niż manualnie porównując tekst z pozyskanymi przez model danymi. Taki proces jest jednak czasochłonny i zniwelowałby cały zysk z automatyzacji przetwarzania dużej ilości tekstu. Czy rozwiązaniem było by powtarzanie każdego zapytania np. 3 razy i uznawanie powtarzających się odpowiedzi za wiarygodne zaś pozostałych za wymagające weryfikacji - trudno powiedzieć, ale jest przecież możliwe, że konsekwetnie w każdym teście pojawiać będą się informację błędne a więc niewiarygodne. Manualna weryfikacja danych pozyskanych dzięki dużym modelom językowym wydaje się - na dziś - nieunikniona.
+
+### Model Nous-Hermes-13b
+
+Wyniki testów modelu Nous-Hermes-13b uruchamianego lokalnie (tylko CPU) na tej samej próbce 50 biogramów, na których testowane były modele GPT-3 i GPT-4. Badany model (https://huggingface.co/NousResearch/Nous-Hermes-13b) jest dotrenowaną werjsą Llama-13b. Ze względu na to, że jest mniejszy od modeli GPT, uruchamiany był lokalnie (co jest dosyć czasochłonne na komputerze bez GPU), przetwarzanie biogramów zostało uproszczone do jednego pytania - o ojca bohatera/bohaterki tekstu.
+
+Użyty prompt:
+
+```TXT
+Na podstawie wyłącznie informacji z podanego tekstu napisz kto był ojcem <person>.
+Wynik zapisz w formacie JSON.
+Na przykład:
+Tekst: "Łukasz Kowalski (1901-1987) ur. w Bogatce z ojca Hieronima i matki Heleny z Kruszyńskich."
+Wynik: {"ojciec": "Hieronim Kowalski"}
+Tekst: "Marcin Wielopolski (1700-1776), szlachcic pomorski, ur. w Ustce. Ojcem W. był Antoni, herbu Trójnóg."
+Wynik: {"ojciec": "Antoni Wielopolski"}
+Tekst: "Eustachy Wikozy (zm. 1233), pochodzenie nienane, klucznik gnieźnieński."
+Wynik: {"ojciec":"brak danych"}
+
+Tekst: <data>
+Wynik:
+```
+
+Gdzie w miejscu `<person>` wstawiany było imię i nazwisko bohatera, zaś w miejsce `<data>`
+uproszczony tekst biogramu. W porównaniu z GPT-4 model  Nous-Hermes-13b może przetworzyć dużo mniejszy rozmiar kontekstu (2048 tokenów), dlatego zarówno treść pytania, przykłady, jak i sam biogram musiały zostać ograniczone. Biogramy w przypadku gdy przekraczały 1700 tokenów były ograniczane do 3 początkowych i 2 końcowych zdań, oraz tych zdań gdzie występowały słowa kluczowe związane z pokrewieństwem, co mogło niestey wpłynąć na efekty działania modelu.
+
+Wyniki:
+
+| Postać / Rezultat | Prawidłowo? |
+| ------------------------------------------------------------ | :---------: |
+| **Aloe Franciszek Eljasz** | |
+| {"ojciec": "Jan Baptysta d’Aloy i Henryka Rakocy"} | True? |
+| **Bartoszewski Jan** | |
+| "The father of Jan Bartoszewski is not mentioned in the given text." | True |
+| **Bezprym** | |
+| {"ojciec": "Bolesław Chrobry"} | True |
+| **Dąbrowska_Pelagia** | |
+| {"ojciec": "Michał Zgliczyński"} | True |
+| **Daszyński Ignacy** | |
+| ...Ignacy Daszyński miał ojca Ferdynanda. | True |
+| **Dzierżek_Natalia** | |
+| {"ojciec": "Henryk Dzierżek"} | True |
+| **Eufrozyna** | |
+| {"ojciec": "Kazimierz, ks. opolski"} | True |
+| **Ewild al. Eywild** | |
+| {"ojciec": "Eywild al. Eywild Jan"} | **False** |
+| **Ezra ben Nisan** | |
+| {"ojciec": "Ezra ben Nisan z Trok, inaczej Ezra Nisanowicz (ok. 1596–1666)"} | **False** |
+| **Falęta** | |
+| {"ojciec": "brak danych"} | True |
+| **Fiorentini Władysław** | |
+| {"ojciec": "Antoni Fiorentini"} | True |
+| **Fuzorius Bartłomiej** | |
+| {"ojciec": "Stanisław Lwowczyk"} | True |
+| **Gliński Iwan** | |
+| {"ojciec": "Lew Borysowicz"} | True |
+| **Gołaski Jan** | |
+| {"ojciec": "Jan Gołaski"} | **False** |
+| **Grzegorzewski Jan** | |
+| {"ojciec": "Jakub"} | True |
+| **Guicciardini Galeazzo** | |
+| {"ojciec": "Guicciardini Galeazzo"} | **False** |
+| **Hincza z Rogowa** | |
+| {"ojciec": "Hinczka z Rogowa (zm. przed 1415)"} | True |
+| **Hirschenfeld-Mielecki Józef** | |
+| {"ojciec": "brak danych"} | True |
+| **Jadwiga Jagiellonka** | |
+| {"ojciec": "Kazimierz Jagiellończyk"} | True |
+| **Kakowski Aleksander** | |
+| {"ojciec": "Franciszek Kakowski"} | True |
+| **Krumhausen Gabriel** | |
+| {"ojciec": "Joachim Krumhausen"} | True |
+| **Łańcucki Wojciech** | |
+| {"ojciec": "Stanisław Łańcucki"} | True |
+| **Langfort Teodor Henryk** | |
+| {"ojciec": "brak danych"} | True |
+| **Leymiter Stanisław** | |
+| {"ojciec": "Mikołaj Leymiter"} | True |
+| **Mierzeński Aleksander** | |
+| {"ojciec": "Abraham Mierzeński"} | True |
+| **Mostowska z Bujwidów** | |
+| {"ojciec": "Odo Bujwid, prof. bakteriologii UJ"} | True |
+| **Patruus** | |
+| {"ojciec": "Jan Patruus"} | **False** |
+| **Pichgiel** | |
+| {"ojciec": "Christian Pichgiel młodszy"} | **False** |
+| **Pion Maurice** | |
+| {"ojciec": "Antoine Claude Pion"} | True |
+| **Piotrowiczowa z Rogolińskich** | |
+| {"ojciec": "Zygmunt Rogoliński"} | True |
+| **Popiel** | |
+| {"ojciec": "Popiel"} | **False** |
+| **Renard Benedykt** | |
+| {"ojciec": ""} | True |
+| **Rossi Piotr** | |
+| {"ojciec": "Andrzej Rossi"} | True |
+| **Sapieha_Jan_Fryderyk** | |
+|  ...ojcem Jan Fryderyk Sapieha był Fryderyk | True |
+| **Siemowit** | |
+| The prompt asks to determine who was the father of Siemowit.. | **False** |
+| **Śląska Aleksandra** | |
+| {"ojciec": "Edmund Wąsik"} | True |
+| **Słowicki Józef** | |
+| {"ojciec": "Józef Słowicki"} | True |
+| **Śniadecka Kornelia Ludwika**
+| {"ojciec": "Jędrzej Śniadecki"} | True |
+| **Spektor Mordechaj** | |
+| {"ojciec": "Mordechaj Spektor"} | **False** |
+| **Spycigniew_z_Dąbrowy** | |
+| {"ojciec": "brak danych"} | True |
+| **Stańczakowa ze Strancmanów** | |
+| {"ojciec": "Adolf Strancman"} | True |
+| **Stanisław_Cielątko** | |
+| {"ojciec": "Jan Cielątko"} | True |
+| **Strzelecki Wiesław Marian** | |
+| {"ojciec": "Felicjan Strzelecki"} | True |
+| **Swach Jerzy** | |
+| {"ojciec": "Udalryk (Oldrzycha) Swach"} | True |
+| **Świrski Jerzy Włodzimierz** | |
+| {"ojciec": "Włodzimierz Świrski"} | True |
+| **Szapira Majer** | |
+| {"ojciec": "Jakub Szamszon (1861–1948)"} | True |
+| **Szapocznikow_Alina** | |
+| The father of Alina Szapocznikow is Jakub Szapocznik (1896-1938) | True |
+| **Szczubioł_Andrzej** | |
+| {"ojciec": "Stefan Szczubioł z Jasieńca i Ciechomic"} | True |
+| **Sztaffel Izrael** | |
+| {"ojciec": "Izrael Abraham Sztaffel"} | True |
+| **Szumski Boksa** | |
+| {"ojciec": "brak danych"} | **False?** |
+
+W 2 wątpliwych przypadkach do wyniku True/False dodano znak zapytania (raz model zwrócił i ojca i matkę, za drugim razem brak danych, tymczasem biogram wspomina o prawdopodobnym ojcu). **Efekt pracy modelu to 40/50 poprawnych odpowiedzi czyli 80% dokładności**, co wydaje się bardzo dobrym wynikiem. Porównując go jednak z osiągnięciami GPT-4, jeżeli spojrzeć tylko na wyniki dotyczące kategorii 'ojciec' to najlepszy obecnie model językowy popełnił tylko 1 błąd (98%) a sama relacja 'bohater->ojciec' wydaje się jedną z najprostszych do uzyskania. Mimo wszystko jednak, Nous-Hermes-13b jest wielokrotnie mniejszym i prostszym modelem, jest dostępny za darmo do użytku niekomercyjnego, można go uruchomić na zwykłym laptopie bez GPU (ale z 16GB RAM i będzie to działać bardzo powoli), lecz co najważniejsze **przetwarzane są teksty w języku polskim**!
+
+Inne uwagi:
+
+- model ma niekiedy problem ze zwracaniem wyniku w oczekiwanym formacie,
+- czas oczekiwania na wynik, mimo skrócenia biogramów do 2-7 minut na biogram,
+- jest bardzo wrażliwy na kształt i treść promptu, niewielka zmiana potrafiła znacznie pogorszyć wynik
