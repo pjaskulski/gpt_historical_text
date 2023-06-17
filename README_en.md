@@ -1330,9 +1330,9 @@ the simplified text of the biography. Compared to GPT-4, the Nous-Hermes-13b mod
 | **Szczubioł_Andrzej** | |
 | {"ojciec": "Stefan Szczubioł z Jasieńca i Ciechomic"} | True |
 | **Sztaffel Izrael** | |
-| {"ojciec": "Izrael Abraham Sztaffel"} | True |
+| {"ojciec": "Izrael Abraham Sztaffel"} | False |
 | **Szumski Boksa** | |
-| {"ojciec": "brak danych"} | **False?** |
+| {"ojciec": "brak danych"} | **True?** |
 
 In 2 doubtful cases a question mark was added to the True/False result (once the model returned both father and mother, the second time no data, meanwhile the biography mentions a probable father). **The result of the model's work is 40/50 correct answers which means 80% accuracy**, which seems a very good result. However, comparing it with the achievements of GPT-4, if you look only at the results for the 'father' category, the current best language model made only 1 error (98% accuracy) and the 'main character->father' relationship itself seems to be one of the easiest to obtain. Despite all this, however, Nous-Hermes-13b is many times a smaller and simpler model, is available for free for non-commercial use, can be run on a regular laptop without a GPU (but with 16GB RAM and it will run very slowly), but most importantly **processes texts in Polish**!
 

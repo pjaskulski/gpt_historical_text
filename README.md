@@ -1270,7 +1270,7 @@ Wynik:
 Gdzie w miejscu `<person>` wstawiane było imię i nazwisko bohatera, zaś w miejsce `<data>`
 uproszczony tekst biogramu. W porównaniu z GPT-4 model  Nous-Hermes-13b może przetworzyć dużo mniejszy rozmiar kontekstu (2048 tokenów), dlatego zarówno treść pytania, przykłady, jak i sam biogram musiały zostać ograniczone. Biogramy w przypadku gdy przekraczały 1700 tokenów były ograniczane do 3 początkowych i 2 końcowych zdań, oraz tych zdań gdzie występowały słowa kluczowe związane z pokrewieństwem, co mogło niestey wpłynąć na efekty działania modelu.
 
-Wyniki:
+Results:
 
 | Postać / Rezultat | Prawidłowo? |
 | ------------------------------------------------------------ | :---------: |
@@ -1371,9 +1371,9 @@ Wyniki:
 | **Szczubioł_Andrzej** | |
 | {"ojciec": "Stefan Szczubioł z Jasieńca i Ciechomic"} | True |
 | **Sztaffel Izrael** | |
-| {"ojciec": "Izrael Abraham Sztaffel"} | True |
+| {"ojciec": "Izrael Abraham Sztaffel"} | False |
 | **Szumski Boksa** | |
-| {"ojciec": "brak danych"} | **False?** |
+| {"ojciec": "brak danych"} | **True?** |
 
 W 2 wątpliwych przypadkach do wyniku True/False dodano znak zapytania (raz model zwrócił i ojca i matkę, za drugim razem brak danych, tymczasem biogram wspomina o prawdopodobnym ojcu). **Efekt pracy modelu to 40/50 poprawnych odpowiedzi czyli 80% dokładności**, co wydaje się bardzo dobrym wynikiem. Porównując go jednak z osiągnięciami GPT-4, jeżeli spojrzeć tylko na wyniki dotyczące kategorii 'ojciec' to najlepszy obecnie model językowy popełnił tylko 1 błąd (98%) a sama relacja 'bohater->ojciec' wydaje się jedną z najprostszych do uzyskania. Mimo wszystko jednak, Nous-Hermes-13b jest wielokrotnie mniejszym i prostszym modelem, jest dostępny za darmo do użytku niekomercyjnego, można go uruchomić na zwykłym laptopie bez GPU (ale z 16GB RAM i będzie to działać bardzo powoli), lecz co najważniejsze **przetwarzane są teksty w języku polskim**!
 
