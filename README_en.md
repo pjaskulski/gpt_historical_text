@@ -1344,4 +1344,4 @@ Other comments:
 
 ### Verifying the results returned by LLM - Guardrails
 
-The results returned by LLM are variable, not always in the correct expected format, not always true, even when high quality content is passed to the query context. Therefore, they require verification before further use, such as saving to a knowledge base. To facilitate this process, one can use [guardrails] (https://shreyar.github.io/guardrails/), a Python language library that facilitates both the verification of the structure of the response and, to some extent, the verification of the facts.
+The results returned by LLM are variable, not always in the correct expected format, not always true, even when high quality content is passed to the query context. Therefore, they require verification before further use, such as saving to a knowledge base. To facilitate this process, one can use [guardrails](https://shreyar.github.io/guardrails/), a Python language library that facilitates both the verification of the structure of the response and, to some extent, the verification of the facts.
