@@ -32,6 +32,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Formatowanie wyników - JSON](#formatowanie-wyników---json)
   - [Indeterminizm i halucynacje](#indeterminizm-i-halucynacje)
   - [Test modelu Nous-Hermes-13b](#test-modelu-nous-hermes-13b)
+  - [Weryfikacja wyników zwracanych przez LLM - guardrails](#weryfikacja-wyników-zwracanych-przez-llm---guardrails)
 
 
 ## Notatki

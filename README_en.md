@@ -30,6 +30,7 @@ Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerp
   - [Formatting results - JSON](#formatting-results---json)
   - [Indeterminism and hallucinations](#indeterminism-and-hallucinations)
   - [Nous-Hermes-13b Model Test](#nous-hermes-13b-model-test)
+  - [Verifying the results returned by LLM - Guardrails](#verifying-the-results-returned-by-llm---guardrails)
 
 ## Notes
 
