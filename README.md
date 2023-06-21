@@ -1449,6 +1449,9 @@ Wynik:
 ]
 ```
 
+**Uwaga**: w przypadku tego promptu identyczne wyniki zwracał także model `gpt-3.5-turbo`
+(znacznie tańszy niż GPT-4), jednak dla pozostałych zapytań jakość odpowiedzi modelu gpt-4 była wyraźnie lepsza.
+
 **Prompt dla funkcji i urzędów**:
 
 ```TXT
@@ -1715,4 +1718,12 @@ Wynik z parametrem `temperature` = 0.0:
 w Poznańskiem, był wykładowcą historii Kościoła, kaznodzieją, kapelanem
 sióstr franciszkanek i ambasady austro-węgierskiej w Stambule oraz dyrektorem
 domu księży demerytów w Osiecznej."
+```
+
+Wynik przygotowany przez model `gpt-3.5-turbo` (również z parametrem `temperature` = 0.0):
+
+```TXT
+Szpręga Teodor, w zakonie Anastazy (1833—1911), reformat, misjonarz i komisarz
+generalny w Poznańskiem, autor przetłumaczonej na język polski "Reguły Trzeciego
+Zakonu S. O. Franciszka".
 ```
