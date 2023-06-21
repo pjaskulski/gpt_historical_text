@@ -1428,7 +1428,7 @@ Wynik:
 [{"place_of_birth":"Andalewo"},
  {"place_of_death":"Hurczyniany"},
  {"place_of_burial":"cmentarz parafialny w Hurczynianach"},
- {"date_of_birth","1557-06-01"},
+ {"date_of_birth":"1557-06-01"},
  {"date_of_death":"1591"},
  {"date_of_burial":"brak danych"}
 ]
@@ -1442,7 +1442,7 @@ Wynik:
   {"place_of_birth":"Czersk"},
   {"place_of_death":"Osieczna"},
   {"place_of_burial":"plac przed kościołem w Osiecznej"},
-  {"date_of_birth","1833-11-01"},
+  {"date_of_birth":"1833-11-01"},
   {"date_of_death":"1911-07-26"},
   {"date_of_burial":"brak danych"}
 ]
