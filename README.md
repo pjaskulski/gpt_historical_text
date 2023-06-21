@@ -1387,3 +1387,325 @@ Inne uwagi:
 ### Weryfikacja wyników zwracanych przez LLM - guardrails
 
 Wyniki zwracane przez LLM są zmienne, nie zawsze we właściwym oczekiwanym formacie, nie zawsze prawdziwe, nawet w przypadku przekazania wysokiej jakości treści do kontekstu zapytania. Wymagają więc weryfikacji przed dalszym użyciem, na przykład zapisaniem w bazie wiedzy. Aby ułatwić tą procedurę można skorzystać z [guardrails](https://shreyar.github.io/guardrails/) - gotowej bibliotki języka Python, która ułatwia weryfikację zarówno struktury odpowiedzi, jak i w pewnym stopniu weryfikację faktów.
+
+
+### Przykład ekstrakcji informacji z biogramu PSB
+
+Analizowany biogram Teodora Szpręgi pochodzi z 49 tomu PSB wydanego w 2013 roku. Za pomocą modelu GPT-4 spróbowano wydobyć z tekstu biogramu wszystkie informacje niezbędne do przygotowania danych do wprowadzenia do instancji wikibase. W szczególności:
+
+- dane podstawowe: data i miejsce urodzenia, data i miejsce śmierci, data i miejsce pochówku postaci
+- dane o funkcjach, urzędach pełnionych przez postać
+- dane o relacjach rodzinnych
+- dane o instytucjach, z którymi był związany bohater biogramu
+- dane o miejscowiściach, z którymi był związany bohater biogramu
+- dane o ważnych dla bohatera biogramu osobach (poza krewnymi)
+a także jednozdaniowe streszczenie biogramu, które można wykorzystać jako opis elementu w wikibase.
+
+Poniżej lista promptów wraz z wynikami, w przykładach użyto danych fikcyjnej postaci.
+
+**Prompt dla podstawowych danych**:
+
+```TXT
+Na podstawie podanego tekstu biografii wyszukaj miejsce urodzenia, miejsce śmierci i miejsce pochówku głównego bohatera/bohaterki.
+Podaj także datę urodzenia i datę śmierci.
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+place_of_birth: miejsce urodzenia bohatera/bohaterki
+place_of_death: miejsce śmierci bohatera/bohaterki
+place_of_burial: miejsce pochówku bohatera/bohaterki
+date_of_birth: data urodzenia bohatera/bohaterki
+date_of_death: data śmierci bohatera/bohaterki
+date_of_burial: data pochówku bohatera/bohaterki
+Jeżeli jakiejś informacji brak w podanym tekście napisz: 'brak danych'
+
+Przykład 1.
+Tekst: "Soderini Carlos (ok. 1557–1591), kupiec i bankier.
+Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym
+bratem Bernarda (zob.). Ur. się 1 czerwca, we wsi Andalewo koło Wyszeborga. Jego bratanicą była Małgorzata Anna, żona
+Winfrida de Loeve. S. ożenił się z Joanną, córką burgrabiego
+krakowskiego Adama Kurozwęckiego. Zmarł w Hurczynianach, pochowano go na miejscowym cmentarzu parafialnym."
+Wynik:
+[{"place_of_birth":"Andalewo"},
+ {"place_of_death":"Hurczyniany"},
+ {"place_of_burial":"cmentarz parafialny w Hurczynianach"},
+ {"date_of_birth","1557-06-01"},
+ {"date_of_death":"1591"},
+ {"date_of_burial":"brak danych"}
+]
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik:
+```JSON
+[
+  {"place_of_birth":"Czersk"},
+  {"place_of_death":"Osieczna"},
+  {"place_of_burial":"plac przed kościołem w Osiecznej"},
+  {"date_of_birth","1833-11-01"},
+  {"date_of_death":"1911-07-26"},
+  {"date_of_burial":"brak danych"}
+]
+```
+
+**Prompt dla funkcji i urzędów**:
+
+```TXT
+Na podstawie podanego tekstu biografii wyszukaj wszystkie urzędy i funkcje pełnione przez głównego bohatera/bohaterkę.
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+function: funkcja, urząd pełnione przez bohatera/bohaterkę
+
+Przykład 1.
+Tekst: "Soderini Carlos (ok. 1557–1591), kupiec i bankier.
+Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym
+bratem Bernarda (zob.). Jego bratanicą była Małgorzata Anna, żona
+Winfrida de Loeve. S. ożenił się z Joanną, córką burgrabiego
+krakowskiego Adama Kurozwęckiego."
+Wynik:
+[{"function":"kupiec"},
+ {"function":"bankier"}
+]
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik:
+
+```JSON
+[
+  {"role_or_office":"reformat"},
+  {"role_or_office":"misjonarz"},
+  {"role_or_office":"komisarz generalny w Poznańskiem"},
+  {"role_or_office":"uczeń w gimnazjum katolickim w Chojnicach"},
+  {"role_or_office":"zakonnik Zakonu Braci Mniejszych w Prow. Reformatów Niepokalanego Poczęcia NMP"},
+  {"role_or_office":"student filozofii i teologii w klasztorze w Łąkach"},
+  {"role_or_office":"kapłan"},
+  {"role_or_office":"student teologii w Prow. Rekolektów Krzyża Świętego w Westfalii"},
+  {"role_or_office":"wykładowca historii Kościoła w studium seminaryjnym w Miejskiej Górce"},
+  {"role_or_office":"wicemagister nowicjatu w Wejherowie"},
+  {"role_or_office":"kaznodzieja w Wejherowie"},
+  {"role_or_office":"dyrektor Trzeciego Zakonu w Wejherowie"},
+  {"role_or_office":"gwardian w Wejherowie"},
+  {"role_or_office":"gwardian i dyrektor domu księży demerytów w Osiecznej"},
+  {"role_or_office":"kaznodzieja w Zamartem i Miejskiej Górce"},
+  {"role_or_office":"misjonarz apostolski"},
+  {"role_or_office":"kapelan sióstr franciszkanek i ambasady austro-węgierskiej w Stambule"},
+  {"role_or_office":"wikariusz w Kurzętniku"},
+  {"role_or_office":"wikariusz w Zblewie"},
+  {"role_or_office":"wikariusz parafii w Miejskiej Górce"},
+  {"role_or_office":"duszpasterz w kościele zakonnym na Goruszkach"},
+  {"role_or_office":"wikariusz parafii w Dubinie"},
+  {"role_or_office":"zastępca prowincjała"},
+  {"role_or_office":"komisarz generalny"},
+  {"role_or_office":"dyrektor domu księży demerytów w Osiecznej"},
+  {"role_or_office":"zastępca proboszcza parafii w Drzeczkowie"}
+]
+```
+
+**Prompt dla relacji rodzinnych**:
+
+```TXT
+Na podstawie podanego tekstu wyszukaj wszystkich krewnych lub powinowatych głównego bohatera tekstu: {name}. Możliwe rodzaje pokrewieństwa: ojciec, matka, syn, córka, brat, siostra, żona, mąż, teść, teściowa, dziadek, babcia, wnuk, wnuczka, szwagier, szwagierka, siostrzeniec, siostrzenica, bratanek, bratanica, kuzyn, kuzynka, zięć, synowa.
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+family relation: rodzaj pokrewieństwa (kim osoba była dla bohatera/bohaterki )
+person: nazwa (imię i nazwisko osoby związanej relacją z bohaterem)
+Wypisz tylko rodzaje pokrewieństwa, które występują w tekście.
+Jeżeli w tekście nie ma żadnych informacji o pokrewieństwach głównego bohatera napisz: "brak danych".
+
+Przykład 1
+Tekst: "Soderini Carlo (ok. 1537–1581), kupiec i bankier. Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym bratem Bernarda (zob.).
+Jego bratanicą była Małgorzata Anna, żona Winfrida de Loeve. S. ożenił się z Joanną, córką burgrabiego krakowskiego Adama Kurozwęckiego."
+Wynik:
+[{"family_relation":"ojciec", "person":"Niccola Ricasoli"},
+ {"family_relation":"matka": "person":"Annalena Ricasoli"},
+ {"family_relation":"brat": "person":"Bernard"},
+ {"family_relation":"bratanica": "person":"Małgorzata Anna"},
+ {"family_relation":"żona": "person":"Joanna"},
+ {"family_relation":"teść": "person":"Adam Kurozwęcki"}
+]
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik:
+
+```JSON
+[
+  {"family_relation":"ojciec", "person":"Ignacy"},
+  {"family_relation":"matka", "person":"Katarzyna Sabiniarz"}
+]
+```
+
+**Prompt zwracający instytucje, z którymi był związany bohater biogramu**:
+
+```TXT
+Na podstawie podanego tekstu biografii wyszukaj instytucje związane z głównym bohaterem/bohaterką.
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+institution: nazwa instytucji związanej z bohaterem/bohaterką
+place_of_institution: miejscowość w której położona jest instytucja związana z bohaterem/bohaterką
+Miejscowość podaj w mianowniku.
+Jeżeli jakiejś informacji brak w podanym tekście napisz: 'brak danych'
+
+Przykład 1.
+Tekst: "Soderini Carlos (ok. 1557–1591), kupiec i bankier.
+Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym
+bratem Bernarda (zob.). Ur. się 1 czerwca, we wsi Andalewo koło Wyszeborga.
+Pracował w Banku Czeskim we Wrocławiu, później zaś praktykował w Izbie Celnej miasta Gdańska.
+Zmarł w Hurczynianach, pochowano go na miejscowym cmentarzu parafialnym."
+Wynik:
+[{"institution":"Bank Czeski", "place_of_institution":"Wrocław"},
+ {"institution":"Izba Celna", "place_of_institution":"Gdańsk"}
+]
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik:
+
+```JSON
+[
+  {"institution":"Gimnazjum katolickie", "place_of_institution":"Chojnice"},
+  {"institution":"Zakon Braci Mniejszych", "place_of_institution":"Wejherowo"},
+  {"institution":"Klasztor w Łąkach", "place_of_institution":"Łąki"},
+  {"institution":"Prowincja Rekolektów Krzyża Świętego", "place_of_institution":"Westfalia"},
+  {"institution":"Studium seminaryjne", "place_of_institution":"Miejska Górka"},
+  {"institution":"Dom księży demerytów", "place_of_institution":"Osieczna"},
+  {"institution":"Klasztor przy kościele NMP (zwanej Draperis)", "place_of_institution":"Stambuł"},
+  {"institution":"Kaplica ambasady austro-węgierskiej", "place_of_institution":"Stambuł"},
+  {"institution":"Parafia w Kurzętniku", "place_of_institution":"Kurzętnik"},
+  {"institution":"Parafia w Zblewie", "place_of_institution":"Zblewo"},
+  {"institution":"Parafia w Miejskiej Górce", "place_of_institution":"Miejska Górka"},
+  {"institution":"Kościół zakonny na Goruszkach", "place_of_institution":"Miejska Górka"},
+  {"institution":"Parafia w Dubinie", "place_of_institution":"Dubin"},
+  {"institution":"Parafia w Drzeczkowie", "place_of_institution":"Drzeczkowo"}
+]
+```
+
+**Prompt dla miejscowości, związanych z bohaterem/bohaterką biogramu**:
+
+```TXT
+Na podstawie podanego tekstu biografii wyszukaj miejscowości związane z głównym bohaterem/bohaterką.
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+place: nazwa miejscowości związanej z bohaterem/bohaterką
+date: data, kiedy bohater/bohaterka przebywał w danej miejscowości
+Miejscowość podaj w mianowniku.
+Jeżeli jakiejś informacji brak w podanym tekście napisz: 'brak danych'
+
+Przykład 1.
+Tekst: "Soderini Carlos (ok. 1557–1591), kupiec i bankier.
+Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym
+bratem Bernarda (zob.). Ur. się 1 czerwca, we wsi Andalewo koło Wyszeborga.
+Pracował w Banku Czeskim we Wrocławiu w latach 1577-78, później zaś, od 1579 roku praktykował w Izbie Celnej miasta Gdańska.
+Pod koniec życia zamieszkał w Elblągu w pobliżu portu.
+Zmarł w Hurczynianach, pochowano go na miejscowym cmentarzu parafialnym."
+Wynik:
+[{"place":"Andalewo", "date":"1557-06-01"},
+ {"place":"Wrocław", "date":"1577-1578"},
+ {"place":"Gdańsk", "date":"1579"},
+ {"place":"Elbląg", "date":"brak danych"},
+ {"place":"Hurczyniany", "date":"1591"}
+]
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik:
+
+```JSON
+[
+  {"place":"Czersk", "date":"1833-11-01"},
+  {"place":"Chojnice", "date":"brak danych"},
+  {"place":"Wejherowo", "date":"1856-05-05"},
+  {"place":"Łąki", "date":"1857-05-06"},
+  {"place":"Westfalia", "date":"brak danych"},
+  {"place":"Miejska Górka", "date":"1861-09-02"},
+  {"place":"Osieczna", "date":"1865-07"},
+  {"place":"Zamarte", "date":"1870"},
+  {"place":"Stambuł", "date":"1872-05"},
+  {"place":"Adampol", "date":"brak danych"},
+  {"place":"Rzym", "date":"1881-07-05"},
+  {"place":"Kurzętnik", "date":"1884"},
+  {"place":"Zblewo", "date":"1885-01"},
+  {"place":"Goruszki", "date":"1887-07"},
+  {"place":"Dubinie", "date":"1887-09-05"},
+  {"place":"Poznań", "date":"brak danych"},
+  {"place":"Asyż", "date":"1895-05-16"},
+  {"place":"Drzeczkowo", "date":"1900-10-09"}
+]
+```
+
+**Prompt zwracający listę ważnych osób dla głównej postaci biogramu**:
+
+```TXT
+Na podstawie podanego tekstu biografii wyszukaj osoby związane z głównym bohaterem/bohaterką, lecz pomiń krewnych i powinowatych.
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+name: imię i nazwisko osoby związanej z bohaterem/bohaterką
+date: data, kiedy bohater/bohaterka spotkał/zetknał się z daną osobą
+info: dodatkowe informacje o osobie np. funkcja, zawód
+Jeżeli jakiejś informacji brak w podanym tekście napisz: 'brak danych'
+
+Przykład 1.
+Tekst: "Soderini Carlos (ok. 1557–1591), kupiec i bankier.
+Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym
+bratem Bernarda (zob.). Ur. się 1 czerwca, we wsi Andalewo koło Wyszeborga. Od 1567 roku uczył się w szkole wiejskiej
+prowadzonej przez księdza Jana Tokalskiego z Krakowa. Następnie wstąpił na uniwersystet w Królewcu, gdzie zaprzyjaźnił się
+ze Zdenkiem Kovacem, synem właściciela banku w Pradze, oraz z Czesławem Dąbkiem.
+Pracował w Banku Czeskim we Wrocławiu w latach 1577-78, później zaś, od 1579 roku praktykował w Izbie Celnej miasta Gdańska.
+Pod koniec życia zamieszkał w Elblągu w pobliżu portu, gdzie jeszcze w 1590 r. prowadził interesy handlowe z Morycem Wachowskim,
+kupcem zbożowym.
+Zmarł w Hurczynianach, pochowano go na miejscowym cmentarzu parafialnym."
+Wynik:
+[{"name":"Jan Tokalski", "date":"1567", "info":"ksiądz"},
+ {"name":"Zdenek Kovac", "date":"brak danych","info":"syn właściciela banku"},
+ {"name":"Czesław Dąbek", "date":"brak danych","info":"brak danych"},
+ {"name":"Moryc Wachowski", "date":"1590", "info":"kupiec zbożowy"},
+]
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik:
+
+```JSON
+[
+  {"name":"Jerzy Jeschke", "date":"1858", "info":"chełmiński biskup pomocniczy"},
+  {"name":"Pacyfik Bydłowski", "date":"1881","info":"były prowincjał i definitór generalny zakonu"},
+  {"name":"Bernardyn Dal Vago", "date":"brak danych","info":"generał reformatów"},
+  {"name":"Roger Binkowski", "date":"1889", "info":"prowincjał"},
+  {"name":"Alojzy Canali", "date":"1890", "info":"generał reformatów"},
+  {"name":"Florian Stablewski", "date":"1900", "info":"arcybiskup gnieźnieński i poznański"},
+  {"name":"Euzebiusz Stateczny", "date":"1904", "info":"brak danych"},
+  {"name":"Dionizy Schuler", "date":"1906", "info":"generał zakonu"}
+]
+```
+
+**Prompt tworzący jednozdaniowe streszczenie biogramu**:
+
+```TXT
+Na podstawie podanego tekstu napisz jednozdaniowy opis głównego bohatera/bohaterki, który będzie opisem itemu w bazie wiedzy na temat tej postaci.
+
+Przykład 1
+Tekst: "Soderini Carlos (ok. 1557–1591), kupiec i bankier.
+Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym
+bratem Bernarda (zob.). Ur. się 1 czerwca, we wsi Andalewo koło Wyszeborga. Od 1567 roku uczył się w szkole wiejskiej
+prowadzonej przez księdza Jana Tokalskiego z Krakowa. Następnie wstąpił na uniwersystet w Królewcu, gdzie zaprzyjaźnił się
+ze Zdenkiem Kovacem, synem właściciela banku w Pradze.
+Pracował w Banku Czeskim we Wrocławiu w latach 1577-78, później zaś, od 1579 roku praktykował jako młodszy asystent celny w Izbie Celnej miasta Gdańska.
+Pod koniec życia zamieszkał w Elblągu w pobliżu portu, gdzie prowadził interesy handlowe z Morycem Wachowskim.
+Zmarł w Hurczynianach, pochowano go na miejscowym cmentarzu parafialnym."
+Wynik:
+"Soderini Carlos (ok. 1557–1591), kupiec, bankier i asystent celny, studiował na Uniwersytecie w Królewcu."
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik:
+
+```TXT
+"Szpręga Teodor (1833–1911), reformat, misjonarz i komisarz generalny, prowadził nauczanie w szkole seminaryjnej, służył jako kapelan w Stambule i pracował na odbudowę zakonu w Polsce."
+```
+
+Wynik z parametrem `temperature` = 0.0:
+
+```
+"Teodor Szpręga (1833-1911), reformat, misjonarz i komisarz generalny w Poznańskiem, był wykładowcą historii Kościoła, kaznodzieją, kapelanem sióstr franciszkanek i ambasady austro-węgierskiej w Stambule oraz dyrektorem domu księży demerytów w Osiecznej."
+```
