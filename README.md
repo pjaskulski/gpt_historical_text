@@ -1437,6 +1437,7 @@ Tekst: [TEKST_BIOGRAMU]
 ```
 
 Wynik:
+
 ```JSON
 [
   {"place_of_birth":"Czersk"},
