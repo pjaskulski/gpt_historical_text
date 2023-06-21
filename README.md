@@ -1702,11 +1702,16 @@ Tekst: [TEKST_BIOGRAMU]
 Wynik:
 
 ```TXT
-"Szpręga Teodor (1833–1911), reformat, misjonarz i komisarz generalny, prowadził nauczanie w szkole seminaryjnej, służył jako kapelan w Stambule i pracował na odbudowę zakonu w Polsce."
+"Szpręga Teodor (1833–1911), reformat, misjonarz i komisarz generalny, prowadził
+nauczanie w szkole seminaryjnej, służył jako kapelan w Stambule i pracował na
+odbudowę zakonu w Polsce."
 ```
 
 Wynik z parametrem `temperature` = 0.0:
 
-```
-"Teodor Szpręga (1833-1911), reformat, misjonarz i komisarz generalny w Poznańskiem, był wykładowcą historii Kościoła, kaznodzieją, kapelanem sióstr franciszkanek i ambasady austro-węgierskiej w Stambule oraz dyrektorem domu księży demerytów w Osiecznej."
+```TXT
+"Teodor Szpręga (1833-1911), reformat, misjonarz i komisarz generalny
+w Poznańskiem, był wykładowcą historii Kościoła, kaznodzieją, kapelanem
+sióstr franciszkanek i ambasady austro-węgierskiej w Stambule oraz dyrektorem
+domu księży demerytów w Osiecznej."
 ```
