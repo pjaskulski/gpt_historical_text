@@ -1726,3 +1726,20 @@ Result (for another biography - Wladyslaw Szpilman, as pesudonyms occur in it):
 ```
 
 Another person's nickname also appears in the biography, but is omitted, according to the prompt and example.
+
+The same prompt run by the 'gpt-3.5-turbo' model (`temperature` = 0.0) returns a much worse result:
+
+```JSON
+[
+  {"name_variant":"Spielman"},
+  {"forname_variant":"Władysław"},
+  {"nickname":"Al Legro"},
+  {"nickname":"Wiktor Karwiński"},
+  {"name_variant":"Wolf"},
+  {"name_variant":"Szpilman"},
+  {"name_variant":"Spielman"},
+  {"forname_variant":"Władysław"},
+  {"nickname":"Al Legro"},
+  {"nickname":"Wiktor Karwiński"},
+  {"name_variant":"Wolf"}]
+```

@@ -1756,14 +1756,32 @@ Wynik:
 Tekst: [TEKST_BIOGRAMU]
 ```
 
-Wynik (dla innego biogramu - Władysława Szpilmana, gdyż występują w nim pesudonimy):
+Wynik (dla innego biogramu - Władysława Szpilmana, gdyż w odróżnieniu od biogramu Teodora Szpręgi występują w nim i warianty nazwiska/imienia i pseudonimy):
 
 ```JSON
-[{"name_variant":"Spielman"},
-{"forname_variant":"Wolf"},
-{"nickname":"Al Legro"},
-{"nickname":"Wiktor Karwiński"}
+[
+  {"name_variant":"Spielman"},
+  {"forname_variant":"Wolf"},
+  {"nickname":"Al Legro"},
+  {"nickname":"Wiktor Karwiński"}
 ]
 ```
 
-W biograme występuje też pseudonim innej osoby, jednak zgodnie z promptem i przykładem jst pomijany.
+W biograme występuje też pseudonim innej osoby, jednak zgodnie z promptem i przykładem jest pomijany.
+
+Ten sam prompt uruchomiony przez model 'gpt-3.5-turbo' (`temperature` = 0.0) zwraca znacznie gorszy wynik:
+
+```JSON
+[
+  {"name_variant":"Spielman"},
+  {"forname_variant":"Władysław"},
+  {"nickname":"Al Legro"},
+  {"nickname":"Wiktor Karwiński"},
+  {"name_variant":"Wolf"},
+  {"name_variant":"Szpilman"},
+  {"name_variant":"Spielman"},
+  {"forname_variant":"Władysław"},
+  {"nickname":"Al Legro"},
+  {"nickname":"Wiktor Karwiński"},
+  {"name_variant":"Wolf"}]
+```
