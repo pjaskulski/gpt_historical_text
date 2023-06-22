@@ -1727,3 +1727,43 @@ Szpręga Teodor, w zakonie Anastazy (1833—1911), reformat, misjonarz i komisar
 generalny w Poznańskiem, autor przetłumaczonej na język polski "Reguły Trzeciego
 Zakonu S. O. Franciszka".
 ```
+
+**Prompt wyszukujący warianty imienia i nazwiska postaci, oraz jej pesudonimy/kryptonimy**:
+
+```TXT
+Na podstawie podanego tekstu biografii wyszukaj wszystkie warianty nazwiska (także błędne),
+imienia (także błędne) i pesudonimy lub kryptonimy
+głównego bohatera/bohaterki (pomiń pseudonimy innych osób występujących w tekście).
+Wynik przedstaw w formie listy obiektów JSON zawierających pola:
+name_variant: wariant nazwiska bohatera/bohaterki
+forname_variant: wariant imienia bohatera/bohaterki
+nickname: pseudonim lub kryptonim bohatera/bohaterki
+
+Przykład 1.
+Tekst: "Soderini (Sodderini, Sodero) Carlos, pseud.: Carlito, Jan Będowski (ok. 1557–1591), kupiec i bankier.
+Był jednym z pięciu synów Niccola i Annaleny Ricasoli, młodszym
+bratem Bernarda (zob.). Jego bratanicą była Małgorzata Anna, żona
+Winfrida de Loeve znanego też pod psed. Ikarus. S. ożenił się z Joanną, córką burgrabiego
+krakowskiego Adama Kurozwęckiego."
+Wynik:
+[{"name_variant":"Sodderini"},
+ {"name_variant":"Sodero"},
+ {"forname_variant":"Karl"},
+ {"nickname":"Carlito"},
+ {"nickname":"Jan Będowski"},
+]
+
+Tekst: [TEKST_BIOGRAMU]
+```
+
+Wynik (dla innego biogramu - Władysława Szpilmana, gdyż występują w nim pesudonimy):
+
+```JSON
+[{"name_variant":"Spielman"},
+{"forname_variant":"Wolf"},
+{"nickname":"Al Legro"},
+{"nickname":"Wiktor Karwiński"}
+]
+```
+
+W biograme występuje też pseudonim innej osoby, jednak zgodnie z promptem i przykładem jst pomijany.
