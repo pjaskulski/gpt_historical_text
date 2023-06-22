@@ -1769,7 +1769,7 @@ Wynik (dla innego biogramu - Władysława Szpilmana, gdyż w odróżnieniu od bi
 
 W biograme występuje też pseudonim innej osoby, jednak zgodnie z promptem i przykładem jest pomijany.
 
-Ten sam prompt uruchomiony przez model 'gpt-3.5-turbo' (`temperature` = 0.0) zwraca znacznie gorszy wynik:
+Ten sam prompt uruchomiony przez model 'gpt-3.5-turbo' (`temperature` = 0.0) zwraca gorszy wynik:
 
 ```JSON
 [
@@ -1777,11 +1777,5 @@ Ten sam prompt uruchomiony przez model 'gpt-3.5-turbo' (`temperature` = 0.0) zwr
   {"forname_variant":"Władysław"},
   {"nickname":"Al Legro"},
   {"nickname":"Wiktor Karwiński"},
-  {"name_variant":"Wolf"},
-  {"name_variant":"Szpilman"},
-  {"name_variant":"Spielman"},
-  {"forname_variant":"Władysław"},
-  {"nickname":"Al Legro"},
-  {"nickname":"Wiktor Karwiński"},
-  {"name_variant":"Wolf"}]
+]
 ```
