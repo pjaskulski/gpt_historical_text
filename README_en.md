@@ -1543,6 +1543,7 @@ Result:
   {"institution":"Parafia w Drzeczkowie", "place_of_institution":"Drzeczkowo"}
 ]
 ```
+**Notes**: It is difficult to say where the model got the "embassy chapel" from, it is rather an example of hallucination - the text only mentions that the protagonist of the biography was a chaplain of the Austro-Hungarian embassy.
 
 **Prompt for localities associated with the hero/heroine of the biography**:
 
@@ -1597,7 +1598,7 @@ Result:
 ]
 ```
 
-The locality in which the biography's protagonist died was not included, perhaps because it also occurred earlier, and the query did not make it clear that localities could occur multiple times with different dates.
+**Notes**: The locality in which the biography's protagonist died was not included, perhaps because it also occurred earlier, and the query did not make it clear that localities could occur multiple times with different dates.
 
 **Prompt returning a list of important people for the main character in the biography**:
 
