@@ -1398,7 +1398,7 @@ Analizowany biogram Teodora Szpręgi pochodzi z 49 tomu PSB wydanego w 2013 roku
 - dane o funkcjach, urzędach pełnionych przez postać
 - dane o relacjach rodzinnych
 - dane o instytucjach, z którymi był związany bohater biogramu
-- dane o miejscowiściach, z którymi był związany bohater biogramu
+- dane o miejscowościach, z którymi był związany bohater biogramu
 - dane o ważnych dla bohatera biogramu osobach (poza krewnymi)
 a także jednozdaniowe streszczenie biogramu, które można wykorzystać jako opis elementu w wikibase.
 
