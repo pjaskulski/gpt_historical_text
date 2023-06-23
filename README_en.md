@@ -1597,6 +1597,8 @@ Result:
 ]
 ```
 
+The locality in which the biography's protagonist died was not included, perhaps because it also occurred earlier, and the query did not make it clear that localities could occur multiple times with different dates.
+
 **Prompt returning a list of important people for the main character in the biography**:
 
 ```TXT

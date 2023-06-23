@@ -1585,6 +1585,8 @@ Wynik:
 ]
 ```
 
+**Uwagi**: Trudno powiedzieć skąd model wziął "kaplicę ambasady", to raczej przykład halucynacji - w tekście jest tylko mowa o tym, że bohater biogramu był kapelanem ambasady austro-węgierskiej.
+
 **Prompt dla miejscowości, związanych z bohaterem/bohaterką biogramu**:
 
 ```TXT
@@ -1637,6 +1639,8 @@ Wynik:
   {"place":"Drzeczkowo", "date":"1900-10-09"}
 ]
 ```
+
+**Uwagi**: Nie została uwzględniona miejscowość, w której zmarł bohater biogramu, być może dlatego że wystąpiła też wcześniej, a w zapytaniu nie było jasno określone, że miejscowości mogą wystąpić wielokrotnie z różnymi datami.
 
 **Prompt zwracający listę ważnych osób dla głównej postaci biogramu**:
 
