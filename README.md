@@ -1798,3 +1798,10 @@ Ten sam prompt uruchomiony przez model 'gpt-3.5-turbo' (`temperature` = 0.0) zwr
   {"nickname":"Wiktor Karwiński"},
 ]
 ```
+
+Dane pozyskane automatycznie z biografii wymagają oczywiście dalszej obróbki przed wprowadzeniem ich do bazy danych/bazy wiedzy. Konieczna jest identyfikacja osób, miejsc i instytucji.
+Także uspójnienie wyników - model nie zawsze trzyma się sztywno wytycznych, np. w przypadku braku danych zwykle w wynikach pojawia się odpowiedź 'brak danych', ale czasem 'nieznany', 'nieznana'.
+Weryfikacji wymaga też jakość sformatowania wyników, json zwracany przez model może być niepoprawny.
+
+Osobną kwestią specyficzną dla biogramów jest kwestia uwspółcześnienia pisowni przedwojennej,
+Polski Słownik Biograficzny zaczął być wydawany w 1935 roku, pojawiają się w nim imiona w formie Marjan (współczesna pisownia: Marian), Apolonja (Apolonia).

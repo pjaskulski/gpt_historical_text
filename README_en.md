@@ -1753,3 +1753,11 @@ The same prompt run by the 'gpt-3.5-turbo' model (`temperature` = 0.0) returns a
   {"nickname":"Wiktor Karwiński"},
 ]
 ```
+
+Data automatically extracted from biographies obviously requires further processing before it can be entered into a database/knowledge base. Identification of people, places and institutions is necessary.
+
+Also the consistency of the results - the model does not always strictly follow the guidelines, e.g. if there is no data, the results usually show "no data", but sometimes "unknown".
+The quality of the formatting of the results must also be checked, the json returned by the model may not be correct.
+
+A separate issue specific to biographies is the question of modernizing pre-war spelling,
+The Polish Biographical Dictionary has been published since 1935, and names in the form Marjan (modern: Marian), Apolonja (modern: Apolonia) appear in it.
