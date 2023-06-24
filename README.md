@@ -1506,6 +1506,8 @@ Wynik:
 ]
 ```
 
+**Uwaga**: wszystkie przygotowane przez model informacje są prawdziwe, raczej nie pominięto żadnej funkcji/urzędu, można zauważyć ewentualne drobne niezręczności - jeżeli bohater zastępował proboszcza to (chyba) nie pełnił funkcji `zastępcy proboszcza`, tylko tymczasowo był proboszczem.
+
 **Prompt dla relacji rodzinnych**:
 
 ```TXT
@@ -1539,6 +1541,8 @@ Wynik:
   {"family_relation":"matka", "person":"Katarzyna Sabiniarz"}
 ]
 ```
+
+**Uwaga**: to poprawny wynik, wymienione zostały wszystkie relacje rodzinne głównego bohatera biogramu.
 
 **Prompt zwracający instytucje, z którymi był związany bohater biogramu**:
 
@@ -1642,6 +1646,13 @@ Wynik:
 
 **Uwagi**: Nie została uwzględniona miejscowość, w której zmarł bohater biogramu, być może dlatego że wystąpiła też wcześniej, a w zapytaniu nie było jasno określone, że miejscowości mogą wystąpić wielokrotnie z różnymi datami.
 
+Jedna z miejscowości na liście pojawia się w odmienionej formie (Dubinie) mimo wyraźnej wskazówki
+w prompcie, by nazwy miejscowości wymienione zostały w mianowniku.
+
+Informacja dotycząca Poznania mówi tylko o wydaniu reguł zakonnych przez bohatera, nie musi t oznaczać, że przebywał on w tym mieście, ten wynik można więc uznać za wątpliwy.
+
+Pominięte zostały Wiedeń i Triest przez które bohater podróżował w 1872 roku.
+
 **Prompt zwracający listę ważnych osób dla głównej postaci biogramu**:
 
 ```TXT
@@ -1686,6 +1697,9 @@ Wynik:
   {"name":"Dionizy Schuler", "date":"1906", "info":"generał zakonu"}
 ]
 ```
+
+**Uwagi**: pominięty ks. Michał Ławrynowicz, którego relację bohater spisywał - co chyba oznacza
+że go spotkał (?).
 
 **Prompt tworzący jednozdaniowe streszczenie biogramu**:
 

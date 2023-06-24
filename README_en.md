@@ -1465,6 +1465,8 @@ Result:
 ]
 ```
 
+**Note**: all the information prepared by the model is correct, no function/office is likely to have been omitted, possible minor awkwardness may be noted - if the protagonist was deputising for a parish priest then (I think) he was not acting as `deputy parish priest', he was only temporarily a parish priest.
+
 **Prompt for family relationships**:
 
 ```TXT
@@ -1498,6 +1500,8 @@ Result:
   {"family_relation":"matka", "person":"Katarzyna Sabiniarz"}
 ]
 ```
+
+**Note**: this is the correct result, all family relationships of the main character in the biography are listed.
 
 **Prompt returning the institutions with which the biography's protagonist was associated**:
 
@@ -1600,6 +1604,13 @@ Result:
 
 **Notes**: The locality in which the biography's protagonist died was not included, perhaps because it also occurred earlier, and the query did not make it clear that localities could occur multiple times with different dates.
 
+One of the localities on the list appears in a modified form (Dubina) despite a clear indication
+in the prompt for place names to be listed in the nominative.
+
+The information concerning Poznań only mentions the hero's issuing of monastic rules, it does not necessarily mean that he stayed in this city, this result can therefore be considered questionable.
+
+Vienna and Trieste, through which the hero travelled in 1872, are omitted.
+
 **Prompt returning a list of important people for the main character in the biography**:
 
 ```TXT
@@ -1644,6 +1655,7 @@ Result:
   {"name":"Dionizy Schuler", "date":"1906", "info":"generał zakonu"}
 ]
 ```
+**Notes**: omitted Rev. Michał Ławrynowicz, whose account the protagonist was writing down - which probably means that he met him (?).
 
 **Prompt creating a one-sentence summary of the biography**:
 
