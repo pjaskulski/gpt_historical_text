@@ -990,7 +990,8 @@ What do the results look like for the entire series of 50 biographical entries?
 | brak -> szwgier -> Chociemir Garnek (Garnysz) z Pojałowic i Suchcic | **False** |
 | brak -> szwagierka -> Świątka | **False** |
 
-In the analyzed biographical entries, there are a total of **245** relationships or lack of relationships (when the content of the biographical entry does not contain information about relatives and in-laws; in the previous analysis using GPT-3, I did not notice several relationships), of which the GPT-4 model correctly identified **215** - achieving **88%** accuracy.
+In the analyzed biographical entries, there are a total of **245** relationships or lack of relationships (when the content of the biographical entry does not contain information about relatives and in-laws; in the previous analysis using GPT-3, I did not notice several relationships), of which the GPT-4 model correctly identified **215** - achieving **88%** of correctness.
+Taking more typical measures, the number of correctly found relationships is 208, all found relationships is 229, all actually occurring relationships in biographies is 235, which would give a value of precision = 0.9, recall = 0.88 and f1 = 0.889.
 
 This is clearly a better result than the previous one achieved by GPT3 (model 'davinci-003'), but also in line with expectations, since, according to OpenAI's technical report on GPT4 (https://arxiv.org/abs/2303.08774), the new model is 29% better at avoiding 'closed domain hallucinations', i.e. making up false information, despite instructions that the information is to come only from the given context, e.g. an anlized article.
 
