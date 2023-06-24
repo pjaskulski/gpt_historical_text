@@ -1359,7 +1359,8 @@ The analysed biography of Teodor Szpręga comes from the 49th volume of the PSB 
 - data on institutions with which the biography's protagonist was associated
 - data on the towns to which the biography's protagonist was connected
 - data on persons (other than relatives) important to the biographical hero
-and a one-sentence summary of the biography, which can be used as a description of the item in the wikibase.
+and a one-sentence summary of the biography, which can be used as a description of the item in the wikibase
+- nicknames, variants of names and surnames of the biography's protagonist.
 
 Below is a list of prompts with results, the examples use fictional character data.
 

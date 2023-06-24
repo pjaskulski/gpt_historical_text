@@ -1400,7 +1400,8 @@ Analizowany biogram Teodora Szpręgi pochodzi z 49 tomu PSB wydanego w 2013 roku
 - dane o instytucjach, z którymi był związany bohater biogramu
 - dane o miejscowościach, z którymi był związany bohater biogramu
 - dane o ważnych dla bohatera biogramu osobach (poza krewnymi)
-a także jednozdaniowe streszczenie biogramu, które można wykorzystać jako opis elementu w wikibase.
+a także jednozdaniowe streszczenie biogramu, które można wykorzystać jako opis elementu w wikibase
+- pseudonimy, warianty nazwisk i imion bohatera biogramu.
 
 Poniżej lista promptów wraz z wynikami, w przykładach użyto danych fikcyjnej postaci.
 
@@ -1649,7 +1650,7 @@ Wynik:
 Jedna z miejscowości na liście pojawia się w odmienionej formie (Dubinie) mimo wyraźnej wskazówki
 w prompcie, by nazwy miejscowości wymienione zostały w mianowniku.
 
-Informacja dotycząca Poznania mówi tylko o wydaniu reguł zakonnych przez bohatera, nie musi t oznaczać, że przebywał on w tym mieście, ten wynik można więc uznać za wątpliwy.
+Informacja dotycząca Poznania mówi tylko o wydaniu reguł zakonnych przez bohatera, nie musi to oznaczać, że przebywał on w tym mieście, ten wynik można więc uznać za wątpliwy.
 
 Pominięte zostały Wiedeń i Triest przez które bohater podróżował w 1872 roku.
 
