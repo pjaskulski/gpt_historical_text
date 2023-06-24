@@ -1387,7 +1387,7 @@ Inne uwagi:
 
 ### Weryfikacja wyników zwracanych przez LLM - guardrails
 
-Wyniki zwracane przez LLM są zmienne, nie zawsze we właściwym oczekiwanym formacie, nie zawsze prawdziwe, nawet w przypadku przekazania wysokiej jakości treści do kontekstu zapytania. Wymagają więc weryfikacji przed dalszym użyciem, na przykład zapisaniem w bazie wiedzy. Aby ułatwić tą procedurę można skorzystać z [guardrails](https://shreyar.github.io/guardrails/) - gotowej bibliotki języka Python, która ułatwia weryfikację zarówno struktury odpowiedzi, jak i w pewnym stopniu weryfikację faktów.
+Wyniki zwracane przez LLM są zmienne, nie zawsze we właściwym oczekiwanym formacie, nie zawsze prawdziwe, nawet w przypadku przekazania wysokiej jakości treści do kontekstu zapytania. Wymagają więc weryfikacji przed dalszym użyciem, na przykład zapisaniem w bazie wiedzy. Aby ułatwić tą procedurę można skorzystać z [guardrails](https://shreyar.github.io/guardrails/) - gotowej biblioteki języka Python, która ułatwia weryfikację zarówno struktury odpowiedzi, jak i w pewnym stopniu weryfikację faktów.
 
 
 ### Przykład ekstrakcji informacji z biogramu PSB
