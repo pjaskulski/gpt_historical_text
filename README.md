@@ -1409,7 +1409,7 @@ Przykładowy plik RAIL dla zapytania zwracającego podstawowe dane bohatera/boha
 
 <prompt>
 Na podstawie podanego tekstu biografii wyszukaj miejsce urodzenia, miejsce śmierci i miejsce pochówku głównego bohatera/bohaterki.
-Podaj także datę urodzenia i datę śmierci.
+Podaj także datę urodzenia i datę śmierci oraz datę pochówku.
 
 Tekst: {{document}}
 
