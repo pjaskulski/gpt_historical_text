@@ -1389,6 +1389,94 @@ Inne uwagi:
 
 Wyniki zwracane przez LLM są zmienne, nie zawsze we właściwym oczekiwanym formacie, nie zawsze prawdziwe, nawet w przypadku przekazania wysokiej jakości treści do kontekstu zapytania. Wymagają więc weryfikacji przed dalszym użyciem, na przykład zapisaniem w bazie wiedzy. Aby ułatwić tą procedurę można skorzystać z [guardrails](https://shreyar.github.io/guardrails/) - gotowej biblioteki języka Python, która ułatwia weryfikację zarówno struktury odpowiedzi, jak i w pewnym stopniu weryfikację faktów.
 
+Biblioteka guardrails posługuje się specyfikacjami zapisanymi w formie plików xml w standardzie RAIL (Reliable AI markup Language), w którym opisana jest struktura oczekiwanego wyniku, format pól wyniku, opcjonalne walidacje, prompt.
+
+Przykładowy plik RAIL dla zapytania zwracającego podstawowe dane bohatera/bohaterki biogramu wygląda następująco:
+
+```XML
+<rail version="0.1">
+
+<output>
+    <object name="person_info">
+        <string name="place_of_birth" description="Miejsce urodzenia bohatera/bohaterki biogramu" />
+        <string name="place_of_death" description="Miejsce śmierci bohatera/bohaterki biogramu" />
+        <string name="place_of_burial" description="Miejsce pochówku bohatera/bohaterki biogramu " />
+        <date name="date_of_birth" description="Data urodzenia bohatera/bohaterki biogramu" date_format='%Y-%m-%d'/>
+        <date name="date_of_death" description="Data śmierci bohatera/bohaterki biogramu" date_format='%Y-%m-%d'/>
+        <date name="date_of_burial" description="Data pochówku bohatera/bohaterki biogramu" date_format='%Y-%m-%d'/>
+    </object>
+</output>
+
+<prompt>
+Na podstawie podanego tekstu biografii wyszukaj miejsce urodzenia, miejsce śmierci i miejsce pochówku głównego bohatera/bohaterki.
+Podaj także datę urodzenia i datę śmierci.
+
+Tekst: {{document}}
+
+@xml_prefix_prompt
+
+{output_schema}
+
+@json_suffix_prompt
+</prompt>
+</rail>
+```
+
+Poniżej prosty program korzystający z biblioteki guardrails i specyfikacji RAIL zapisanej w pliku person_basic.xml:
+
+```Python
+""" guardrails - podstawowe informacje o postaci z biogramu  """
+import os
+from pathlib import Path
+import guardrails as gd
+import openai
+from dotenv import load_dotenv
+
+
+# api key
+env_path = Path(".") / ".env"
+load_dotenv(dotenv_path=env_path)
+
+OPENAI_ORG_ID = os.environ.get('OPENAI_ORG_ID')
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
+openai.api_key = OPENAI_API_KEY
+
+# biogram
+file_path = Path(".") / 'Szpręga Teodor.txt'
+with open(file_path, 'r',encoding='utf-8') as f:
+    content = f.read()
+
+# create a Guard object
+rail_spec_path = Path(".") / 'person_basic.xml'
+guard = gd.Guard.from_rail(rail_spec_path)
+
+raw_llm_output, validated_output = guard(
+    openai.ChatCompletion.create,
+    prompt_params={"document": content},
+    max_tokens=800,
+    model="gpt-3.5-turbo-16k",
+    temperature=0
+)
+
+# result
+print(validated_output)
+```
+
+Wynik działania skryptu:
+
+```JSON
+{
+  "person_info": {
+    "place_of_birth": "Czersk",
+    "place_of_death": "Osieczna",
+    "place_of_burial": "Osieczna",
+    "date_of_birth": "1833-11-01",
+    "date_of_death": "1911-07-26",
+    "date_of_burial": null
+  }
+}
+```
 
 ### Przykład ekstrakcji informacji z biogramu PSB
 
