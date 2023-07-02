@@ -34,6 +34,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Test modelu Nous-Hermes-13b](#test-modelu-nous-hermes-13b)
   - [Weryfikacja wyników zwracanych przez LLM - guardrails](#weryfikacja-wyników-zwracanych-przez-llm---guardrails)
   - [Przykład ekstrakcji informacji z biogramu PSB](#przykład-ekstrakcji-informacji-z-biogramu-psb)
+  - [GPT i biogramy PSB - uwagi i wnioski](#gpt-i-biogramy-psb---uwagi-i-wnioski)
 
 
 ## Notatki
@@ -1887,9 +1888,16 @@ Ten sam prompt uruchomiony przez model 'gpt-3.5-turbo' (`temperature` = 0.0) zwr
 ]
 ```
 
-Dane pozyskane automatycznie z biografii wymagają oczywiście dalszej obróbki przed wprowadzeniem ich do bazy danych/bazy wiedzy. Konieczna jest identyfikacja osób, miejsc i instytucji.
-Także uspójnienie wyników - model nie zawsze trzyma się sztywno wytycznych, np. w przypadku braku danych zwykle w wynikach pojawia się odpowiedź 'brak danych', ale czasem 'nieznany', 'nieznana'.
-Weryfikacji wymaga też jakość sformatowania wyników, json zwracany przez model może być niepoprawny.
+### GPT i biogramy PSB - uwagi i wnioski
 
-Osobną kwestią specyficzną dla biogramów jest kwestia uwspółcześnienia pisowni przedwojennej,
-Polski Słownik Biograficzny zaczął być wydawany w 1935 roku, pojawiają się w nim imiona w formie Marjan (współczesna pisownia: Marian), Apolonja (Apolonia).
+- GPT-4 daje dużo lepsze wyniki niż GPT-3 lub GPT-3.5-turbo, dzieje się tak nawet w przypadku najprostszych pytań o podstawowe fakty, jeżeli biogram jest napisany prostym językiem i dane są podane wprost, wynik gpt-3.5 i gpt-4 jest podobny, ale w trudniejszych przypadkach widać przewagę gpt-4.
+- Koszt korzystania z gpt-4 jest 10x większy niż z gpt-3.5, koszt gpt-3 jest niższy niż gpt-4, ale biorąc pod uwagę jakość wyników korzystanie z niego do wyciągana informacji z biogramów ma mniejszy sens.
+- Gpt-4 z odpowiednio skonstruowanym promptem jest w stanie wydobyć z tekstu wszystkie oczekiwane informacje, konstrukcja zapytania, odpowiedni przykład w prompcie ma jednak ogromne znaczenie.
+- Gpt-4 jest w stanie zwrócić informacje od razu w formie ustrukturyzowanej np. w formie obiektu JSON, praktycznie bezbłędnie, można jednak dodatkowo posłużyć się bibliotekami w rodzaju guardrails w celu weryfikacji i walidacji formatu (a nawet wyników).
+- Lepsze wyniki dają zapytania o wybrane konkretne informacje niż o wiele informacji na raz. Pytanie ograniczone do informacji podstawowych, lub tylko do relacji rodzinnych daje bardzo dobre rezultaty, ale stworzenie jednego dużego zapytania próbującego wyciągnąć z tekstu wszystkie te dane jednocześnie może powodować pogorszenie wyników, model np. nie odnajduje miejsca pochówku postaci, co dla konkretnego zapytania robił bezbłędnie. To niestety zwiększa koszt przetwarzania tekstów, ponieważ dla każdego biogramu należy zadać np. 6 pytań za każdym razem przekazując tekst biogramu. Koszt przetworzenia 1 biogramu modelem gpt-4 zbliża się wówczas do kilkudziesięciu centów.
+- Problemem jest długość biogramów, standardowy model gpt-4 ma długość kontekstu równą 8 tys. tokenów (dla języka polskiego to ok. 4 tys wyrazów), model 32k z czterokrotnie większymi możliwościami nie jest jeszcze powszechne dostępny, ale nawet w jego przypadku sporo z biogramów PSB zawiera dłuższy tekst, powstaje więc konieczność skracania tekstu biogramu, lub przetwarzania w częściach. Najdłuższy biogram, Stanisława Augusta Poniatowskiego liczy 78076 tokenów. Zależnie od tematyki pytania znając sposób konstruowania biogramów można stosować różne metody skracania. Dla informacji podstawowych, które są zwykle umieszczone w kilku początkowych i kilku końcowych zdaniach można biogram ograniczyć właśnie w ten sposób. Informacje o relacjach rodzinnych kryją  się w zdaniahc zawierających określone słowa kluczowe, związane z pokrewieństwem i powinowactwem, to również jest prosty sposób na ograniczenie biogramu np. do kilku początkowych zdań oraz zdań zawierających te słowa. W każdym innym przypadku można skorzystać z możliwości przetworzenia tekstu na liczby, poprzez utworenie osadzeń (embeddings) i zapisanie ich w bazach wektorowych, następnie wyszukiwanie najbardziej podobnych zdań do tematyki zapytania.
+- Można testować zapytania korzytając z interfejsu ChatGPT Pro, który pozwala na używanie modelu gpt-4, ale wyniki mogą być inne niż w przypadku bezpośredniego odpytywania modelu przez API, ponieważ korzystając z API mamy wpływ na parametry działania modelu, w ChatGPT nie. W szczególności podczas ekstrakcji informacji z biogramów należy zmniejszyć wartość
+parametru `temperature` do zera.
+- Dane pozyskane automatycznie z biografii wymagają oczywiście dalszej obróbki przed wprowadzeniem ich do bazy danych/bazy wiedzy. Konieczna jest identyfikacja osób, miejsc i instytucji.
+- Ważne jest także uspójnienie wyników - model nie zawsze trzyma się sztywno wytycznych, np. w przypadku braku danych zwykle w wynikach pojawia się odpowiedź 'brak danych', ale czasem 'nieznany', 'nieznana'.
+- Osobną kwestią specyficzną dla biogramów jest kwestia uwspółcześnienia pisowni przedwojennej, Polski Słownik Biograficzny zaczął być wydawany w 1935 roku, pojawiają się w nim imiona w formie Marjan (współczesna pisownia: Marian), Apolonja (Apolonia).

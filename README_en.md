@@ -32,6 +32,7 @@ Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerp
   - [Nous-Hermes-13b Model Test](#nous-hermes-13b-model-test)
   - [Verifying the results returned by LLM - Guardrails](#verifying-the-results-returned-by-llm---guardrails)
   - [Example of information extraction from a PSB biography](#example-of-information-extraction-from-a-psb-biography)
+  - [GPT and PSB Biographies - Remarks and Conclusions](#gpt-and-psb-biographies---remarks-and-conclusions)
 
 ## Notes
 
@@ -1843,10 +1844,15 @@ The same prompt run by the 'gpt-3.5-turbo' model (`temperature` = 0.0) returns a
 ]
 ```
 
-Data automatically extracted from biographies obviously requires further processing before it can be entered into a database/knowledge base. Identification of people, places and institutions is necessary.
+### GPT and PSB Biographies - Remarks and Conclusions
 
-Also the consistency of the results - the model does not always strictly follow the guidelines, e.g. if there is no data, the results usually show "no data", but sometimes "unknown".
-The quality of the formatting of the results must also be checked, the json returned by the model may not be correct.
-
-A separate issue specific to biographies is the question of modernizing pre-war spelling,
-The Polish Biographical Dictionary has been published since 1935, and names in the form Marjan (modern: Marian), Apolonja (modern: Apolonia) appear in it.
+- GPT-4 gives much better results than GPT-3 or GPT-3.5-turbo, even for the simplest questions about basic facts. If the biography is written in simple language and the data are provided directly, the results of gpt-3.5 and gpt-4 are similar, but the superiority of gpt-4 is visible in more difficult cases.
+- The cost of using gpt-4 is 10 times higher than gpt-3.5. The cost of gpt-3 is lower than gpt-4, but considering the quality of the results, it makes less sense to use it for extracting information from biographies.
+- Gpt-4, with a properly constructed prompt, is capable of extracting all the expected information from the text. The construction of the query and a suitable example in the prompt are of immense importance.
+- Gpt-4 is capable of returning information in a structured form, such as a JSON object, with virtually no errors. However, you can additionally use libraries such as guardrails to verify and validate the format (and even the results).
+- You will get better results if you ask for selected, specific information rather than a lot of information at once. A query limited to basic information or just family relationships will give very good results, but creating a large query that tries to extract all that data at once can make the results worse. For example, the model won't find the character's burial place, which it did flawlessly for a specific query. Unfortunately, this increases the cost of text processing, because for each biography, for example, you have to ask 6 questions each time you pass the text of the biography. The cost of processing 1 biography with the gpt-4 model then approaches several tens of cents.
+- The length of the biographies is a problem, the standard gpt-4 model has a context length of 8 thousand tokens (for Polish this is about 4 thousand words), the 32k model with four times greater capabilities is not yet widely available, but even in its case many of the PSB biographies contain longer text, creating the need to shorten the text of the biography or process it in parts. The longest biography, that of Stanislaw August Poniatowski, has 78076 tokens. Depending on the topic of the question, knowing how to construct biographies, you can use different methods of shortening. For basic information, which is usually placed in the first and last sentences, you can limit the biography in this way. Information about family relationships is hidden in sentences that contain certain keywords related to kinship and affinity, this is also an easy way to limit the biography, for example, to the first few sentences and sentences that contain these words. In any case, you can take advantage of the ability to convert text into numbers by creating embeddings and storing them in vector databases, and then searching for the sentences most similar to the subject of the query.
+- You can test queries using the ChatGPT Pro interface, which allows the use of the gpt-4 model, but the results may be different from those obtained when querying the model directly through the API, because by using the API we can influence the parameters of the model's operation, not in ChatGPT. In particular, when extracting information from biographies, you should reduce the value of the temperature parameter to zero.
+- Data automatically extracted from biographies, of course, requires further processing before being entered into a database/knowledge base. Identification of persons, places, and institutions is necessary.
+- Aligning the results is also important - the model does not always strictly follow the guidelines, for example, in the absence of data, the answer "no data" usually appears in the results, but sometimes "unknown".
+- A separate issue specific to biographies is the question of modernizing pre-war spelling. The Polish Biographical Dictionary was published in 1935 and contains names in the form of Marjan (modern spelling: Marian), Apolonja (Apolonia).
