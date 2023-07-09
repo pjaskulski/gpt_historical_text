@@ -1904,3 +1904,12 @@ When you run the script, you get a series of triples (subject, object, predicate
 ('Adam Wacław', '12 December 1574', 'was born on')
 ('Adam Wacław', 'his father died', 'was 5 years old when')
 ```
+
+And this is the result of processing one of the further sentences of the biography
+("_Dla poprawienia swego położenia wstąpił A. W. do służby w wojsku cesarskiem i jako dowódca oddziału, złożonego z jazdy, a więc na stanowisku podrzędnem, walczył z Turkami na Węgrzech..._"):
+
+```TXT
+('Adam Wacław', 'Imperial Army', 'joined the')
+('Adam Wacław', 'a cavalry unit', 'was a commander of')
+('Adam Wacław', 'the Turks', 'fought against')
+```

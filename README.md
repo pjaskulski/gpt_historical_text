@@ -1911,7 +1911,7 @@ rodzajami informacji, które należało pozyskać. Co w przypadku gdy nie wiadom
 zawarte są w przetwarzanym opracowaniu historycznym i chcemy po prostu (!) pobrać wszelkie fakty
 z tekstu? Biblioteka LangChain ma ciekawy komponent nazwany GraphIndexCreator, który służy właśnie do tego celu.
 
-Przykład skryptu, przetwarzającego fragment biogramu Adama Wacława, księcia z dynastii Piastów śląskich. Obecnie GraphIndexCreator sprawdza się lepiej dla krótszych tekstów, wyniki zwraca w języku angielskim, mimo to efekt jest ciekawy.
+Przykład skryptu, przetwarzającego fragment (początek) biogramu Adama Wacława, księcia z dynastii Piastów śląskich. Obecnie GraphIndexCreator sprawdza się lepiej dla krótszych tekstów, wyniki zwraca w języku angielskim, mimo to efekt jest ciekawy.
 
 ```Python
 import os
@@ -1948,4 +1948,12 @@ Po uruchomieniu otrzymujemy serię trójek (subject, object, predicate):
 ('Adam Wacław', 'Katarzyna Sydonji', 'is the son of')
 ('Adam Wacław', '12 December 1574', 'was born on')
 ('Adam Wacław', 'his father died', 'was 5 years old when')
+```
+
+A to efekt przetworzenia jednego z dalszych zdań biogramu ("_Dla poprawienia swego położenia wstąpił A. W. do służby w wojsku cesarskiem i jako dowódca oddziału, złożonego z jazdy, a więc na stanowisku podrzędnem, walczył z Turkami na Węgrzech..._"):
+
+```TXT
+('Adam Wacław', 'Imperial Army', 'joined the')
+('Adam Wacław', 'a cavalry unit', 'was a commander of')
+('Adam Wacław', 'the Turks', 'fought against')
 ```
