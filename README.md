@@ -35,6 +35,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Weryfikacja wyników zwracanych przez LLM - guardrails](#weryfikacja-wyników-zwracanych-przez-llm---guardrails)
   - [Przykład ekstrakcji informacji z biogramu PSB](#przykład-ekstrakcji-informacji-z-biogramu-psb)
   - [GPT i biogramy PSB - uwagi i wnioski](#gpt-i-biogramy-psb---uwagi-i-wnioski)
+  - [Automatyczne tworzenie grafów wiedzy](#automatyczne-tworzenie-grafów-wiedzy)
 
 
 ## Notatki
@@ -1902,3 +1903,49 @@ parametru `temperature` do zera.
 - Dane pozyskane automatycznie z biografii wymagają oczywiście dalszej obróbki przed wprowadzeniem ich do bazy danych/bazy wiedzy. Konieczna jest identyfikacja osób, miejsc i instytucji.
 - Ważne jest także uspójnienie wyników - model nie zawsze trzyma się sztywno wytycznych, np. w przypadku braku danych zwykle w wynikach pojawia się odpowiedź 'brak danych', ale czasem 'nieznany', 'nieznana'.
 - Osobną kwestią specyficzną dla biogramów jest kwestia uwspółcześnienia pisowni przedwojennej, Polski Słownik Biograficzny zaczął być wydawany w 1935 roku, pojawiają się w nim imiona w formie Marjan (współczesna pisownia: Marian), Apolonja (Apolonia).
+
+### Automatyczne tworzenie grafów wiedzy
+
+Wszystkie powyższe przykłady wyciągania wiedzy z tekstów związane były ze z góry określonymi
+rodzajami informacji, które należało pozyskać. Co w przypadku gdy nie wiadomo jakie informacje
+zawarte są w przetwarzanym opracowaniu historycznym i chcemy po prostu (!) pobrać wszelkie fakty
+z tekstu? Biblioteka LangChain ma ciekawy komponent nazwany GraphIndexCreator, który służy właśnie do tego celu.
+
+Przykład skryptu, przetwarzającego fragment biogramu Adama Wacława, księcia z dynastii Piastów śląskich. Obecnie GraphIndexCreator sprawdza się lepiej dla krótszych tekstów, wyniki zwraca w języku angielskim, mimo to efekt jest ciekawy.
+
+```Python
+import os
+from langchain.llms import OpenAI
+from langchain.indexes import GraphIndexCreator
+from pathlib import Path
+from dotenv import load_dotenv
+
+
+# api key
+env_path = Path(".") / ".env"
+load_dotenv(dotenv_path=env_path)
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
+text = """Adam Wacław (1574–1617) z rodu Piastów, książę cieszyński, tytułujący się także
+księciem górnogłogowskim, choć tego księstwa już nie posiadał,
+był synem Wacława Adama i drugiej jego żony, Katarzyny Sydonji, księżniczki saskiej.
+Urodził się 12 XII 1574 r. Miał 5 lat, gdy umarł mu ojciec."""
+
+index_creator = GraphIndexCreator(llm=OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY))
+graph = index_creator.from_text(text)
+result = graph.get_triples()
+
+for item in result:
+    print(item)
+```
+
+Po uruchomieniu otrzymujemy serię trójek (subject, object, predicate):
+```TXT
+('Adam Wacław', 'member of the Piast dynasty', 'is a')
+('Adam Wacław', 'prince of Cieszyn', 'is a')
+('Adam Wacław', 'prince of Górnogłogów', 'is a')
+('Adam Wacław', 'Wacław Adam', 'is the son of')
+('Adam Wacław', 'Katarzyna Sydonji', 'is the son of')
+('Adam Wacław', '12 December 1574', 'was born on')
+('Adam Wacław', 'his father died', 'was 5 years old when')
+```

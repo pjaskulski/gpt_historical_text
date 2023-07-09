@@ -33,6 +33,7 @@ Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerp
   - [Verifying the results returned by LLM - Guardrails](#verifying-the-results-returned-by-llm---guardrails)
   - [Example of information extraction from a PSB biography](#example-of-information-extraction-from-a-psb-biography)
   - [GPT and PSB Biographies - Remarks and Conclusions](#gpt-and-psb-biographies---remarks-and-conclusions)
+  - [Automatic creation of knowledge graphs](#automatic-creation-of-knowledge-graphs)
 
 ## Notes
 
@@ -1857,3 +1858,49 @@ The same prompt run by the 'gpt-3.5-turbo' model (`temperature` = 0.0) returns a
 - Data automatically extracted from biographies, of course, requires further processing before being entered into a database/knowledge base. Identification of persons, places, and institutions is necessary.
 - Aligning the results is also important - the model does not always strictly follow the guidelines, for example, in the absence of data, the answer "no data" usually appears in the results, but sometimes "unknown".
 - A separate issue specific to biographies is the question of modernizing pre-war spelling. The Polish Biographical Dictionary was published in 1935 and contains names in the form of Marjan (modern spelling: Marian), Apolonja (Apolonia).
+
+### Automatic creation of knowledge graphs
+
+All of the above examples of extracting knowledge from text were related to predetermined
+types of information that needed to be extracted. What if it is not known what information is
+contained in the historical study being processed, and we simply (!) want to extract all the facts
+from the text? The LangChain library has an interesting component called [GraphIndexCreator](https://python.langchain.com/docs/modules/chains/additional/graph_qa) that serves exactly this purpose.
+
+An example of a script processing a fragment of the biography of Adam Wacław, a prince of the Silesian Piast dynasty. For now GraphIndexCreator has some limitations, it works better for shorter texts and returns results in English, but the effect is still interesting.
+
+```Python
+import os
+from langchain.llms import OpenAI
+from langchain.indexes import GraphIndexCreator
+from pathlib import Path
+from dotenv import load_dotenv
+
+# api key
+env_path = Path(".") / ".env"
+load_dotenv(dotenv_path=env_path)
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
+text = """Adam Wacław (1574–1617) z rodu Piastów, książę cieszyński, tytułujący się także
+księciem górnogłogowskim, choć tego księstwa już nie posiadał,
+był synem Wacława Adama i drugiej jego żony, Katarzyny Sydonji, księżniczki saskiej.
+Urodził się 12 XII 1574 r. Miał 5 lat, gdy umarł mu ojciec."""
+
+index_creator = GraphIndexCreator(llm=OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY))
+graph = index_creator.from_text(text)
+result = graph.get_triples()
+
+for item in result:
+    print(item)
+```
+
+When you run the script, you get a series of triples (subject, object, predicate):
+
+```TXT
+('Adam Wacław', 'member of the Piast dynasty', 'is a')
+('Adam Wacław', 'prince of Cieszyn', 'is a')
+('Adam Wacław', 'prince of Górnogłogów', 'is a')
+('Adam Wacław', 'Wacław Adam', 'is the son of')
+('Adam Wacław', 'Katarzyna Sydonji', 'is the son of')
+('Adam Wacław', '12 December 1574', 'was born on')
+('Adam Wacław', 'his father died', 'was 5 years old when')
+```
