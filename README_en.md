@@ -1859,6 +1859,9 @@ The same prompt run by the 'gpt-3.5-turbo' model (`temperature` = 0.0) returns a
 - Aligning the results is also important - the model does not always strictly follow the guidelines, for example, in the absence of data, the answer "no data" usually appears in the results, but sometimes "unknown".
 - A separate issue specific to biographies is the question of modernizing pre-war spelling. The Polish Biographical Dictionary was published in 1935 and contains names in the form of Marjan (modern spelling: Marian), Apolonja (Apolonia).
 
+An example of a larger analysis: a sample of 250 biographies from the Polish Biographical Dictionary:
+[GPT_PSB](https://github.com/pjaskulski/gpt_psb)
+
 ### Automatic creation of knowledge graphs
 
 All of the above examples of extracting knowledge from text were related to predetermined

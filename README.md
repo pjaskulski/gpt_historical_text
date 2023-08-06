@@ -1904,6 +1904,9 @@ parametru `temperature` do zera.
 - Ważne jest także uspójnienie wyników - model nie zawsze trzyma się sztywno wytycznych, np. w przypadku braku danych zwykle w wynikach pojawia się odpowiedź 'brak danych', ale czasem 'nieznany', 'nieznana'.
 - Osobną kwestią specyficzną dla biogramów jest kwestia uwspółcześnienia pisowni przedwojennej, Polski Słownik Biograficzny zaczął być wydawany w 1935 roku, pojawiają się w nim imiona w formie Marjan (współczesna pisownia: Marian), Apolonja (Apolonia).
 
+Przykład większej analizy: próbka 250 biogramów z Polskiego Słownika Biograficznego:
+[GPT_PSB](https://github.com/pjaskulski/gpt_psb)
+
 ### Automatyczne tworzenie grafów wiedzy
 
 Wszystkie powyższe przykłady wyciągania wiedzy z tekstów związane były ze z góry określonymi
