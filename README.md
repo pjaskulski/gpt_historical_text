@@ -1968,9 +1968,27 @@ Model douczany był 10 przykładami (plik jsonl w repozytorium: [link](https://g
 
 Przeprowadzono test na modelu standardowym i modelu po fine-tuningu wykorzystując zapytanie:
 ```
-Na podstawie podanego tekstu biografii wyszukaj miejsce urodzenia, miejsce śmierci, miejsce pochówku, datę urodzenia, datę śmierci i datę pochówku głównego bohatera/bohaterki. Jeżeli w tekście brak danych na ten temat, zapisz: brak danych. Wynik przedstaw w formie listy obiektów JSON.
+Na podstawie podanego tekstu biografii wyszukaj miejsce urodzenia,
+miejsce śmierci, miejsce pochówku, datę urodzenia, datę śmierci
+i datę pochówku głównego bohatera/bohaterki. Jeżeli w tekście brak danych
+na ten temat, zapisz: brak danych. Wynik przedstaw w formie listy obiektów
+JSON.
 
-Tekst: Adam Wacław (1574–1617) z rodu Piastów, książę cieszyński, tytułujący się także księciem górnogłogowskim, choć tego księstwa już nie posiadał, był synem Wacława Adama i drugiej jego żony, Katarzyny Sydonji, księżniczki saskiej. Urodził się 12 XII 1574 r. Miał 5 lat, gdy umarł mu ojciec. W czasie jego małoletności rządziła księstwem matka wraz z dodanymi jej przez cesarza opiekunami księcia. Przyjeżdżała ona w tym celu od czasu do czasu do Cieszyna, po powtórnem wyjściu zamąż – z wiedzą króla Stefana Batorego – za Emeryka Forgacha, żupana trenczyńskiego, A.-W. wychowywał się przez 8 lat na dworze elektora saskiego, w r. 1595 objął rządy w księstwie i w tym samym roku ożenił się z Elżbietą, córką ks. kurlandzkiego, Kettlera. A.-W. umarł w Cieszynie na Brandysie 13 VII 1617; ciało jego złożono najpierw na zamku i dopiero 4 IV następnego roku pochowano w kościele dominikanów cieszyńskich, gdzie spoczywały zwłoki wszystkich jego poprzedników. Zostawił 5 dzieci, z których Fryderyk Wilhelm, ostatni cieszyński Piast męski, i Elżbieta Lukrecja, ostatnia Piastówna, rządzili kolejno Księstwem.
+Tekst: Adam Wacław (1574–1617) z rodu Piastów, książę cieszyński,
+tytułujący się także księciem górnogłogowskim, choć tego księstwa
+już nie posiadał, był synem Wacława Adama i drugiej jego żony, Katarzyny
+Sydonji, księżniczki saskiej. Urodził się 12 XII 1574 r. Miał 5 lat,
+gdy umarł mu ojciec. W czasie jego małoletności rządziła księstwem
+matka wraz z dodanymi jej przez cesarza opiekunami księcia. Przyjeżdżała
+ona w tym celu od czasu do czasu do Cieszyna, po powtórnem wyjściu zamąż
+– z wiedzą króla Stefana Batorego – za Emeryka Forgacha, żupana trenczyńskiego,
+A.-W. wychowywał się przez 8 lat na dworze elektora saskiego, w r. 1595 objął
+rządy w księstwie i w tym samym roku ożenił się z Elżbietą, córką ks. kurlandzkiego,
+Kettlera. A.-W. umarł w Cieszynie na Brandysie 13 VII 1617; ciało jego złożono
+najpierw na zamku i dopiero 4 IV następnego roku pochowano w kościele dominikanów
+cieszyńskich, gdzie spoczywały zwłoki wszystkich jego poprzedników. Zostawił
+5 dzieci, z których Fryderyk Wilhelm, ostatni cieszyński Piast męski, i Elżbieta
+Lukrecja, ostatnia Piastówna, rządzili kolejno Księstwem.
 ```
 
 Wynik dla **standardowego** modelu: **gpt-3.5-turbo**
