@@ -36,6 +36,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Przykład ekstrakcji informacji z biogramu PSB](#przykład-ekstrakcji-informacji-z-biogramu-psb)
   - [GPT i biogramy PSB - uwagi i wnioski](#gpt-i-biogramy-psb---uwagi-i-wnioski)
   - [Automatyczne tworzenie grafów wiedzy](#automatyczne-tworzenie-grafów-wiedzy)
+  - [Test fine-tuningu modelu gpt-3.5-turbo](#test-fine-tunigu-modelu-gpt-35-turbo)
 
 
 ## Notatki
@@ -1960,3 +1961,49 @@ A to efekt przetworzenia jednego z dalszych zdań biogramu ("_Dla poprawienia sw
 ('Adam Wacław', 'a cavalry unit', 'was a commander of')
 ('Adam Wacław', 'the Turks', 'fought against')
 ```
+
+### Test fine-tunigu modelu gpt-3.5-turbo
+
+Model douczany był 10 przykładami (plik jsonl w repozytorium: [link](https://github.com/pjaskulski/gpt_psb/tree/main/data_fine_tuning)), które miały nauczyć go ekstrakcji podstawowych informacji o postaci historycznej i zwrócenia wyniku w formacie JSON.
+
+Przeprowadzono test na modelu standardowym i modelu po fine-tuningu wykorzystując zapytanie:
+```
+Na podstawie podanego tekstu biografii wyszukaj miejsce urodzenia, miejsce śmierci, miejsce pochówku, datę urodzenia, datę śmierci i datę pochówku głównego bohatera/bohaterki. Jeżeli w tekście brak danych na ten temat, zapisz: brak danych. Wynik przedstaw w formie listy obiektów JSON.
+
+Tekst: Adam Wacław (1574–1617) z rodu Piastów, książę cieszyński, tytułujący się także księciem górnogłogowskim, choć tego księstwa już nie posiadał, był synem Wacława Adama i drugiej jego żony, Katarzyny Sydonji, księżniczki saskiej. Urodził się 12 XII 1574 r. Miał 5 lat, gdy umarł mu ojciec. W czasie jego małoletności rządziła księstwem matka wraz z dodanymi jej przez cesarza opiekunami księcia. Przyjeżdżała ona w tym celu od czasu do czasu do Cieszyna, po powtórnem wyjściu zamąż – z wiedzą króla Stefana Batorego – za Emeryka Forgacha, żupana trenczyńskiego, A.-W. wychowywał się przez 8 lat na dworze elektora saskiego, w r. 1595 objął rządy w księstwie i w tym samym roku ożenił się z Elżbietą, córką ks. kurlandzkiego, Kettlera. A.-W. umarł w Cieszynie na Brandysie 13 VII 1617; ciało jego złożono najpierw na zamku i dopiero 4 IV następnego roku pochowano w kościele dominikanów cieszyńskich, gdzie spoczywały zwłoki wszystkich jego poprzedników. Zostawił 5 dzieci, z których Fryderyk Wilhelm, ostatni cieszyński Piast męski, i Elżbieta Lukrecja, ostatnia Piastówna, rządzili kolejno Księstwem.
+```
+
+Wynik dla **standardowego** modelu: **gpt-3.5-turbo**
+
+```JSON
+[
+    {
+      "imię": "Adam",
+      "nazwisko": "Wacław",
+      "miejsce_urodzenia": "brak danych",
+      "miejsce_śmierci": "Cieszyn, Brandys",
+      "miejsce_pochówku": "kościół dominikanów cieszyńskich",
+      "data_urodzenia": "12 XII 1574",
+      "data_śmierci": "13 VII 1617",
+      "data_pochówku": "4 IV następnego roku"
+    }
+]
+```
+
+Wynik dla modelu gpt_3.5-turbo **po fine-tuningu**:
+
+```JSON
+{
+  "place_of_birth": { "place": "brak danych" },
+  "place_of_death": { "place": "Cieszyn" },
+  "place_of_burial": {
+    "place": "Cieszyn",
+    "note": "kościół dominikanów cieszyńskich"
+  },
+  "date_of_birth": { "date": "1574-12-12" },
+  "date_of_death": { "date": "1617-07-13" },
+  "date_of_burial": { "date": "1618-04-04" }
+}
+```
+
+Koszt fine-tunigu: ok 0.30$, czas trwania - ok 10 minut.
