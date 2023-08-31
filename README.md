@@ -2025,3 +2025,33 @@ Wynik dla modelu gpt_3.5-turbo **po fine-tuningu**:
 ```
 
 Koszt fine-tunigu: ok 0.30$, czas trwania - ok 10 minut.
+
+Można jeszcze porównać wynik **standardowego** modelu gpt-3.5-turbo z dłuższym promptem,
+stosowanym podczas testu gpt-4 ([link](https://github.com/pjaskulski/gpt_psb/blob/main/prompts/person_basic.txt) do pliku z tekstem promptu):
+
+```JSON
+[
+  {
+    "place_of_birth": {
+      "place": "brak danych"
+    },
+    "place_of_death": {
+      "place": "Cieszyn, Brandys"
+    },
+    "place_of_burial": {
+      "place": "kościół dominikanów cieszyńskich"
+    },
+    "date_of_birth": {
+      "date": "1574-12-12"
+    },
+    "date_of_death": {
+      "date": "1617-07-13"
+    },
+    "date_of_burial": {
+      "date": "1618-04-04"
+    }
+  }
+]
+```
+
+Trzeba przyznać, że wynik otrzymany dzięki modelowi po fine-tuningu jest jednak najlepszy, porównywalny z GPT-4.
