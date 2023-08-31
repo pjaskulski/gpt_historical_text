@@ -1964,7 +1964,7 @@ A to efekt przetworzenia jednego z dalszych zdań biogramu ("_Dla poprawienia sw
 
 ### Test fine-tunigu modelu gpt-3.5-turbo
 
-Model douczany był 10 przykładami (plik jsonl w repozytorium: [link](https://github.com/pjaskulski/gpt_psb/tree/main/data_fine_tuning)), które miały nauczyć go ekstrakcji podstawowych informacji o postaci historycznej i zwrócenia wyniku w formacie JSON.
+Model douczany był 10 przykładami (plik jsonl w repozytorium: [link](https://github.com/pjaskulski/gpt_psb/tree/main/data_fine_tuning), skrypt: [fine_tuning_gpt35_test.py](https://github.com/pjaskulski/gpt_psb/blob/main/src/fine_tuning_gpt35_test.py)), które miały nauczyć go ekstrakcji podstawowych informacji o postaci historycznej i zwrócenia wyniku w formacie JSON.
 
 Przeprowadzono test na modelu standardowym i modelu po fine-tuningu wykorzystując zapytanie:
 ```
