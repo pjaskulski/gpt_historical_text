@@ -2055,3 +2055,49 @@ stosowanym podczas testu gpt-4 ([link](https://github.com/pjaskulski/gpt_psb/blo
 ```
 
 Trzeba przyznać, że wynik otrzymany dzięki modelowi po fine-tuningu jest jednak najlepszy, porównywalny z GPT-4.
+
+### Przetwarzanie 250 biogramów modelem gpt-3.5-turbo po fine-tuningu
+
+Wyniki modelu po fine-tunigu należałoby jednak sprawdzić na większej próbie np. tej samej serii 250 biogramów, które w odrębnym projekcie 
+były przetwarzane przez model GPT-4.
+
+Poprawność wyników modelu 3.5-turbo (fine-tuning) w zakresie ekstrakcji danych podstawowych
+(miejsce i data urodzenia, miejsce i data śmierci, miejsce i data pochówku) z biogramów postaci PSB (próbka 250 biogramów):
+
+| Rodzaj informacji | Poprawne     | Niepoprawne |
+| ---               | ---          | ---         |
+| Place of birth    | 182 (72.8%)  | 68 (27.2%)  | 
+| Place of death    | 222 (88.8%)  | 28 (11.2%)  |
+| Place of burial   | 233 (93.2%)  | 17 (6.8%)   |
+| Date of birth     | 226 (90.4%)  | 24 (9.6%)   |
+| Date of death     | 226 (90.4%)  | 24 (9.6%)   |
+| Date of burial    | 235 (94.0%)  | 15 (6%)     |
+| Ogółem            | 1315 (87.5%) | 185 (12.5%) | 
+
+Braki danych (1500 potencjalnych iformacji: 250 biogramów, 6 rodzajów informacji):
+
+| RodZaj informacji | Brak danych |
+| ---               | ---         | 
+| Miejsce urodzenia | 45          |
+| Miejsce śmierci   | 90          |
+| Miejsce pochówku  | 137         |
+| Data urodzenia    | 53          |
+| Data śmierci      | 23          |
+| Data pochówku     | 220         |
+| Ogółem            | 568         |
+
+
+Najrzadziej znajdowane są miejsca i data pochówku, faktycznie takie informacje często nie pojawiają się w biogramach.
+
+Jeżeli brać pod uwagę tylko te informacje, które udało się znaleźć (czyli pomijając braki danych), skuteczność
+modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biogramów):
+
+| Rodzaj informacji | Znaleziono | Poprawnie    |
+| ---               | ---        | ---          |
+| Miejsce urodzenia | 205        | 137 (66.83%) |
+| Miejsce śmierci   | 160        | 137 (85.62%) |
+| Miejsce pochówku  | 113        | 99 (87.61%)  |
+| Data urodzenia    | 197        | 174 (88.32%) |
+| Data śmierci      | 227        | 210 (92.51%) |
+| Data pochówku     | 30         | 19 (63.33%)  |
+| Ogółem            | 932        | 776 (83.26%) |
