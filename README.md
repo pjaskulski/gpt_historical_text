@@ -37,6 +37,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [GPT i biogramy PSB - uwagi i wnioski](#gpt-i-biogramy-psb---uwagi-i-wnioski)
   - [Automatyczne tworzenie grafów wiedzy](#automatyczne-tworzenie-grafów-wiedzy)
   - [Test fine-tuningu modelu gpt-3.5-turbo](#test-fine-tunigu-modelu-gpt-35-turbo)
+  - [Przetwarzanie 250 biogramów modelem gpt-3.5-turbo po fine-tuningu]()
 
 
 ## Notatki
