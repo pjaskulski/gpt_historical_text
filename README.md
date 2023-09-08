@@ -2103,5 +2103,5 @@ modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biog
 | Data pochówku     | 30         | 19 (63.33%)  |
 | Ogółem            | 932        | 776 (83.26%) |
 
-Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuningu **jest jednak istotnie słabszy niż model gpt-4**. To czego nie widać w samych liczbach, to częste wyszukiwanie poprawnych lecz
+Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuningu **jest jednak istotnie słabszy niż model gpt-4** - zob. [tabelę](https://github.com/pjaskulski/gpt_psb#analiza-poprawno%C5%9Bci-wynik%C3%B3w)  To czego nie widać w samych liczbach, to częste wyszukiwanie poprawnych lecz
 niedokładnych dat (np. roczne, gdy w biogramie można znaleźć dzienne), lub częste błędy w odmianie nazw geograficznych - takie dane były zaliczane jako poprawne, jednak z odpowiednią notatką wskazującą że odpowiedź modelu nie była idealna.
