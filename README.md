@@ -37,7 +37,7 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [GPT i biogramy PSB - uwagi i wnioski](#gpt-i-biogramy-psb---uwagi-i-wnioski)
   - [Automatyczne tworzenie grafów wiedzy](#automatyczne-tworzenie-grafów-wiedzy)
   - [Test fine-tuningu modelu gpt-3.5-turbo](#test-fine-tunigu-modelu-gpt-35-turbo)
-  - [Przetwarzanie 250 biogramów modelem gpt-3.5-turbo po fine-tuningu]()
+  - [Przetwarzanie 250 biogramów modelem gpt-3.5-turbo po fine-tuningu](#przetwarzanie-250-biogramów-modelem-gpt-35-turbo-po-fine-tuningu)
 
 
 ## Notatki
@@ -2059,7 +2059,7 @@ Trzeba przyznać, że wynik otrzymany dzięki modelowi po fine-tuningu jest jedn
 
 ### Przetwarzanie 250 biogramów modelem gpt-3.5-turbo po fine-tuningu
 
-Wyniki modelu po fine-tunigu należałoby jednak sprawdzić na większej próbie np. tej samej serii 250 biogramów, które w odrębnym projekcie 
+Wyniki modelu po fine-tunigu należałoby jednak sprawdzić na większej próbie np. tej samej serii 250 biogramów, które w odrębnym projekcie
 były przetwarzane przez model GPT-4.
 
 Poprawność wyników modelu 3.5-turbo (fine-tuning) w zakresie ekstrakcji danych podstawowych
@@ -2067,18 +2067,18 @@ Poprawność wyników modelu 3.5-turbo (fine-tuning) w zakresie ekstrakcji danyc
 
 | Rodzaj informacji | Poprawne     | Niepoprawne |
 | ---               | ---          | ---         |
-| Place of birth    | 182 (72.8%)  | 68 (27.2%)  | 
+| Place of birth    | 182 (72.8%)  | 68 (27.2%)  |
 | Place of death    | 222 (88.8%)  | 28 (11.2%)  |
 | Place of burial   | 233 (93.2%)  | 17 (6.8%)   |
 | Date of birth     | 226 (90.4%)  | 24 (9.6%)   |
 | Date of death     | 226 (90.4%)  | 24 (9.6%)   |
 | Date of burial    | 235 (94.0%)  | 15 (6%)     |
-| Ogółem            | 1315 (87.5%) | 185 (12.5%) | 
+| Ogółem            | 1315 (87.5%) | 185 (12.5%) |
 
 Braki danych (1500 potencjalnych iformacji: 250 biogramów, 6 rodzajów informacji):
 
 | RodZaj informacji | Brak danych |
-| ---               | ---         | 
+| ---               | ---         |
 | Miejsce urodzenia | 45          |
 | Miejsce śmierci   | 90          |
 | Miejsce pochówku  | 137         |
@@ -2102,3 +2102,6 @@ modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biog
 | Data śmierci      | 227        | 210 (92.51%) |
 | Data pochówku     | 30         | 19 (63.33%)  |
 | Ogółem            | 932        | 776 (83.26%) |
+
+Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuningu **jest jednak istotnie słabszy niż model gpt-4**. To czego nie widać w samych liczbach, to częste wyszukiwanie poprawnych lecz
+niedokładnych dat (np. roczne, gdy w biogramie można znaleźć dzienne), lub częste błędy w odmianie nazw geograficznych - takie dane były zaliczane jako poprawne, jednak z odpowiednią notatką wskazującą że odpowiedź modelu nie była idealna.
