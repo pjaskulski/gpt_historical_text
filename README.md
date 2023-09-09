@@ -2066,12 +2066,12 @@ Ogólna poprawność wyników modelu 3.5-turbo (fine-tuning) w zakresie ekstrakc
 
 | Rodzaj informacji | Poprawne     | Niepoprawne |
 | ---               | ---          | ---         |
-| Place of birth    | 182 (72.8%)  | 68 (27.2%)  |
-| Place of death    | 222 (88.8%)  | 28 (11.2%)  |
-| Place of burial   | 233 (93.2%)  | 17 (6.8%)   |
-| Date of birth     | 226 (90.4%)  | 24 (9.6%)   |
-| Date of death     | 226 (90.4%)  | 24 (9.6%)   |
-| Date of burial    | 235 (94.0%)  | 15 (6%)     |
+| Miejsce urodzenia | 182 (72.8%)  | 68 (27.2%)  |
+| Miejsce śmierci   | 222 (88.8%)  | 28 (11.2%)  |
+| Miejsce pochówku  | 233 (93.2%)  | 17 (6.8%)   |
+| Data urodzenia    | 226 (90.4%)  | 24 (9.6%)   |
+| Data śmierci      | 226 (90.4%)  | 24 (9.6%)   |
+| Data pochówku     | 235 (94.0%)  | 15 (6%)     |
 | Ogółem            | 1315 (87.5%) | 185 (12.5%) |
 
 Braki danych (1500 potencjalnych iformacji: 250 biogramów, 6 rodzajów informacji):

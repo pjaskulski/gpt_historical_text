@@ -34,6 +34,7 @@ Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerp
   - [Example of information extraction from a PSB biography](#example-of-information-extraction-from-a-psb-biography)
   - [GPT and PSB Biographies - Remarks and Conclusions](#gpt-and-psb-biographies---remarks-and-conclusions)
   - [Automatic creation of knowledge graphs](#automatic-creation-of-knowledge-graphs)
+  - []()
 
 ## Notes
 
@@ -1916,3 +1917,153 @@ And this is the result of processing one of the further sentences of the biograp
 ('Adam Wacław', 'a cavalry unit', 'was a commander of')
 ('Adam Wacław', 'the Turks', 'fought against')
 ```
+
+##GPT-3.5-turbo Model Fine-tuning Test
+
+The model was fine-tuned with 10 examples (jsonl file in the repository: link, script: fine_tuning_gpt35_test.py), which were supposed to teach it to extract basic information about a historical figure and return the result in JSON format.
+
+A test was conducted on the standard model and the model after fine-tuning using the query (in Polish):
+
+```
+Na podstawie podanego tekstu biografii wyszukaj miejsce urodzenia,
+miejsce śmierci, miejsce pochówku, datę urodzenia, datę śmierci
+i datę pochówku głównego bohatera/bohaterki. Jeżeli w tekście brak danych
+na ten temat, zapisz: brak danych. Wynik przedstaw w formie listy obiektów
+JSON.
+
+Tekst: Adam Wacław (1574–1617) z rodu Piastów, książę cieszyński,
+tytułujący się także księciem górnogłogowskim, choć tego księstwa
+już nie posiadał, był synem Wacława Adama i drugiej jego żony, Katarzyny
+Sydonji, księżniczki saskiej. Urodził się 12 XII 1574 r. Miał 5 lat,
+gdy umarł mu ojciec. W czasie jego małoletności rządziła księstwem
+matka wraz z dodanymi jej przez cesarza opiekunami księcia. Przyjeżdżała
+ona w tym celu od czasu do czasu do Cieszyna, po powtórnem wyjściu zamąż
+– z wiedzą króla Stefana Batorego – za Emeryka Forgacha, żupana trenczyńskiego,
+A.-W. wychowywał się przez 8 lat na dworze elektora saskiego, w r. 1595 objął
+rządy w księstwie i w tym samym roku ożenił się z Elżbietą, córką ks. kurlandzkiego,
+Kettlera. A.-W. umarł w Cieszynie na Brandysie 13 VII 1617; ciało jego złożono
+najpierw na zamku i dopiero 4 IV następnego roku pochowano w kościele dominikanów
+cieszyńskich, gdzie spoczywały zwłoki wszystkich jego poprzedników. Zostawił
+5 dzieci, z których Fryderyk Wilhelm, ostatni cieszyński Piast męski, i Elżbieta
+Lukrecja, ostatnia Piastówna, rządzili kolejno Księstwem.
+```
+
+Result for **standard** model: **gpt-3.5-turbo**:
+
+```JSON
+[
+    {
+      "imię": "Adam",
+      "nazwisko": "Wacław",
+      "miejsce_urodzenia": "brak danych",
+      "miejsce_śmierci": "Cieszyn, Brandys",
+      "miejsce_pochówku": "kościół dominikanów cieszyńskich",
+      "data_urodzenia": "12 XII 1574",
+      "data_śmierci": "13 VII 1617",
+      "data_pochówku": "4 IV następnego roku"
+    }
+]
+```
+
+Result for the gpt_3.5-turbo model **after fine-tuning**:
+
+```JSON
+{
+  "place_of_birth": { "place": "brak danych" },
+  "place_of_death": { "place": "Cieszyn" },
+  "place_of_burial": {
+    "place": "Cieszyn",
+    "note": "kościół dominikanów cieszyńskich"
+  },
+  "date_of_birth": { "date": "1574-12-12" },
+  "date_of_death": { "date": "1617-07-13" },
+  "date_of_burial": { "date": "1618-04-04" }
+}
+```
+
+Fine-tuning cost: approx. $0.30, duration - approx. 10 minutes.
+
+It is also possible to compare the result of the standard gpt-3.5-turbo model with a longer prompt, used during the gpt-4 test (link to the file with the prompt text):
+
+```JSON
+[
+  {
+    "place_of_birth": {
+      "place": "brak danych"
+    },
+    "place_of_death": {
+      "place": "Cieszyn, Brandys"
+    },
+    "place_of_burial": {
+      "place": "kościół dominikanów cieszyńskich"
+    },
+    "date_of_birth": {
+      "date": "1574-12-12"
+    },
+    "date_of_death": {
+      "date": "1617-07-13"
+    },
+    "date_of_burial": {
+      "date": "1618-04-04"
+    }
+  }
+]
+```
+
+It must be admitted that the result obtained thanks to the fine-tuned model is indeed the best, comparable to GPT-4.
+
+## Processing 250 Biographies with the Fine-tuned GPT-3.5-turbo Model
+
+However, the results of the fine-tuned model should be checked on a larger sample, for example, the same series of 250 biographies that were processed by the GPT-4 model in a separate project. Below are the results of such a test.
+
+The overall accuracy of the 3.5-turbo model results (fine-tuning) in terms of extracting basic data (place and date of birth, place and date of death, place and date of burial) from PSB character biographies (sample of 250 biographies, overall accuracy includes both found data and data not found returned by the model):
+
+| Type of information | Correct      | Incorrect   |
+| ---                 | ---          | ---         |
+| Place of birth      | 182 (72.8%)  | 68 (27.2%)  |
+| Place of death      | 222 (88.8%)  | 28 (11.2%)  |
+| Place of burial     | 233 (93.2%)  | 17 (6.8%)   |
+| Date of birth       | 226 (90.4%)  | 24 (9.6%)   |
+| Date of death       | 226 (90.4%)  | 24 (9.6%)   |
+| Date of burial      | 235 (94.0%)  | 15 (6%)     |
+| Total               | 1315 (87.5%) | 185 (12.5%) |
+
+Data gaps (1500 potential information: 250 biographies, 6 types of information):
+
+| Type of information | No data     |
+| ---                 | ---         |
+| Place of birth      | 45          |
+| Place of death      | 90          |
+| Place of burial     | 137         |
+| Date of birth       | 53          |
+| Date of death       | 23          |
+| Date of burial      | 220         |
+| Total               | 568         |
+
+The places and dates of burial are found the least often; indeed, such information often does not appear in the biographies.
+
+If we only consider the information that was found (i.e., excluding missing data), the effectiveness of the gpt-3.5-turbo model after fine-tuning looks as follows (250 biographies were analyzed):
+
+| Type of information | Found      | Correct    |
+| ---                 | ---        | ---          |
+| Place of birth      | 205        | 137 (66.83%) |
+| Place of death      | 160        | 137 (85.62%) |
+| Place of burial     | 113        | 99 (87.61%)  |
+| Date of birth       | 197        | 174 (88.32%) |
+| Date of death       | 227        | 210 (92.51%) |
+| Date of burial      | 30         | 19 (63.33%)  |
+| Total               | 932        | 776 (83.26%) |
+
+Examining only the cases of missing data, the accuracy of the results returned by the model is higher, although a clearly weaker result in the case of the date of death is noticeable, where in nearly 1/3 of the biographies the model did not find information that was in the biography:
+
+| Type of information | No data         | Correct      |
+| ---                 | ---             | ---          |
+| Place of birth      | 45              | 45 (100.00%) |
+| Place of death      | 90              | 85 (94.44%)  |
+| Place of burial     | 137             | 134 (97.81%) |
+| Date of birth       | 53              | 52 (98.11%)  |
+| Date of death       | 23              | 16 (69.57%)  |
+| Date of burial      | 220             | 216 (98.18%) |
+| Total               | 568             | 548 (96.48%) |
+
+The results for the entire series of biographies show that the 3.5-turbo model after fine-tuning **is significantly weaker than the gpt-4 model** - see [results for gpt-4](https://github.com/pjaskulski/gpt_psb#analiza-poprawno%C5%9Bci-wynik%C3%B3w). What is not visible in the numbers alone, is the **frequent retrieval of correct but imprecise dates** (e.g., yearly when daily can be found in the biography - 53 cases for the date of death of the character!), or **frequent errors in the declension of geographical names** - such data were counted as correct, however with an appropriate note indicating that the model's answer was not perfect. **Considering this kind of data as incorrect would significantly worsen the model's result, e.g., for the date of death, the percentage of correctly extracted information would drop from 92 to 69!** Detailed results for each biography are available in the [repository](https://github.com/pjaskulski/gpt_psb/tree/main/results_evaluation_35ft/basic).
