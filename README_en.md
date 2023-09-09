@@ -34,7 +34,8 @@ Tests of GPT-3 and GPT-4 models provided by OpenAI's API are conducted on excerp
   - [Example of information extraction from a PSB biography](#example-of-information-extraction-from-a-psb-biography)
   - [GPT and PSB Biographies - Remarks and Conclusions](#gpt-and-psb-biographies---remarks-and-conclusions)
   - [Automatic creation of knowledge graphs](#automatic-creation-of-knowledge-graphs)
-  - []()
+  - [GPT-3.5-turbo Model Fine-tuning Test](#gpt-35-turbo-model-fine-tuning-test)
+  - [Processing 250 Biographies with the Fine-tuned GPT-3.5-turbo Model](#processing-250-biographies-with-the-fine-tuned-gpt-35-turbo-model)
 
 ## Notes
 
@@ -1918,7 +1919,7 @@ And this is the result of processing one of the further sentences of the biograp
 ('Adam Wacław', 'the Turks', 'fought against')
 ```
 
-##GPT-3.5-turbo Model Fine-tuning Test
+## GPT-3.5-turbo Model Fine-tuning Test
 
 The model was fine-tuned with 10 examples (jsonl file in the repository: link, script: fine_tuning_gpt35_test.py), which were supposed to teach it to extract basic information about a historical figure and return the result in JSON format.
 
