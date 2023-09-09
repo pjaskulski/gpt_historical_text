@@ -2043,17 +2043,17 @@ Data gaps (1500 potential information: 250 biographies, 6 types of information):
 
 The places and dates of burial are found the least often; indeed, such information often does not appear in the biographies.
 
-If we only consider the information that was found (i.e., excluding missing data), the effectiveness of the gpt-3.5-turbo model after fine-tuning looks as follows (250 biographies were analyzed):
+If we only consider the information that was found (i.e., excluding missing data), the effectiveness of the gpt-3.5-turbo model after fine-tuning looks as follows (250 biographies were analyzed, GPT-4 results are also provided for comparison):
 
-| Type of information | Found      | Correct    |
-| ---                 | ---        | ---          |
-| Place of birth      | 205        | 137 (66.83%) |
-| Place of death      | 160        | 137 (85.62%) |
-| Place of burial     | 113        | 99 (87.61%)  |
-| Date of birth       | 197        | 174 (88.32%) |
-| Date of death       | 227        | 210 (92.51%) |
-| Date of burial      | 30         | 19 (63.33%)  |
-| Total               | 932        | 776 (83.26%) |
+| Type of information | Found      | Correct      | Found (GPT-4) | Correct (GPT-4) |
+| ---                 | ---        | ---          | ---           | ---             |
+| Place of birth      | 205        | 137 (66.83%) | 154           | 137 (88.96%)    |
+| Place of death      | 160        | 137 (85.62%) | 160           | 141 (88.12%)    |
+| Place of burial     | 113        | 99 (87.61%)  | 111           | 101 (90.99%)    |
+| Date of birth       | 197        | 174 (88.32%) | 180           | 177 (98.33%)    |
+| Date of death       | 227        | 210 (92.51%) | 230           | 229 (99.57%)    |
+| Date of burial      | 30         | 19 (63.33%)  | 26            | 23 (88.46%)     |
+| Total               | 932        | 776 (83.26%) | 861           | 808 (93.84%)    |
 
 Examining only the cases of missing data, the accuracy of the results returned by the model is higher, although a clearly weaker result in the case of the date of death is noticeable, where in nearly 1/3 of the biographies the model did not find information that was in the biography:
 

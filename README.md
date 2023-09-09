@@ -2089,17 +2089,17 @@ Braki danych (1500 potencjalnych iformacji: 250 biogramów, 6 rodzajów informac
 
 Najrzadziej znajdowane są miejsca i data pochówku, faktycznie takie informacje często nie pojawiają się w biogramach.
 
-Jeżeli brać pod uwagę tylko te informacje, które udało się znaleźć (czyli pomijając braki danych), skuteczność modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biogramów):
+Jeżeli brać pod uwagę tylko te informacje, które udało się znaleźć (czyli pomijając braki danych), skuteczność modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biogramów, dla porównania podane także wyniki GPT-4):
 
-| Rodzaj informacji | Znaleziono | Poprawnie    |
-| ---               | ---        | ---          |
-| Miejsce urodzenia | 205        | 137 (66.83%) |
-| Miejsce śmierci   | 160        | 137 (85.62%) |
-| Miejsce pochówku  | 113        | 99 (87.61%)  |
-| Data urodzenia    | 197        | 174 (88.32%) |
-| Data śmierci      | 227        | 210 (92.51%) |
-| Data pochówku     | 30         | 19 (63.33%)  |
-| Ogółem            | 932        | 776 (83.26%) |
+| Rodzaj informacji | Znaleziono | Poprawnie    | Znaleziono (GPT-4) | Poprawnie (GPT-4) |
+| ---               | ---        | ---          | ---                | ---               |
+| Miejsce urodzenia | 205        | 137 (66.83%) | 154                | 137 (88.96%)      |
+| Miejsce śmierci   | 160        | 137 (85.62%) | 160                | 141 (88.12%)      |
+| Miejsce pochówku  | 113        | 99 (87.61%)  | 111                | 101 (90.99%)      |
+| Data urodzenia    | 197        | 174 (88.32%) | 180                | 177 (98.33%)      |
+| Data śmierci      | 227        | 210 (92.51%) | 230                | 229 (99.57%)      |
+| Data pochówku     | 30         | 19 (63.33%)  | 26                 | 23 (88.46%)       |
+| Ogółem            | 932        | 776 (83.26%) | 861                | 808 (93.84%)      |
 
 Badając tylko przypadki braku danych, poprawność wyników zwracanych przez model, jest większa, choć zwraca uwagę wyraźnie słabszy wynik w przypadku daty śmierci, w blisko 1/3 biogramów model nie znalazł informacji, która w była w biogramie:
 
