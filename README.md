@@ -2059,8 +2059,7 @@ Trzeba przyznać, że wynik otrzymany dzięki modelowi po fine-tuningu jest jedn
 
 ### Przetwarzanie 250 biogramów modelem gpt-3.5-turbo po fine-tuningu
 
-Wyniki modelu po fine-tunigu należałoby jednak sprawdzić na większej próbie np. tej samej serii 250 biogramów, które w odrębnym projekcie
-były przetwarzane przez model GPT-4.
+Wyniki modelu po fine-tunigu należałoby jednak sprawdzić na większej próbie np. tej samej serii 250 biogramów, które w odrębnym projekcie były przetwarzane przez model GPT-4. Poniżej efekty takiego testu.
 
 Poprawność wyników modelu 3.5-turbo (fine-tuning) w zakresie ekstrakcji danych podstawowych
 (miejsce i data urodzenia, miejsce i data śmierci, miejsce i data pochówku) z biogramów postaci PSB (próbka 250 biogramów):
@@ -2090,8 +2089,7 @@ Braki danych (1500 potencjalnych iformacji: 250 biogramów, 6 rodzajów informac
 
 Najrzadziej znajdowane są miejsca i data pochówku, faktycznie takie informacje często nie pojawiają się w biogramach.
 
-Jeżeli brać pod uwagę tylko te informacje, które udało się znaleźć (czyli pomijając braki danych), skuteczność
-modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biogramów):
+Jeżeli brać pod uwagę tylko te informacje, które udało się znaleźć (czyli pomijając braki danych), skuteczność modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biogramów):
 
 | Rodzaj informacji | Znaleziono | Poprawnie    |
 | ---               | ---        | ---          |
@@ -2103,5 +2101,16 @@ modelu gpt-35-turbo po fine-tuningu wygląda następująco (analizowano 250 biog
 | Data pochówku     | 30         | 19 (63.33%)  |
 | Ogółem            | 932        | 776 (83.26%) |
 
-Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuningu **jest jednak istotnie słabszy niż model gpt-4** - zob. [tabelę](https://github.com/pjaskulski/gpt_psb#analiza-poprawno%C5%9Bci-wynik%C3%B3w)  To czego nie widać w samych liczbach, to częste wyszukiwanie poprawnych lecz
-niedokładnych dat (np. roczne, gdy w biogramie można znaleźć dzienne), lub częste błędy w odmianie nazw geograficznych - takie dane były zaliczane jako poprawne, jednak z odpowiednią notatką wskazującą że odpowiedź modelu nie była idealna.
+Badając tylko przypadki braku danych, poprawność wyników zwracanych przez model, jest większa, choć zwraca uwagę wyraźnie słabszy wynik w przypadku daty śmierci, w blisko 1/3 biogramów model nie znalazł informacji, która w była w biogramie:
+
+| Rodzaj danych     | Brak danych dla | Poprawnie    |
+| ---               | ---             | ---          |
+| Miejsce urodzenia | 45              | 45 (100.00%) |
+| Miejsce śmierci   | 90              | 85 (94.44%)  |
+| Miejsce pochówku  | 137             | 134 (97.81%) |
+| Data urodzenia    | 53              | 52 (98.11%)  |
+| Data śmierci      | 23              | 16 (69.57%)  |
+| Data pochówku     | 220             | 216 (98.18%) |
+| Ogółem            | 568             | 548 (96.48%) |
+
+Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuningu **jest jednak istotnie słabszy niż model gpt-4** - zob. [wyniki dla gpt-4](https://github.com/pjaskulski/gpt_psb#analiza-poprawno%C5%9Bci-wynik%C3%B3w)  To czego nie widać w samych liczbach, **to częste wyszukiwanie poprawnych lecz niedokładnych dat** (np. roczne, gdy w biogramie można znaleźć dzienne - 53 przypadki dla daty śmierci postaci!), lub **częste błędy w odmianie nazw geograficznych** - takie dane były zaliczane jako poprawne, jednak z odpowiednią notatką wskazującą że odpowiedź modelu nie była idealna. **Uwzględnienie tego rodzaju danych jako niepoprawnych znacznie pogorszyłoby wynik modelu, np. dla daty śmierci procent poprawnie wydobytych infromacji spadłby z 92 do 69!**. Szczegółowe rezultaty dla każdego biogramu dostępne są w [repozytorium](https://github.com/pjaskulski/gpt_psb/tree/main/results_evaluation_35ft/basic)
