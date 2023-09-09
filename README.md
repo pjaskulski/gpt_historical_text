@@ -2061,8 +2061,8 @@ Trzeba przyznać, że wynik otrzymany dzięki modelowi po fine-tuningu jest jedn
 
 Wyniki modelu po fine-tunigu należałoby jednak sprawdzić na większej próbie np. tej samej serii 250 biogramów, które w odrębnym projekcie były przetwarzane przez model GPT-4. Poniżej efekty takiego testu.
 
-Poprawność wyników modelu 3.5-turbo (fine-tuning) w zakresie ekstrakcji danych podstawowych
-(miejsce i data urodzenia, miejsce i data śmierci, miejsce i data pochówku) z biogramów postaci PSB (próbka 250 biogramów):
+Ogólna poprawność wyników modelu 3.5-turbo (fine-tuning) w zakresie ekstrakcji danych podstawowych
+(miejsce i data urodzenia, miejsce i data śmierci, miejsce i data pochówku) z biogramów postaci PSB (próbka 250 biogramów, ogólna poprawność uwzględnia i znalezione dane i zwrócone przez model braki danych):
 
 | Rodzaj informacji | Poprawne     | Niepoprawne |
 | ---               | ---          | ---         |
