@@ -2216,7 +2216,8 @@ osoby, np. 'Jan z Warki syn Piotra' i 'Jan z Warki syn Władysława' to różne 
 
 Tekst: {tekst}"
 ```
-Odpowiedź:
+Odpowiedź jest w zasadzie poprawna, być może modelowi należałoby udzielić dodatkowych wskazówek
+związanych ze specyfiką tekstu:
 
 ```TEXT
 Urban z Babic był synem Piotra. W 1422 roku, wraz ze swoim bratem Pawłem, podzielił
