@@ -38,6 +38,8 @@ Testy modeli GPT-3 i GPT-4 udostępnionych przez API OpenAI przeprowadzane na fr
   - [Automatyczne tworzenie grafów wiedzy](#automatyczne-tworzenie-grafów-wiedzy)
   - [Test fine-tuningu modelu gpt-3.5-turbo](#test-fine-tunigu-modelu-gpt-35-turbo)
   - [Przetwarzanie 250 biogramów modelem gpt-3.5-turbo po fine-tuningu](#przetwarzanie-250-biogramów-modelem-gpt-35-turbo-po-fine-tuningu)
+  - [Rozwijanie skrótów w hasłach SHG](#rozwijanie-skrótów-w-hasłach-shg)
+  - [SHG jako źródło wiedzy dla LLM](#shg-jako-źródło-wiedzy-dla-llm)
 
 
 ## Notatki
@@ -2125,7 +2127,11 @@ ze słownika ziemii warszawskiej, dokładnie punktu 3 tego hasła dotyczącego s
 Katalog skrótów (skrót = rozwinięcie, kolejne sktóry oddzielone znakiem średnika):
 a. = ante (przed); abp = arcybiskup ...
 
-Dodatkowo w tekście może wystąpić skrót od nazwy opisywanej miejscowości - jest to zwykle pierwsza duża litera nazwy miejscowości, w tym tekście miejscowość to Babice, a skrót od niej = B. Pamiętaj aby rozwinięte ze skrótów słowa zostały użyte we właściwej odmianie (przypadku) np. 'Piotr z B. śwd. na dok. ks. Siemowita II' = 'Piotr z Babic świadek na dokumencie księcia Siemowita II'.
+Dodatkowo w tekście może wystąpić skrót od nazwy opisywanej miejscowości - jest to
+zwykle pierwsza duża litera nazwy miejscowości, w tym tekście miejscowość to Babice,
+a skrót od niej = B. Pamiętaj aby rozwinięte ze skrótów słowa zostały użyte we
+właściwej odmianie (przypadku) np. 'Piotr z B. śwd. na dok. ks. Siemowita II' =
+'Piotr z Babic świadek na dokumencie księcia Siemowita II'.
 
 Tekst: {tu tekst hasła}"
 ```
@@ -2133,25 +2139,100 @@ Tekst: {tu tekst hasła}"
 Tekst oryginalny można zobaczyć w wersji online słownika (link powyżej), zaś efekt rozwijania skrótów poniżej:
 
 ```TXT
-"Własność szlachecka. 1313 Piotr z Babic świadek na dokumencie księcia Siemowita II (NKDMaz. 2 nr 135); 1365-91 Marcin Babka z Babic → punkt 6; 1399 Marcin z Babic świadek na dokumencie księcia Janusza I (MK 89, 217v-219v); 1400-17 Marcin z Babic, syn Marcina → punkt 6; 1401 książę Janusz I dał niegdyś Marcinowi Babce wojewodzie mazowieckiemu dobra Żarnowo z lasem Niemiczyn w ziemi ciechanowskiej oraz dąbrowę zwaną Bratkowy Kąty z jeziorem Rybno nad rzeką Pisą koło Nowogrodu; po zgonie wojewody jego synowie Marcin podkomorzy warszawski i Piotr oraz Stanisław syn Jaśka jako spadkobiercy odsprzedają księciu dąbrowę z jeziorem, a książę potwierdza wyżej wymienione nadanie Marcinowi z Babic podkomorzy warszawski, któremu przypadła wieś [Żarnowo] z lasem (MK 6, 103v-104); [1417] rycerz pasowany Marcin z Babic podkomorzy warszawski kwituje brata Piotra z Latchorzewa z zadośćuczynienia za Babice i Trupienie oraz z wypłaty 100 kop groszy praskich Janowi Fortunie ze Szczytna i 30 kop groszy praskich Marcinowi z Goźlina; Marcin z Babic podkomorzy i jego żona Imisława zatrzymują dożywotnio użytkowanie tych wsi; jeżeli podkomorzy będzie miał syna, to zwróciwszy 130 kop groszy odbierze te wsie, a jeżeli córki, to każda otrzyma w posagu 30 kop groszy od Piotra z Latchorzewa; żona podkomorzego będzie miała dożywotnio Babice, a Piotr z Latchorzewa Trupienie (MK 3, 61v); 1421 Imka wdowa po Marcinie z Babic podkomorzy warszawski pozywa braci Pawła i Urbana z Latchorzewa o posag zapisany jej na Babice i Trupieniu, ale dokument posażny zostaje uznany za falsyfikat (Warszawa. 1, 3v); [1422] Paweł i Urban z Latchorzewa synowie Piotra dzielą się dobrami ojczystymi; Paweł dostaje Latchorzewo i Trupienie, a Urban Babice, Zbarz i Korzkiewki; Paweł będzie mógł otrzymać Służewiec i Jemielino bez przeszkód ze strony Urbana (MK 3, 87v88); 1424 Marcin z Goźlina zięć pani Babickiej (Warszawa. 1, 134); 1424 Marcin z Babic (Warszawa. 1, 151v); 1425 pani Babicka uzyskuje prawo zagradzania drogi, którą dziedzice z Wierzuchowa dawniej chodzili do kościoła [w Babicach] (Warszawa. 1, 176); 1426 Jan Wircioch mieszczanin Nowej Warszawy zobowiązuje się zapłacić 42 grosze Maciejowi z Babic (ŁawWN nr 77); 1426 Marcin z Babic (Warszawa. 1, 229v); 1428 szlachetny Hincza z Babic (Warszawa. 2, 10); 1434 pani Imka z Babic (Warszawa. 2, 254); 1438 Urban z Babic dostaje Młodynin na Zawkrzu od Anny wdowy po Klemensie z Kraśniewa i od jej syna Włodzimierza, przypadły im w spadku po bracie Anny Marcinie (MK 335, 27v); 1446 Urban z Babic zabezpiecza sobie wierzytelność 100 kop groszy na domu zmarłego pana „Slycz” w Starej Warszawie (PP 3 nr 959); 1451 Urban z Babic odwołuje sprzedaż Kiełpina i Gromadzyna dokonaną w 1449 przez Jana Sąchockiego z Zaborowa [ziemia wyszogrodzka] na rzecz Jana z Węgrzynowa wojewody mazowieckiego za 450 kop groszy w półgroszku (MK 4, 153v-154); 1458-59 Urban z Babic → punkt 6; 1467 Jan Babicki syn [zmarłego] Urbana stolnika warszawskiego (Warszawa. 4, 88); 1477 Jan z Babic ma proces w sądzie kościelnym z Marcinem Latochorzewskim (AE II 498); 1479 Jan Babicki (ZR nr 1473); 1484 Jan Babicki z Babic sprzedaje z prawem odkupu czynsz roczny 4 grzywien groszy w półgroszku ze Zbarza za 40 kop groszy w półgroszku Marcinowi z Zalesia kanonik płocki i pleban z Przybyszewa na ołtarz w kolegiacie warszawskiej i zaręcza spokój ze strony żony Barbary (MK 9, 161v); 1484 książę Bolesław V daje Janowi z Babic prawo nieodpowiednie i zwolnienie od kar sądowych (MK 9, 166v; MK 60, 265; MS 4 nr 6444); 1484 kowal Maciej Babicki mieszczanin Nowej Warszawy (ŁawWN nr 1018); 1490 [Jan] Babicki uczestnik najazdu szlachty na dobra tarczyńskie prepozyta kapituły warszawskiej (AC 2 nr 1872); 1494 Jan syn zmarłego Łazarza z Sosnkowa lub z Bliznego sprzedaje dział w Bliznem Janowi z Babic (MK 18, 248v); 1502 → punkt 6; 1506 transakcja z 1496 zostaje potwierdzona Urbanowi synowi Jana z Babic (MK 18, 248v); 1509 Barbara wdowa po zmarłym Janie z Babic (Warszawa. 10, 5); 1511 szlachetny Urban z Babic (Warszawa. 10, 896); 1518 Urban z Babic i Jerzy z Parzniewa sprzedają z prawem odkupu czynsz roczny z Babic i Parzniewa Grzegorzowi z Cedrowic wikariuszowi wiecznemu katedry włocławskiej (MK 32, 18); 1526 w Babicach 9 włók osiadłych (ASK I 27, 451); 1527 → punkt 5; 1530 Anna żona Urbana Babickiego, córka Jana Duckiego otrzymuje wraz z siostrami zapis ojca na jego dobrach w Dudzie, Otwocku, Dąbrówce, Woli i innych (Bon. 5, 71); 1539 wypis dokumentu z 1484 na prośbę Urbana Babickiego (MS 4 nr 6444); 1580 pobór od 5 włók osiadłych (ŹD 263); 1584 Babiccy herbu Dołęga, jednej dzielnicy ze Służowieckimi (Papr. 403); XIX wiek. Babice wieś ma 428 morg [ok. 14 włók], folwark 1598 morg [53 włóki] (Małc. 192).
+"Własność szlachecka. 1313 Piotr z Babic świadek na dokumencie księcia
+Siemowita II (NKDMaz. 2 nr 135); 1365-91 Marcin Babka z Babic → punkt 6; 1399
+Marcin z Babic świadek na dokumencie księcia Janusza I (MK 89, 217v-219v);
+1400-17 Marcin z Babic, syn Marcina → punkt 6; 1401 książę Janusz I dał niegdyś
+Marcinowi Babce wojewodzie mazowieckiemu dobra Żarnowo z lasem Niemiczyn w ziemi
+ciechanowskiej oraz dąbrowę zwaną Bratkowy Kąty z jeziorem Rybno nad rzeką Pisą
+koło Nowogrodu; po zgonie wojewody jego synowie Marcin podkomorzy warszawski
+i Piotr oraz Stanisław syn Jaśka jako spadkobiercy odsprzedają księciu dąbrowę
+z jeziorem, a książę potwierdza wyżej wymienione nadanie Marcinowi z Babic
+podkomorzy warszawski, któremu przypadła wieś [Żarnowo] z lasem (MK 6, 103v-104);
+[1417] rycerz pasowany Marcin z Babic podkomorzy warszawski kwituje brata Piotra
+z Latchorzewa z zadośćuczynienia za Babice i Trupienie oraz z wypłaty 100 kop
+groszy praskich Janowi Fortunie ze Szczytna i 30 kop groszy praskich Marcinowi
+z Goźlina; Marcin z Babic podkomorzy i jego żona Imisława zatrzymują dożywotnio
+użytkowanie tych wsi; jeżeli podkomorzy będzie miał syna, to zwróciwszy 130 kop
+groszy odbierze te wsie, a jeżeli córki, to każda otrzyma w posagu 30 kop groszy
+od Piotra z Latchorzewa; żona podkomorzego będzie miała dożywotnio Babice, a Piotr
+z Latchorzewa Trupienie (MK 3, 61v); 1421 Imka wdowa po Marcinie z Babic podkomorzy
+warszawski pozywa braci Pawła i Urbana z Latchorzewa o posag zapisany jej na Babice
+i Trupieniu, ale dokument posażny zostaje uznany za falsyfikat (Warszawa. 1, 3v);
+[1422] Paweł i Urban z Latchorzewa synowie Piotra dzielą się dobrami ojczystymi;
+Paweł dostaje Latchorzewo i Trupienie, a Urban Babice, Zbarz i Korzkiewki; Paweł
+będzie mógł otrzymać Służewiec i Jemielino bez przeszkód ze strony Urbana
+(MK 3, 87v88); 1424 Marcin z Goźlina zięć pani Babickiej (Warszawa. 1, 134);
+1424 Marcin z Babic (Warszawa. 1, 151v); 1425 pani Babicka uzyskuje prawo zagradzania
+drogi, którą dziedzice z Wierzuchowa dawniej chodzili do kościoła [w Babicach]
+(Warszawa. 1, 176); 1426 Jan Wircioch mieszczanin Nowej Warszawy zobowiązuje się
+zapłacić 42 grosze Maciejowi z Babic (ŁawWN nr 77); 1426 Marcin z Babic
+(Warszawa. 1, 229v); 1428 szlachetny Hincza z Babic (Warszawa. 2, 10); 1434 pani
+Imka z Babic (Warszawa. 2, 254); 1438 Urban z Babic dostaje Młodynin na Zawkrzu
+od Anny wdowy po Klemensie z Kraśniewa i od jej syna Włodzimierza, przypadły im
+w spadku po bracie Anny Marcinie (MK 335, 27v); 1446 Urban z Babic zabezpiecza
+sobie wierzytelność 100 kop groszy na domu zmarłego pana „Slycz” w Starej Warszawie
+(PP 3 nr 959); 1451 Urban z Babic odwołuje sprzedaż Kiełpina i Gromadzyna dokonaną
+w 1449 przez Jana Sąchockiego z Zaborowa [ziemia wyszogrodzka] na rzecz Jana z
+Węgrzynowa wojewody mazowieckiego za 450 kop groszy w półgroszku (MK 4, 153v-154);
+1458-59 Urban z Babic → punkt 6; 1467 Jan Babicki syn [zmarłego] Urbana stolnika
+warszawskiego (Warszawa. 4, 88); 1477 Jan z Babic ma proces w sądzie kościelnym
+z Marcinem Latochorzewskim (AE II 498); 1479 Jan Babicki (ZR nr 1473); 1484 Jan
+Babicki z Babic sprzedaje z prawem odkupu czynsz roczny 4 grzywien groszy w
+półgroszku ze Zbarza za 40 kop groszy w półgroszku Marcinowi z Zalesia kanonik
+płocki i pleban z Przybyszewa na ołtarz w kolegiacie warszawskiej i zaręcza spokój
+ze strony żony Barbary (MK 9, 161v); 1484 książę Bolesław V daje Janowi z Babic
+prawo nieodpowiednie i zwolnienie od kar sądowych (MK 9, 166v; MK 60, 265; MS 4 nr 6444);
+1484 kowal Maciej Babicki mieszczanin Nowej Warszawy (ŁawWN nr 1018); 1490
+[Jan] Babicki uczestnik najazdu szlachty na dobra tarczyńskie prepozyta kapituły
+warszawskiej (AC 2 nr 1872); 1494 Jan syn zmarłego Łazarza z Sosnkowa lub z Bliznego
+sprzedaje dział w Bliznem Janowi z Babic (MK 18, 248v); 1502 → punkt 6; 1506
+transakcja z 1496 zostaje potwierdzona Urbanowi synowi Jana z Babic (MK 18, 248v);
+1509 Barbara wdowa po zmarłym Janie z Babic (Warszawa. 10, 5); 1511 szlachetny
+Urban z Babic (Warszawa. 10, 896); 1518 Urban z Babic i Jerzy z Parzniewa sprzedają
+z prawem odkupu czynsz roczny z Babic i Parzniewa Grzegorzowi z Cedrowic
+wikariuszowi wiecznemu katedry włocławskiej (MK 32, 18); 1526 w Babicach 9 włók
+osiadłych (ASK I 27, 451); 1527 → punkt 5; 1530 Anna żona Urbana Babickiego, córka
+Jana Duckiego otrzymuje wraz z siostrami zapis ojca na jego dobrach w Dudzie, Otwocku,
+Dąbrówce, Woli i innych (Bon. 5, 71); 1539 wypis dokumentu z 1484 na prośbę Urbana
+Babickiego (MS 4 nr 6444); 1580 pobór od 5 włók osiadłych (ŹD 263); 1584 Babiccy
+herbu Dołęga, jednej dzielnicy ze Służowieckimi (Papr. 403); XIX wiek. Babice wieś
+ma 428 morg [ok. 14 włók], folwark 1598 morg [53 włóki] (Małc. 192).
 ```
 
-Większość skrótów została rozwinięta poprawnie i w poprawnej formie.
+Wydaje się, że większość skrótów została rozwinięta poprawnie i w poprawnej formie,
+model miał problem z odmianą słowa podkomorzy: 'Imka wdowa po Marcinie z Babic podkomorzy
+warszawski pozywa braci Pawła i Urbana'.
 
 ### SHG jako źródło wiedzy dla LLM
 
 Tak poprawiony tekst jest lepszym źródłem do dalszych analiz, można na przykład zapytać gpt by opierając się na haśle z SHG wyszukał informacje na temat jakiejś postaci. **GPT nie jest oczywiście historykiem** a źródłowy tekst nie jest prosty, **potrzebne są więc dodatkowe wskazówki**:
 
 ```TEXT
-"Na podstawie podanego tekstu, napisz proszę co wiadomo na temat Urbana z Babic? Podaj tylko informacje znajdujące się w przekazanym tekście.
-Zwróć uwagę, że w tekście mogą występować tak samo nazywające się lecz różne osoby, np. 'Jan z Warki syn Piotra' i 'Jan z Warki syn Władysława' to różne postacie.
+"Na podstawie podanego tekstu, napisz proszę co wiadomo na temat Urbana z Babic?
+Podaj tylko informacje znajdujące się w przekazanym tekście.
+Zwróć uwagę, że w tekście mogą występować tak samo nazywające się lecz różne
+osoby, np. 'Jan z Warki syn Piotra' i 'Jan z Warki syn Władysława' to różne postacie.
 
 Tekst: {tekst}"
 ```
 Odpowiedź:
 
 ```TEXT
-Urban z Babic był synem Piotra. W 1422 roku, wraz ze swoim bratem Pawłem, podzielił się dobrami ojczystymi. Urban otrzymał Babice, Zbarz i Korzkiewki. W 1438 roku otrzymał Młodynin na Zawkrzu od Anny, wdowy po Klemensie z Kraśniewa i od jej syna Włodzimierza. W 1446 roku zabezpieczył sobie wierzytelność 100 kop groszy na domu zmarłego pana „Slycz” w Starej Warszawie. W 1451 roku odwołał sprzedaż Kiełpina i Gromadzyna dokonaną w 1449 przez Jana Sąchockiego z Zaborowa na rzecz Jana z Węgrzynowa wojewody mazowieckiego za 450 kop groszy w półgroszku. W 1506 roku potwierdzono transakcję z 1496 roku Urbanowi, synowi Jana z Babic. W 1511 roku Urban z Babic był określany jako szlachetny. W 1518 roku Urban z Babic i Jerzy z Parzniewa sprzedali z prawem odkupu czynsz roczny z Babic i Parzniewa Grzegorzowi z Cedrowic wikariuszowi wiecznemu katedry włocławskiej. W 1530 roku Anna, żona Urbana Babickiego, córka Jana Duckiego otrzymała wraz z siostrami zapis ojca na jego dobrach w Dudzie, Otwocku, Dąbrówce, Woli i innych. W 1539 roku na prośbę Urbana Babickiego wypisano dokument z 1484 roku.
+Urban z Babic był synem Piotra. W 1422 roku, wraz ze swoim bratem Pawłem, podzielił
+się dobrami ojczystymi. Urban otrzymał Babice, Zbarz i Korzkiewki. W 1438 roku
+otrzymał Młodynin na Zawkrzu od Anny, wdowy po Klemensie z Kraśniewa i od jej syna
+Włodzimierza. W 1446 roku zabezpieczył sobie wierzytelność 100 kop groszy na domu
+zmarłego pana „Slycz” w Starej Warszawie. W 1451 roku odwołał sprzedaż Kiełpina
+i Gromadzyna dokonaną w 1449 przez Jana Sąchockiego z Zaborowa na rzecz Jana z
+Węgrzynowa wojewody mazowieckiego za 450 kop groszy w półgroszku. W 1506 roku
+potwierdzono transakcję z 1496 roku Urbanowi, synowi Jana z Babic. W 1511 roku
+Urban z Babic był określany jako szlachetny. W 1518 roku Urban z Babic i Jerzy
+z Parzniewa sprzedali z prawem odkupu czynsz roczny z Babic i Parzniewa Grzegorzowi
+z Cedrowic wikariuszowi wiecznemu katedry włocławskiej. W 1530 roku Anna, żona
+Urbana Babickiego, córka Jana Duckiego otrzymała wraz z siostrami zapis ojca na
+jego dobrach w Dudzie, Otwocku, Dąbrówce, Woli i innych. W 1539 roku na prośbę
+Urbana Babickiego wypisano dokument z 1484 roku.
 ```
 
 Czy model językowy wraz z bazą wektorową, w której zapisano by hasła Słownika Historyczno-Geograficznego mógłby posłużyć jako wygodny mechanizm semantycznego wyszukiwania, w którym użytkownik zadawałby zapytania w języku naturalnym? Oczywiście nie zamiast obecnego słownika online, ale jako uzupełnienie. Zapewne tak, ale materiał (treść słownika) jest na tyle trudny, że wymagało by to wielu testów i przygotowań, samo 'wrzucenie' tekstu słownika to za mało by taki mechanizm był skuteczny i zwracał wiarygodną wiedzę.
