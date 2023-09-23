@@ -2117,7 +2117,7 @@ Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuning
 
 ### Rozwijanie skrótów w hasłach SHG
 
-W Słowniku Historyczno-Geograficznym stosowanych jest wiele zapisów skrótowych, które dla przeciętnego użytkownika czynią tekst mało czytelnym. Czy gpt-4 mógłby poprawnie rozwinąć skróty na podstawie dostarczonej listy można przetestować na przykładzie hasła [Babice](http://www.slownik.ihpan.edu.pl/search.php?id=26752)
+W Słowniku Historyczno-Geograficznym stosowanych jest wiele zapisów skrótowych, które dla przeciętnego użytkownika czynią tekst mało czytelnym. Czy gpt-4 mógłby poprawnie rozwinąć skróty na podstawie dostarczonej listy można przetestować na przykładzie fragemtu hasła [Babice](http://www.slownik.ihpan.edu.pl/search.php?id=26752)
 ze słownika ziemii warszawskiej, dokładnie punktu 3 tego hasła dotyczącego spraw własności, podatków itp. Oprócz listy skrótów rzeczowych w zapytaniu zawarto dodatkowe wskazówki:
 
 ```TXT
