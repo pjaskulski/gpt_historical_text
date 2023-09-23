@@ -2119,8 +2119,8 @@ Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuning
 
 ### Rozwijanie skrótów w hasłach SHG
 
-W Słowniku Historyczno-Geograficznym stosowanych jest wiele zapisów skrótowych, które dla przeciętnego użytkownika czynią tekst mało czytelnym. Czy gpt-4 mógłby poprawnie rozwinąć skróty na podstawie dostarczonej listy można przetestować na przykładzie fragemtu hasła [Babice](http://www.slownik.ihpan.edu.pl/search.php?id=26752)
-ze słownika ziemii warszawskiej, dokładnie punktu 3 tego hasła dotyczącego spraw własności, podatków itp. Oprócz listy skrótów rzeczowych w zapytaniu zawarto dodatkowe wskazówki:
+W Słowniku Historyczno-Geograficznym stosowanych jest wiele zapisów skrótowych, które dla przeciętnego użytkownika czynią tekst mało czytelnym. Czy gpt-4 mógłby poprawnie rozwinąć skróty na podstawie dostarczonej listy, można przetestować na przykładzie fragmentu hasła [Babice](http://www.slownik.ihpan.edu.pl/search.php?id=26752)
+ze słownika ziemii warszawskiej, a dokładnie punktu 3 tego hasła dotyczącego spraw własności, podatków itp. Oprócz listy skrótów rzeczowych w zapytaniu zawarto dodatkowe wskazówki:
 
 ```TXT
 "Na podstawie przedstawiongo katalogu skrótów rozwniń skróty w podanym tekście.
@@ -2206,7 +2206,7 @@ warszawski pozywa braci Pawła i Urbana'.
 
 ### SHG jako źródło wiedzy dla LLM
 
-Tak poprawiony tekst jest lepszym źródłem do dalszych analiz, można na przykład zapytać gpt by opierając się na haśle z SHG wyszukał informacje na temat jakiejś postaci. **GPT nie jest oczywiście historykiem** a źródłowy tekst nie jest prosty, **potrzebne są więc dodatkowe wskazówki**:
+Tak poprawiony tekst jest lepszym źródłem do dalszych analiz, można na przykład zapytać gpt by opierając się na tak zmodyfikowanym haśle z SHG wyszukał informacje na temat jakiejś postaci. **GPT nie jest oczywiście historykiem** a źródłowy tekst nie jest prosty, **potrzebne są więc dodatkowe wskazówki** w treści zapytania (promptu):
 
 ```TEXT
 "Na podstawie podanego tekstu, napisz proszę co wiadomo na temat Urbana z Babic?
@@ -2235,4 +2235,4 @@ jego dobrach w Dudzie, Otwocku, Dąbrówce, Woli i innych. W 1539 roku na prośb
 Urbana Babickiego wypisano dokument z 1484 roku.
 ```
 
-Czy model językowy wraz z bazą wektorową, w której zapisano by hasła Słownika Historyczno-Geograficznego mógłby posłużyć jako wygodny mechanizm semantycznego wyszukiwania, w którym użytkownik zadawałby zapytania w języku naturalnym? Oczywiście nie zamiast obecnego słownika online, ale jako uzupełnienie. Zapewne tak, ale materiał (treść słownika) jest na tyle trudny, że wymagało by to wielu testów i przygotowań, samo 'wrzucenie' tekstu słownika to za mało by taki mechanizm był skuteczny i zwracał wiarygodną wiedzę.
+Czy model językowy wraz z bazą wektorową, w której zapisano by hasła Słownika Historyczno-Geograficznego mógłby posłużyć jako wygodny mechanizm semantycznego wyszukiwania, w którym użytkownik zadawałby zapytania w języku naturalnym? Oczywiście nie zamiast obecnego słownika online, ale jako jego uzupełnienie. Zapewne tak, ale materiał (treść słownika) jest na tyle trudny, że wymagało by to wielu testów i przygotowań, samo 'wrzucenie' tekstu słownika to za mało by taki mechanizm był skuteczny i zwracał wiarygodną wiedzę. Należałoby się m.in. zastanowić nad podziałem haseł na fragmenty, wprowadzeniem metadanych opisujących hasła i części haseł. Samo zapytanie użytkownika również musiałoby być przetworzone przez model językowy, otrzymane zaś wyniki musiałby by być powiązane ze źródłowymi fragmentami, tak by dało się wskazać na jakiej podstawie model napisał odpowiedź.
