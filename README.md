@@ -2120,8 +2120,11 @@ Wyniki dla całej serii biogramów pokazują, że model 3.5-turbo po fine-tuning
 
 ### Rozwijanie skrótów w hasłach SHG
 
-W Słowniku Historyczno-Geograficznym stosowanych jest wiele zapisów skrótowych, które dla przeciętnego użytkownika czynią tekst mało czytelnym. Czy gpt-4 mógłby poprawnie rozwinąć skróty na podstawie dostarczonej listy, można przetestować na przykładzie fragmentu hasła [Babice](http://www.slownik.ihpan.edu.pl/search.php?id=26752)
-ze słownika ziemii warszawskiej, a dokładnie punktu 3 tego hasła dotyczącego spraw własności, podatków itp. Oprócz listy skrótów rzeczowych w zapytaniu zawarto dodatkowe wskazówki:
+W Słowniku Historyczno-Geograficznym zastosowano wiele zapisów skrótowych, które dla przeciętnego
+użytkownika czynią teksty haseł mało czytelnymi. Czy gpt-4 mógłby poprawnie rozwinąć skróty na podstawie
+dostarczonej listy można przetestować na przykładzie fragmentu hasła [Babice](http://www.slownik.ihpan.edu.pl/search.php?id=26752)
+ze słownika ziemii warszawskiej, a dokładnie punktu 3 tego hasła dotyczącego spraw własności,
+podatków itp. Oprócz listy skrótów rzeczowych w zapytaniu zawarto dodatkowe wskazówki:
 
 ```TXT
 "Na podstawie przedstawiongo katalogu skrótów rozwniń skróty w podanym tekście.
@@ -2137,7 +2140,8 @@ właściwej odmianie (przypadku) np. 'Piotr z B. śwd. na dok. ks. Siemowita II'
 Tekst: {tu tekst hasła}"
 ```
 
-Tekst oryginalny można zobaczyć w wersji online słownika (link powyżej), zaś efekt rozwijania skrótów poniżej:
+Tekst oryginalny można zobaczyć w wersji online słownika (link powyżej), zaś
+efekt rozwijania skrótów poniżej:
 
 ```TXT
 "Własność szlachecka. 1313 Piotr z Babic świadek na dokumencie księcia
@@ -2202,7 +2206,7 @@ ma 428 morg [ok. 14 włók], folwark 1598 morg [53 włóki] (Małc. 192).
 ```
 
 Wydaje się, że większość skrótów została rozwinięta poprawnie i w poprawnej formie,
-model miał problem z odmianą słowa podkomorzy: 'Imka wdowa po Marcinie z Babic podkomorzy
+ale model miał problem np. z odmianą słowa podkomorzy: 'Imka wdowa po Marcinie z Babic podkomorzy
 warszawski pozywa braci Pawła i Urbana'.
 
 ### SHG jako źródło wiedzy dla LLM
